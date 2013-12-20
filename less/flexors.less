@@ -1,8 +1,37 @@
 /*
  *  flexors.less
  *  A flexible gridding system that allows you to align
- *  content properlly.
+ *  content properlly. 
+ *
+ *  This system was inspired and written with the assistance of 
+ *  Bootstrap's source code. See Bootstrap here: 
+ *  https://github.com/twbs/bootstrap
  *
  *  (C)2013 Jonathan Ballands
  */
 
+/*
+ *  MIXINS
+ */
+
+.container-fixed() {
+    margin-right: auto;
+    margin-left: auto;
+    width: @container-width;
+}
+
+.make-row() {
+    width: inherit;
+}
+
+/*
+ *  CLASSES
+ */
+
+.container {
+    .container-fixed();
+}
+
+.row {
+    .make-row();
+}

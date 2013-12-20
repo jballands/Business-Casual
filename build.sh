@@ -16,15 +16,23 @@ if [ ! -d less ]; then
 	exit 0
 fi
 
-# Look for less files
+# Count less files
 cd ./less
 count=`ls -1 *.less | wc -l`
+
+# Any less files?
 if [ $count == 0 ]; then
 	printf "\nThere are no less files for me to build. Please write some.\n\n"
 	exit 0
 fi
 
-printf "\n%d less file(s) found." $count
+# Must have business-casual.less
+if [ ! -e ./business-casual.less ]; then
+	printf "\nYou must have at least one less file called 'business-casual.less'.\n\n"
+	exit 0
+fi
+
+printf "\n%d LESS file(s) found." $count
 
 printf "\nStarting build...\n\n"
 
@@ -34,16 +42,17 @@ if [ ! -d css ]; then
 fi
 cd ./less
 
-# Build them
-find . -type f -iname "*.less" -print0 | while IFS= read -r -d $'\0' line; do
+# Build
+lessc -x ./business-casual.less > ../css/business-casual.css
 
-	filename=$(basename "$line")
-	extension="${filename##*.}"
-	filename="${filename%.*}"
+#find . -type f -iname "*.less" -print0 | while IFS= read -r -d $'\0' line; do
+	#filename=$(basename "$line")
+	#extension="${filename##*.}"
+	#filename="${filename%.*}"
 
-	lessc f > "../css/${filename}.css"
+	#lessc "$line" > "../css/${filename}.css"
 
-	printf "Made %s\n" "${filename}.css"
-done
+	#printf "Made %s\n" "${filename}.css"
+#done
 
-printf "\nDone.\n\n"
+printf "Done.\n\n"
