@@ -3,10 +3,6 @@
  *  A flexible gridding system that allows you to align
  *  content properlly. 
  *
- *  This system was inspired and written with the assistance of 
- *  Bootstrap's source code. See Bootstrap here: 
- *  https://github.com/twbs/bootstrap
- *
  *  (C)2013 Jonathan Ballands
  */
 
@@ -20,8 +16,57 @@
     width: @container-width;
 }
 
-.make-row() {
-    width: inherit;
+.make-row(@columns:@columns) {
+    display: block;
+    margin: 0 @container-width * ((@gutter-width * .5) / @container-width);
+    .clearfix();
+}
+
+.make-flexor-columns() {
+    
+    // Think "do-while" loops
+    // First iteration
+    .column(@index) when (@index = 1)
+    {
+        // Make the item so that we may pass it along
+        @item: ~".column-@{index}";
+           
+        // Set width
+        .column-@{index} {
+            width: percentage((@index / @columns));
+        }
+        
+        // Recursive call
+        .column((@index + 1), @item);
+    }
+    // All other iterations
+    .column(@index, @list) when (@index =< @columns) 
+    {
+        // Make the item so that we may pass it along
+        @item: ~".column-@{index}";
+        
+        // Set width
+        .column-@{index} {
+            width: @container-width * (@index / @columns);
+        }
+        
+        // Recursive call
+        .column((@index + 1), ~"@{list}, @{item}");
+    }
+    
+    // Terminating state
+    .column(@index, @list) when (@index > @columns) 
+    {
+        // Give all items in list these properties
+        @{list} {
+            position: relative;
+            float: left;
+            min-height: 1px;
+        }
+    }
+    
+    // Go!
+    .column(1);
 }
 
 /*
@@ -32,6 +77,8 @@
     .container-fixed();
 }
 
-.row {
-    .make-row();
+.flexor {
+    .make-row(@columns:@columns);
 }
+
+.make-flexor-columns();

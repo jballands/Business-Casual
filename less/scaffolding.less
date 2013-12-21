@@ -22,18 +22,48 @@
 @font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+@font-light:              300;
+@font-medium:             500;
+@font-size-title:         36pt;
+@font-size-normal:        16pt;
 
 /*
  *  Flexor stuff
  */
-@gutter-width:              300px;
-@container-width:           70%;
+@gutter-width:          20;
+@columns:               10;
+@container-width:       900;
+@column-width:          ((@container-width) / @columns);
 
 /*
  *  Scaffolding
  */
+
+//  Clearfix
+//  http://nicolasgallagher.com/micro-clearfix-hack/
+.clearfix() {
+    *zoom: 1;
+        
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
 body {
     font-family: @font-family-sans-serif;
     background-color: @dark-gray;
     color: @white;
+    font-size: @font-size-normal;
+    font-weight: @font-light;
+    .clearfix;
+}
+
+h1 {
+    font-size: @font-size-title;
+    font-weight: @font-medium;
 }
