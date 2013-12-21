@@ -16,9 +16,9 @@
     width: @container-width;
 }
 
-.make-row(@columns:@columns) {
+.make-flexor(@columns:@columns) {
     display: block;
-    margin: 0 @container-width * ((@gutter-width * .5) / @container-width);
+    margin: 0 (@container-width * ((@gutter-width * .5) / @container-width) * -1);
     .clearfix();
 }
 
@@ -47,7 +47,7 @@
         
         // Set width
         .column-@{index} {
-            width: @container-width * (@index / @columns);
+            width: (@container-width * (@index / @columns)) - @gutter-width;
         }
         
         // Recursive call
@@ -62,6 +62,7 @@
             position: relative;
             float: left;
             min-height: 1px;
+            margin: 0 (@gutter-width / 2);
         }
     }
     
@@ -78,7 +79,8 @@
 }
 
 .flexor {
-    .make-row(@columns:@columns);
+    .make-flexor(@columns:@columns);
+    margin-bottom: 10px;
 }
 
 .make-flexor-columns();
