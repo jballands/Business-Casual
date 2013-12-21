@@ -15,6 +15,7 @@
 @darker-gray:  #222222;
 @black:        #000000;
 @teal:         #61EBCA;
+@shadow-color: #1C1C1C;
 
 /*
  *  Fonts
@@ -24,6 +25,8 @@
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 @font-light:              300;
 @font-medium:             500;
+@font-heavy:              600;
+@font-size-hero:          48pt;
 @font-size-title:         36pt;
 @font-size-normal:        16pt;
 
@@ -34,6 +37,12 @@
 @columns:               10;
 @container-width:       900 + @gutter-width;
 @column-width:          ((@container-width) / @columns);
+
+/*
+ *  Hero stuff
+ */
+@hero-unit-height: 550;
+@sidekick-unit-height: 270;
 
 /*
  *  Scaffolding
@@ -60,10 +69,16 @@ body {
     color: @white;
     font-size: @font-size-normal;
     font-weight: @font-light;
+    display: table-cell;
     .clearfix;
 }
 
 h1 {
     font-size: @font-size-title;
     font-weight: @font-medium;
+    color: @teal;
+}
+
+img {
+    vertical-align: middle;
 }

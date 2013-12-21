@@ -1,0 +1,50 @@
+/*
+ *  heroes.less
+ *  Hero units and sidekick units. 
+ *
+ *  (C)2013 Jonathan Ballands
+ */
+
+.hero-unit {
+    position: relative; 
+    overflow: hidden;
+    
+    width: 100%;
+    height: @hero-unit-height;
+}
+
+span.hero-unit-text {
+    position: absolute;
+    font-size: @font-size-hero;
+    color: @white;
+    font-weight: @font-heavy;
+    font-style: italic;
+    z-index: 100;
+}
+
+//
+//  Suppresses unexpected growth
+//
+.hero-unit img {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sidekick-unit {
+    position: block; 
+    overflow: hidden;
+    
+    width: 100%;
+    height: @sidekick-unit-height;
+    
+    margin: 50 0;
+}
+
+//
+//  Suppresses unexpected growth
+//
+.sidekick-unit img {
+    width: 100%;
+}
