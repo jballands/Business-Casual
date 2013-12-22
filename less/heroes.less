@@ -5,46 +5,81 @@
  *  (C)2013 Jonathan Ballands
  */
 
-.hero-unit {
-    position: relative; 
-    overflow: hidden;
-    
-    width: 100%;
-    height: @hero-unit-height;
+/*
+ *  MIXINS
+ */
+
+.border-top() {
+    border-top: 3 solid @darker-gray;
 }
 
-span.hero-unit-text {
-    position: absolute;
-    font-size: @font-size-hero;
-    color: @white;
-    font-weight: @font-heavy;
-    font-style: italic;
-    z-index: 100;
+.border-bottom() {
+    border-bottom: 3 solid @darker-gray;
 }
 
-//
-//  Suppresses unexpected growth
-//
-.hero-unit img {
+.img-adjuster() {
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
 }
 
+.text-adjuster() {
+    position: relative;
+    z-index: 100;
+}
+
+/*
+ *  CLASSES
+ */
+
+.hero-unit {
+    position: relative; 
+    overflow: hidden;
+    
+    width: 100%;
+    height: @hero-unit-height;
+    
+    .border-bottom();
+}
+
+span.hero-unit-text {
+    font-size: @font-size-hero;
+    color: @white;
+    font-weight: @font-heavy;
+    font-style: italic;
+    .text-adjuster();
+}
+
+//
+//  Suppresses unexpected growth
+//
+.hero-unit img {
+    .img-adjuster();
+}
+
 .sidekick-unit {
-    position: block; 
+    position: relative; 
     overflow: hidden;
     
     width: 100%;
     height: @sidekick-unit-height;
     
-    margin: 50 0;
+    .border-top();
+    .border-bottom();
+}
+
+span.sidekick-unit-text {
+    font-size: @font-size-normal;
+    color: @white;
+    font-weight: @font-light;
+    font-style: italic;
+    .text-adjuster();
 }
 
 //
 //  Suppresses unexpected growth
 //
 .sidekick-unit img {
-    width: 100%;
+    .img-adjuster();
 }

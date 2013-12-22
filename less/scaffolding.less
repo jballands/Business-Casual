@@ -35,7 +35,7 @@
  */
 @gutter-width:          20;
 @columns:               10;
-@container-width:       900 + @gutter-width;
+@container-width:       950 + @gutter-width;
 @column-width:          ((@container-width) / @columns);
 
 /*
@@ -64,13 +64,19 @@
 }
 
 body {
-    font-family: @font-family-sans-serif;
+    width: 100%;
+    
+    margin: 0;
+    padding: 0;
+    
     background-color: @dark-gray;
     color: @white;
+    
+    font-family: @font-family-sans-serif;;
     font-size: @font-size-normal;
     font-weight: @font-light;
-    display: table-cell;
-    .clearfix;
+    
+    .clearfix();
 }
 
 h1 {
