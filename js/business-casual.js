@@ -67,37 +67,55 @@ window.onload = function() {
     
     // Sticky
     
-    // Get the sticky element's top
     var stickyElementList = document.querySelectorAll("div.sticky");
     var currentOffset = 0;
+    var allElements = [];
+    var stuckElements = [];
     
-    // For every sticky
+    // Know where all the tops are for each element before scrolling
     for (var i = 0 ; i < stickyElementList.length ; i++) {
-        
-        // Get some information
         var stickyElement = stickyElementList[i];
         var thisTop = stickyElement.getBoundingClientRect().top;
         
-        // When the window scrolls, fire an event
-        window.onscroll = function(e) {
-            
+        allElements.push({"key": thisTop, "value": stickyElement});
+    }
+    
+    // When the window scrolls, fire an event
+    window.onscroll = function(e) {
+        
+        // For every sticky
+        for (var i = 0 ; i < allElements.length ; i++) {
+        
+            // Get the kvp
+            var kvpSticky = allElements[i];
+            var thisTop = kvpSticky["key"];
+            var stickyElement = kvpSticky["value"];
+        
             // Activate sticky
-            if (window.pageYOffset >= thisTop) {
+            if (window.pageYOffset + currentOffset >= thisTop && 
+                stuckElements.indexOf(stickyElement) == -1) {
+                
                 stickyElement.style.position = "fixed";
-                stickyElement.style.top = 0;
+                stickyElement.style.top = currentOffset;
                 stickyElement.style.width = "100%";
                 stickyElement.style.zIndex = 100;
                 
                 stickyElement.nextElementSibling.style.paddingTop = 22;
+                
+                currentOffset = currentOffset + stickyElement.offsetHeight;
+                stuckElements.push(stickyElement);
             }
             
             // Deactiviate sticky
-            else {
+            else if (window.pageYOffset + currentOffset < thisTop + stickyElement.offsetHeight
+                     && stuckElements.indexOf(stickyElement) > -1) {
+                
                 stickyElement.removeAttribute("style");
-                stickyElement.nextElementSibling.removeAttribute("style");
+                stickyElement.nextElementSibling.removeAttribute("style"); 
+                
+                currentOffset = currentOffset - stickyElement.offsetHeight; 
+                stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
             }
-        
-        };    
-    }
-    
+        }
+    };
 };
