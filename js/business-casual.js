@@ -1,8 +1,56 @@
 /*
  *  business-casual.js
- *  The Javascript portion of Business Casual.
+ *  The JavaScript portion of Business Casual. You
+ *  need this file to add Business Casual's dynamic 
+ *  content to your webpage.
  *
  *  (C)2013 Jonathan Ballands
+ */
+
+/*
+ *  Class Initializations
+ */
+
+// Note: Change this to change speed of Crossfaders
+var cf_milliseconds = 5000;
+
+// Crossfader constructor
+function Crossfader(frm, imgList, currImage) {
+    this.frame = frm;
+    this.imageList = imgList;
+    this.currentImage = currImage;
+}
+
+// Public method, Crossfader.start();
+Crossfader.prototype.start = function () {
+    
+    // this-that syntax because JS is freaking weird
+    var that = this;
+    
+    // Set up the interval with lambdas; beware of data binding
+    setInterval(function() {
+            
+        // Remove crossfader-show from old image
+        var thisImage = that.imageList[that.currentImage];
+        thisImage.className = thisImage.className.replace(" crossfader-show","");
+            
+        // Make sure you go back to the beginning if we are at the last image
+        if (that.currentImage == that.imageList.length - 1) {
+               that.currentImage = 0;
+        }
+        else {
+            that.currentImage++;
+        }
+            
+         // Add crossfader-show to new image
+        thisImage = that.imageList[that.currentImage];
+        thisImage.className = thisImage.className.replace(" crossfader-show","");
+        thisImage.className = thisImage.className + " crossfader-show";
+    }, cf_milliseconds);
+};
+
+/*
+ *  Runtime - starts once page has finished loading
  */
 
 window.onload = function() {
@@ -127,4 +175,49 @@ window.onload = function() {
             }
         }
     };
+    
+    /*
+     *  Image stuff
+     */
+    
+    // Crossfader
+    
+    var crossfaderElementList = document.querySelectorAll(".crossfader-frame");
+    
+    for (var i = 0 ; i < crossfaderElementList.length ; i++) {
+        
+        var crossfaderFrameElement = crossfaderElementList[i];
+        var crossfaderFrameWidth = crossfaderFrameElement.offsetWidth;
+        var crossfaderImageList = crossfaderFrameElement.getElementsByTagName("img");
+        var currentlyDisplaying = 0;
+        
+        // Loop through all the images to find the one to show
+        for (var j = 0 ; j < crossfaderImageList.length ; j++) {
+            var crossfaderImage = crossfaderImageList[j];
+            
+            // Should be shown?
+            if (hasClass(crossfaderImage, ".crossfader-show")) {
+                currentlyDisplaying = j;
+            }
+            
+            // Apply id to each image
+            crossfaderImage.width = crossfaderFrameWidth - 2;
+            crossfaderImage.height = crossfaderFrameWidth - 2;
+            crossfaderImage.id = "cf" + j;
+        }
+        
+        // Make a new crossfader
+        var inst = new Crossfader(crossfaderFrameElement, crossfaderImageList, currentlyDisplaying);
+        inst.start();
+    }
 };
+
+/*
+ *  Helpers
+ */
+
+// For Internet Explorer compatibility
+// http://stackoverflow.com/questions/5898656/test-if-an-element-contains-a-class
+function hasClass(element, cls) {
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}

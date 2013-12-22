@@ -1,0 +1,60 @@
+/*
+ *  image.less
+ *  Contains styling required for images in Business
+ *  Casual.
+ *
+ *  (C)2013 Jonathan Ballands
+ */
+
+/*
+ *  MIXINS
+ */
+
+.giveOptions() {
+    &.rounded {
+        -moz-border-radius: @well-round-edge;
+        -webkit-border-radius: @well-round-edge; 
+        border-radius: @well-round-edge;
+    }
+    
+    &.circular {
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%; 
+        border-radius: 50%;
+    }
+    
+    &.border {
+        border: 1 solid @black;
+    }
+}
+
+/*
+ *  CLASSES
+ */
+
+img {
+    .giveOptions();
+}
+
+.crossfader-frame {
+    position: relative;  
+    overflow: hidden;
+    
+    .giveOptions();
+}
+
+.crossfader-image {
+    opacity: 0; 
+    position: absolute;
+    top: 0; 
+    left: 0;
+
+    -webkit-transition: opacity 1s linear;
+    -moz-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+    transition: opacity 1s linear;
+}
+
+.crossfader-show {
+    opacity: 1;
+}
