@@ -40,21 +40,21 @@ img {
     position: relative;  
     overflow: hidden;
     
-    .giveOptions();
-}
+    .crossfader-image {
+        opacity: 0; 
+        position: absolute;
+        top: 0; 
+        left: 0;
+    
+        -webkit-transition: opacity 1s linear;
+        -moz-transition: opacity 1s linear;
+        -o-transition: opacity 1s linear;
+        transition: opacity 1s linear;
+        
+        .giveOptions();
+    }
 
-.crossfader-image {
-    opacity: 0; 
-    position: absolute;
-    top: 0; 
-    left: 0;
-
-    -webkit-transition: opacity 1s linear;
-    -moz-transition: opacity 1s linear;
-    -o-transition: opacity 1s linear;
-    transition: opacity 1s linear;
-}
-
-.crossfader-show {
-    opacity: 1;
+    .crossfader-show {
+        opacity: 1;
+    }
 }
