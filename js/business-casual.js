@@ -65,9 +65,9 @@ window.onload = function() {
      *  Navigation stuff
      */
     
-    // Sticky
+    // Sticky/Magnetic
     
-    var stickyElementList = document.querySelectorAll("div.sticky");
+    var stickyElementList = document.querySelectorAll(".sticky");
     var currentOffset = 0;
     var allElements = [];
     var stuckElements = [];
@@ -78,6 +78,15 @@ window.onload = function() {
         var thisTop = stickyElement.getBoundingClientRect().top;
         
         allElements.push({"key": thisTop, "value": stickyElement});
+    }
+    
+    // Find all the magnetics and adjust them
+    var magneticElementList = document.querySelectorAll(".magnetic");
+    for (var i = 0 ; i < magneticElementList.length ; i++) {
+        var magneticElement = magneticElementList[i];
+        magneticElement.style.top = currentOffset;
+        
+        currentOffset = currentOffset + magneticElement.offsetHeight - 1;
     }
     
     // When the window scrolls, fire an event
@@ -98,22 +107,22 @@ window.onload = function() {
                 stickyElement.style.position = "fixed";
                 stickyElement.style.top = currentOffset;
                 stickyElement.style.width = "100%";
-                stickyElement.style.zIndex = 100;
                 
-                stickyElement.nextElementSibling.style.paddingTop = 22;
+                stickyElement.nextElementSibling.style.paddingTop = 21;
                 
-                currentOffset = currentOffset + stickyElement.offsetHeight;
+                // Subtract one for prettiness
+                currentOffset = currentOffset + stickyElement.offsetHeight - 1;
                 stuckElements.push(stickyElement);
             }
             
-            // Deactiviate sticky
+            // Deactiviate sticky; add offsetHeight to calculate from the bottom of the div
             else if (window.pageYOffset + currentOffset < thisTop + stickyElement.offsetHeight
                      && stuckElements.indexOf(stickyElement) > -1) {
                 
                 stickyElement.removeAttribute("style");
                 stickyElement.nextElementSibling.removeAttribute("style"); 
                 
-                currentOffset = currentOffset - stickyElement.offsetHeight; 
+                currentOffset = currentOffset - stickyElement.offsetHeight + 1; 
                 stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
             }
         }
