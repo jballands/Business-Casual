@@ -9,13 +9,16 @@
 /*
  *  Colors
  */
-@white:        #FFFFFF;
-@gray:         #ABABAB;
-@dark-gray:    #282828;
-@darker-gray:  #222222;
-@black:        #000000;
-@teal:         #61EBCA;
-@shadow-color: #1C1C1C;
+@white:                 #FFFFFF;
+@off-white:             #F2F2F2;
+@dark-off-white:        #CCCCCC;
+@navigation-divider:    #D9D9D9;
+@gray:                  #ABABAB;
+@dark-gray:             #282828;
+@darker-gray:           #222222;
+@black:                 #000000;
+@teal:                  #61EBCA;
+@shadow-color:          #1C1C1C;
 
 /*
  *  Fonts
@@ -43,6 +46,12 @@
  */
 @hero-unit-height: 550;
 @sidekick-unit-height: 270;
+
+/*
+ *  Navigation stuff
+ */
+@navigation-horizontal-gutter:  50;
+@navigation-vertical-gutter:    24;
 
 /*
  *  Scaffolding
@@ -87,4 +96,12 @@ h1 {
 
 img {
     vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    color: @teal;
+    &:hover {
+        color: @white;
+    }
 }

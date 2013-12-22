@@ -32,7 +32,7 @@
            
         // Set width
         .column-@{index} {
-            width: percentage((@index / @columns));
+            width: (@container-width * (@index / @columns)) - @gutter-width;
         }
         
         // Recursive call

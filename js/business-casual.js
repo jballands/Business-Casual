@@ -61,4 +61,43 @@ window.onload = function() {
         sidekickUnitText.style.top = heightOffset;
     }
     
+    /*
+     *  Navigation stuff
+     */
+    
+    // Sticky
+    
+    // Get the sticky element's top
+    var stickyElementList = document.querySelectorAll("div.sticky");
+    var currentOffset = 0;
+    
+    // For every sticky
+    for (var i = 0 ; i < stickyElementList.length ; i++) {
+        
+        // Get some information
+        var stickyElement = stickyElementList[i];
+        var thisTop = stickyElement.getBoundingClientRect().top;
+        
+        // When the window scrolls, fire an event
+        window.onscroll = function(e) {
+            
+            // Activate sticky
+            if (window.pageYOffset >= thisTop) {
+                stickyElement.style.position = "fixed";
+                stickyElement.style.top = 0;
+                stickyElement.style.width = "100%";
+                stickyElement.style.zIndex = 100;
+                
+                stickyElement.nextElementSibling.style.paddingTop = 22;
+            }
+            
+            // Deactiviate sticky
+            else {
+                stickyElement.removeAttribute("style");
+                stickyElement.nextElementSibling.removeAttribute("style");
+            }
+        
+        };    
+    }
+    
 };
