@@ -44,11 +44,14 @@
 }
 
 span.hero-unit-text {
-    font-size: @font-size-hero;
     color: @white;
-    font-weight: @font-heavy;
-    font-style: italic;
     .text-adjuster();
+    
+    &.heroic {
+        font-size: @font-size-hero;
+        font-weight: @font-heavy;
+        font-style: italic;
+    }
 }
 
 //

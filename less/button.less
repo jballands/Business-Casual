@@ -1,0 +1,43 @@
+/*
+ *  buttons.less
+ *  Contains the styling for buttons.
+ *
+ *  (C)2013 Jonathan Ballands
+ */
+
+a.button {
+    display: inline-block;
+    
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    
+    background-image: none;
+    border: 1 solid transparent;
+    white-space: nowrap;
+    
+    padding: (@button-gutter-vertical / 2) (@button-gutter-horizontal / 2);
+    font-size: @font-size-normal;
+    border: 1 solid @white;
+    border-radius: @button-round-edge;
+    
+    color: @white;
+    font-size: @font-size-normal;
+    font-style: normal;
+    font-weight: @font-light;
+    
+    &:hover {
+        background-color: @white;
+        color: @even-darker-gray;
+    }
+    
+    &.large {
+        font-size: @font-size-large;
+        padding: (@large-button-gutter-vertical / 2) (@large-button-gutter-horizontal / 2);
+    }
+    
+    &.small {
+        font-size: @font-size-small;
+    }
+}
