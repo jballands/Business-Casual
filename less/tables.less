@@ -1,0 +1,87 @@
+/*
+ *  tables.less
+ *  Contains styling required for tables in Business
+ *  Casual.
+ *
+ *  (C)2013 Jonathan Ballands
+ */
+
+table {
+    width: 100%;
+    margin-bottom: @line-height;
+    
+    border: 1 solid @white;
+    border-radius: @button-round-edge;
+    
+    // Cells
+    thead, tbody, tfoot {
+        tr {
+            th, td {
+                padding: @table-cell-padding;
+                // line-height: @line-height;
+                vertical-align: top;
+                border-top: 1 solid @white;
+                border-right: 1 solid @white;
+                
+                font-style: normal;
+                font-family: @font-family-sans-serif;
+                font-weight: @font-light;
+                font-size: @font-size-normal;
+            }
+            th:last-child {
+                vertical-align: bottom;
+                border-right: 0;
+            }
+        }
+        tr:first-child {
+            th, td {
+                padding: @table-cell-padding;
+                // line-height: @line-height;
+                vertical-align: top;
+                border-top: 0;
+                border-right: 1 solid @white;
+            }
+            th:last-child {
+                vertical-align: bottom;
+                border-right: 0;
+            }
+        }
+    }
+    
+    // Align for headings
+    thead {
+        tr {
+            th {
+                vertical-align: bottom;
+                border-bottom: 2 solid @white;
+                border-right: 1 solid @white;
+                
+                font-weight: @font-medium;
+                font-style: italic;
+            }
+            th:last-child {
+                vertical-align: bottom;
+                border-bottom: 2 solid @white;
+                border-right: 0;
+            }
+        }
+    }
+    
+    // No top border
+    thead:first-child {
+        tr:first-child {
+            th, td {
+                border-top: 0;
+            }
+        }
+    }
+    
+    // Multiple tbodies
+    tbody + tbody {
+        border-top: 2 solid @white;
+    }
+    
+    .table {
+        background-color: @gray;
+    }
+}
