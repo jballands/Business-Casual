@@ -16,6 +16,7 @@
 @gray:                  #ABABAB;
 @dark-gray:             #282828;
 @darker-gray:           #222222;
+@even-darker-gray:      #171717;
 @black:                 #000000;
 @teal:                  #61EBCA;
 @shadow-color:          #1C1C1C;
@@ -31,7 +32,9 @@
 @font-heavy:              600;
 @font-size-hero:          48pt;
 @font-size-title:         36pt;
+@font-size-aside:         21pt;
 @font-size-normal:        16pt;
+@font-size-code:          14pt;
 
 /*
  *  Flexor stuff
@@ -44,8 +47,8 @@
 /*
  *  Hero stuff
  */
-@hero-unit-height: 550;
-@sidekick-unit-height: 270;
+@hero-unit-height:      550;
+@sidekick-unit-height:  270;
 
 /*
  *  Navigation stuff
@@ -56,12 +59,15 @@
 /*
  *  Well stuff
  */
-@well-gutter: 30;
-@well-round-edge: 10;
+@well-gutter:       30;
+@well-round-edge:   10;
 
 /*
- *  Scaffolding
+ *  Other
  */
+@border-thickness: 1;
+@aside-gutter:  40;
+@seperator-gutter: 50;
 
 //  Clearfix
 //  http://nicolasgallagher.com/micro-clearfix-hack/
@@ -75,39 +81,5 @@
     }
     &:after {
         clear: both;
-    }
-}
-
-body {
-    width: 100%;
-    
-    margin: 0;
-    padding: 0;
-    
-    background-color: @dark-gray;
-    color: @white;
-    
-    font-family: @font-family-sans-serif;;
-    font-size: @font-size-normal;
-    font-weight: @font-light;
-    
-    .clearfix();
-}
-
-h1 {
-    font-size: @font-size-title;
-    font-weight: @font-medium;
-    color: @teal;
-}
-
-img {
-    vertical-align: middle;
-}
-
-a {
-    text-decoration: none;
-    color: @teal;
-    &:hover {
-        color: @white;
     }
 }

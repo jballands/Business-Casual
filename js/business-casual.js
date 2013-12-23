@@ -80,8 +80,19 @@ window.onload = function() {
         var heightOffset = (heroUnitHeight / 2) - (heroUnitText.offsetHeight / 2);
         var widthOffset = (heroUnitWidth / 2) - (heroUnitText.offsetWidth / 2);
      
-        heroUnitText.style.left = widthOffset;
-        heroUnitText.style.top = heightOffset;
+        
+        if (hasClass(heroUnitText, "left")) {
+            heroUnitText.style.left = widthOffset - 2 * (widthOffset / 3);
+            heroUnitText.style.top = heightOffset;
+        }
+        else if (hasClass(heroUnitText, "right")) {
+            heroUnitText.style.left = widthOffset + 2 * (widthOffset / 3);
+            heroUnitText.style.top = heightOffset;
+        }
+        else {
+            heroUnitText.style.left = widthOffset;
+            heroUnitText.style.top = heightOffset;
+        }
     }
     
     // Sidekick units
@@ -219,5 +230,5 @@ window.onload = function() {
 // For Internet Explorer compatibility
 // http://stackoverflow.com/questions/5898656/test-if-an-element-contains-a-class
 function hasClass(element, cls) {
-    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+    return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
 }
