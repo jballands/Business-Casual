@@ -98,7 +98,8 @@
                 background-color: @table-body-background-color;
                 color: @table-body-text-color;
                 
-                padding: @table-cell-pad;
+                // Use well gutter size until you know if this is a full table or not
+                padding: @well-gutter-size / 2;
                 vertical-align: top;
                 border-top: 1 solid @table-body-border-color;
                 border-right: 1 solid @table-body-border-color;
@@ -148,10 +149,25 @@
     
     // If a full fledged table, continue to suppress rounding
     &.full {
+        thead {
+            tr {
+                th, td {
+                    padding: @table-cell-padding;
+                }
+            }
+        }
+        
         tbody, tfoot {
             
             // Suppress rounding
             .suppress-rounding-top();
+            
+            tr {
+                th, td {
+                    padding: @table-cell-padding;
+                }
+            }
+            
         } 
     }
 }
