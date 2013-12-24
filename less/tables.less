@@ -6,82 +6,149 @@
  *  (C)2013 Jonathan Ballands
  */
 
-table {
+/*
+ *  MIXINS
+ */
+
+.make-rounded() {
+    tr:first-child { 
+        th:first-child, td:first-child {
+            border-top-left-radius: @table-round-edge;
+        }
+    }
+    tr:first-child { 
+        th:last-child, td:last-child {
+            border-top-right-radius: @table-round-edge; 
+        } 
+    }
+    tr:last-child { 
+        th:first-child, td:first-child {
+            border-bottom-left-radius: @table-round-edge;  
+        }
+    }
+    tr:last-child {
+        th:last-child, td:last-child {   
+            border-bottom-right-radius: @table-round-edge;  
+        }
+    }
+}
+
+.provide-text-align() {
+    .left {
+        text-align: left;
+    }
+    .right {
+        text-align: right;
+    }
+}
+
+// Used so that the head doesn't round
+.suppress-rounding-bottom() {
+    tr:last-child { 
+        th:first-child, td:first-child {
+            border-bottom-left-radius: 0;  
+        }
+    }
+    tr:last-child {
+        th:last-child, td:last-child {   
+            border-bottom-right-radius: 0;  
+        }
+    }
+}
+
+// Used so that the body doesn't round
+.suppress-rounding-top() {
+    tr:first-child { 
+        th:first-child, td:first-child {
+            border-top-left-radius: 0;
+        }
+    }
+    tr:first-child { 
+        th:last-child, td:last-child {
+            border-top-right-radius: 0; 
+        } 
+    }
+}
+
+/*
+ *  CLASSES
+ */
+
+.rounded-table {
     width: 100%;
     margin-bottom: @line-height;
     
-    border: 1 solid @white;
-    border-radius: @button-round-edge;
+    // Suppress spacing
+    border-spacing: 0;
+
+    .provide-text-align();
     
-    // Cells
+    // Affects all cells
     thead, tbody, tfoot {
+        
+        // Make rows rounded
+        .make-rounded();
+        
         tr {
+            
+            // Applying colors to cells makes it easy to change their color
             th, td {
+                background-color: @off-white;
+                color: @darker-gray;
+                
                 padding: @table-cell-padding;
-                // line-height: @line-height;
                 vertical-align: top;
-                border-top: 1 solid @white;
-                border-right: 1 solid @white;
+                border-top: 1 solid @gray;
+                border-right: 1 solid @gray;
                 
                 font-style: normal;
                 font-family: @font-family-sans-serif;
                 font-weight: @font-light;
                 font-size: @font-size-normal;
             }
-            th:last-child {
-                vertical-align: bottom;
-                border-right: 0;
-            }
-        }
-        tr:first-child {
-            th, td {
-                padding: @table-cell-padding;
-                // line-height: @line-height;
-                vertical-align: top;
-                border-top: 0;
-                border-right: 1 solid @white;
-            }
-            th:last-child {
+            th:last-child, td:last-child {
                 vertical-align: bottom;
                 border-right: 0;
             }
         }
     }
     
-    // Align for headings
+    // Only affects head
     thead {
+        
+        // Suppress rounding
+        .suppress-rounding-bottom();
+        
         tr {
-            th {
+            th, td {
                 vertical-align: bottom;
-                border-bottom: 2 solid @white;
-                border-right: 1 solid @white;
+                border-bottom: 1 solid @even-darker-gray;
+                border-right: 1 solid @even-darker-gray;
+                border-top: 0;
                 
                 font-weight: @font-medium;
                 font-style: italic;
+                
+                background-color: @darker-gray;
+                color: @white;
             }
-            th:last-child {
+            th:last-child, td:last-child {
                 vertical-align: bottom;
-                border-bottom: 2 solid @white;
+                border-bottom: 1 solid @even-darker-gray;
                 border-right: 0;
+                
+                background-color: @darker-gray;
+                color: @white;
             }
         }
     }
     
-    // No top border
-    thead:first-child {
-        tr:first-child {
-            th, td {
-                border-top: 0;
-            }
-        }
-    }
-    
-    // Multiple tbodies
-    tbody + tbody {
-        border-top: 2 solid @white;
-    }
-    
-    .table {
-        background-color: @gray;
+    // If a full fledged table, continue to suppress rounding
+    &.full {
+        tbody, tfoot {
+            
+            // Suppress rounding
+            .suppress-rounding-top();
+        } 
     }
 }

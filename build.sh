@@ -43,7 +43,7 @@ fi
 cd ./less
 
 # Build
-lessc -x ./business-casual.less > ../css/business-casual.css
+lessc ./business-casual.less > ../css/business-casual.css
 
 #find . -type f -iname "*.less" -print0 | while IFS= read -r -d $'\0' line; do
 	#filename=$(basename "$line")
