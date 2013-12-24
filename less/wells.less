@@ -6,14 +6,14 @@
  */
 
 .well {
-    background-color: @darker-gray;
-    color: @white;
+    background-color: @well-background-color;
+    color: @well-text-color;
     
-    padding: @well-gutter/2;
+    padding: (@well-gutter-size / 2);
     
-    -moz-border-radius: @well-round-edge;
-    -webkit-border-radius: @well-round-edge; 
-    border-radius: @well-round-edge;
+    -moz-border-radius: @well-edge-radius;
+    -webkit-border-radius: @well-edge-radius; 
+    border-radius: @well-edge-radius;
     
-    border: 1 solid @even-darker-gray;
+    border: 1 solid @well-border-color;
 }

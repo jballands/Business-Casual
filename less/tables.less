@@ -13,22 +13,22 @@
 .make-rounded() {
     tr:first-child { 
         th:first-child, td:first-child {
-            border-top-left-radius: @table-round-edge;
+            border-top-left-radius: @table-edge-radius;
         }
     }
     tr:first-child { 
         th:last-child, td:last-child {
-            border-top-right-radius: @table-round-edge; 
+            border-top-right-radius: @table-edge-radius; 
         } 
     }
     tr:last-child { 
         th:first-child, td:first-child {
-            border-bottom-left-radius: @table-round-edge;  
+            border-bottom-left-radius: @table-edge-radius;  
         }
     }
     tr:last-child {
         th:last-child, td:last-child {   
-            border-bottom-right-radius: @table-round-edge;  
+            border-bottom-right-radius: @table-edge-radius;  
         }
     }
 }
@@ -93,18 +93,18 @@
             
             // Applying colors to cells makes it easy to change their color
             th, td {
-                background-color: @off-white;
-                color: @darker-gray;
+                background-color: @table-body-background-color;
+                color: @table-body-text-color;
                 
-                padding: @table-cell-padding;
+                padding: @table-cell-pad;
                 vertical-align: top;
-                border-top: 1 solid @gray;
-                border-right: 1 solid @gray;
+                border-top: 1 solid @table-body-border-color;
+                border-right: 1 solid @table-body-border-color;
                 
-                font-style: normal;
+                font-style: @table-body-font-style;
                 font-family: @font-family-sans-serif;
-                font-weight: @font-light;
-                font-size: @font-size-normal;
+                font-weight: @table-body-font-weight;
+                font-size: @table-body-font-size;
             }
             th:last-child, td:last-child {
                 vertical-align: bottom;
@@ -122,23 +122,24 @@
         tr {
             th, td {
                 vertical-align: bottom;
-                border-bottom: 1 solid @even-darker-gray;
-                border-right: 1 solid @even-darker-gray;
+                border-bottom: 1 solid @table-head-border-color;
+                border-right: 1 solid @table-head-border-color;
                 border-top: 0;
                 
-                font-weight: @font-medium;
-                font-style: italic;
+                font-weight: @table-head-font-weight;
+                font-style: @table-head-font-style;
+                font-size: @table-head-font-size;
                 
-                background-color: @darker-gray;
-                color: @white;
+                background-color: @table-head-background-color;
+                color: @table-head-text-color;
             }
             th:last-child, td:last-child {
                 vertical-align: bottom;
-                border-bottom: 1 solid @even-darker-gray;
+                border-bottom: 1 solid @table-head-border-color;
                 border-right: 0;
                 
-                background-color: @darker-gray;
-                color: @white;
+                background-color: @table-head-background-color;
+                color: @table-head-text-color;
             }
         }
     }

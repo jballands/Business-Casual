@@ -17,28 +17,27 @@ a.button {
     border: 1 solid transparent;
     white-space: nowrap;
     
-    padding: (@button-gutter-vertical / 2) (@button-gutter-horizontal / 2);
-    font-size: @font-size-normal;
-    border: 1 solid @teal;
-    border-radius: @button-round-edge;
+    padding: (@button-normal-vertical-gutter / 2) (@button-normal-horizontal-gutter / 2);
+    border: 1 solid @button-border-color;
+    border-radius: @button-edge-radius;
     
-    color: @teal;
-    font-size: @font-size-normal;
-    font-style: normal;
-    font-weight: @font-light;
+    color: @button-text-color;
+    font-size:  @button-normal-font-size;
+    font-style: @button-normal-font-style;
+    font-weight: @button-normal-font-weight;
     
     &:hover {
-        background-color: @white;
-        border: 1 solid @white;
-        color: @even-darker-gray;
+        background-color: @button-hover-background-color;
+        border: 1 solid @button-hover-background-color;
+        color: @button-hover-text-color;
     }
     
     &.large {
-        font-size: @font-size-large;
-        padding: (@large-button-gutter-vertical / 2) (@large-button-gutter-horizontal / 2);
+        font-size: @button-large-font-size;
+        padding: (@button-large-vertical-gutter / 2) (@button-large-horizontal-gutter / 2);
     }
     
     &.small {
-        font-size: @font-size-small;
+        font-size: @button-small-font-size;
     }
 }

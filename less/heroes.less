@@ -10,11 +10,11 @@
  */
 
 .border-top() {
-    border-top: @border-thickness solid @even-darker-gray;
+    border-top: @unit-border-thickness solid @unit-border-color;
 }
 
 .border-bottom() {
-    border-bottom: @border-thickness solid @even-darker-gray;
+    border-bottom: @unit-border-thickness solid @unit-border-color;
 }
 
 .img-adjuster() {
@@ -44,13 +44,13 @@
 }
 
 span.hero-unit-text {
-    color: @white;
+    color: @hero-unit-text-color;
     .text-adjuster();
     
     &.heroic {
-        font-size: @font-size-hero;
-        font-weight: @font-heavy;
-        font-style: italic;
+        font-size: @heroic-font-size;
+        font-weight: @heroic-font-weight;
+        font-style: @heroic-font-style;
     }
 }
 
@@ -66,17 +66,17 @@ span.hero-unit-text {
     overflow: hidden;
     
     width: 100%;
-    height: @sidekick-unit-height;
+    height: @sidekick-height;
     
     .border-top();
     .border-bottom();
 }
 
 span.sidekick-unit-text {
-    font-size: @font-size-normal;
-    color: @white;
-    font-weight: @font-light;
-    font-style: italic;
+    font-size: @sidekick-unit-font-size;
+    color: @sidekick-unit-text-color;
+    font-weight: @sidekick-unit-font-weight;
+    font-style: @sidekick-unit-font-style;
     .text-adjuster();
 }
 

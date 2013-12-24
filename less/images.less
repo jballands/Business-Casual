@@ -24,7 +24,7 @@
     }
     
     &.border {
-        border: @border-thickness solid @even-darker-gray;
+        border: @border-thickness solid @image-border-color;
     }
 }
 
@@ -46,10 +46,10 @@ img {
         top: 0; 
         left: 0;
     
-        -webkit-transition: opacity 1s linear;
-        -moz-transition: opacity 1s linear;
-        -o-transition: opacity 1s linear;
-        transition: opacity 1s linear;
+        -webkit-transition: opacity @image-transition-time linear;
+        -moz-transition: opacity @image-transition-time linear;
+        -o-transition: opacity @image-transition-time linear;
+        transition: opacity @image-transition-time linear;
         
         .giveOptions();
     }

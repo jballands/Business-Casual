@@ -12,32 +12,34 @@ body {
     margin: 0;
     padding: 0;
     
-    background-color: @dark-gray;
-    color: @white;
+    background-color: @body-color;
+    color: @text-color;
     
     font-family: @font-family-sans-serif;;
-    font-size: @font-size-normal;
-    font-weight: @font-light;
+    font-size: @font-size;
+    font-weight: @font-weight;
     
     .clearfix();
 }
 
 h1 {
-    font-size: @font-size-title;
-    font-weight: @font-medium;
-    color: @teal;
+    font-size: @header-font-size;
+    font-weight: @header-font-weight;
+    color: @header-color;
+    font-style: @header-font-style;
     
     span.aside {
-        color: @white;
-        font-size: @font-size-aside;
-        font-style: italic;
+        color: @aside-color;
+        font-size: @aside-font-size;
+        font-style: @aside-font-style;
+        font-weight: @aside-font-weight;
         
         margin-left: @aside-gutter/2;
     }
     
     &.seperate {
         padding-bottom: 10;
-        border-bottom: 1 solid @even-darker-gray;
+        border-bottom: 1 solid @seperator-color;
     }
 }
 
@@ -56,7 +58,7 @@ a {
 
 .code {
     font-family: @font-family-monospace;
-    font-size: @font-size-code;
+    font-size: @code-font-size;
 }
 
 .seperator {
@@ -64,7 +66,7 @@ a {
     height: 1;
     
     min-height: 1;
-    border-bottom: 1 solid @even-darker-gray;
+    border-bottom: 1 solid @seperator-color;
     margin-top: @seperator-gutter / 2;
     margin-bottom: @seperator-gutter / 2;
     
