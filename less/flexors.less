@@ -17,7 +17,10 @@
 
 .make-flexor(@columns:@columns) {
     display: block;
+    
+    // Force flexors to adjust move right by the margin
     margin: 0 (@container-width * ((@gutter-width * .5) / @container-width) * -1);
+    
     .clearfix();
 }
 

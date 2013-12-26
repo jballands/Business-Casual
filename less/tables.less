@@ -149,6 +149,8 @@
     
     // If a full fledged table, continue to suppress rounding
     &.full {
+        
+        // Use table-cell-padding if this is a full table
         thead {
             tr {
                 th, td {
@@ -162,6 +164,7 @@
             // Suppress rounding
             .suppress-rounding-top();
             
+            // Use table-cell-padding if this is a full table
             tr {
                 th, td {
                     padding: @table-cell-padding;
