@@ -2,7 +2,7 @@
  *  basics.less
  *  Contains the basic styling for Business Casual.
  *
- *  (C)2013 Jonathan Ballands
+ *  (C)2014 Jonathan Ballands
  */
 
 
@@ -10,9 +10,9 @@
  *  MIXINS
  */
 
-.give-header-attributes(@size) {
+.give-large-header-attributes(@size) {
     font-weight: @header-font-weight;
-    color: @header-color;
+    color: @large-header-color;
     font-style: @header-font-style;
     
     span.aside {
@@ -23,6 +23,17 @@
         
         margin-left: @aside-gutter/2;
     }
+    
+    &.seperate {
+        padding-bottom: 10;
+        border-bottom: 1 solid @seperator-color;
+    }
+}
+
+.give-small-header-attributes(@size) {
+    font-weight: @header-font-weight;
+    color: @small-header-color;
+    font-style: @header-font-style;
     
     &.seperate {
         padding-bottom: 10;
@@ -49,25 +60,46 @@ body {
 h1 {
     font-size: @header1-font-size;
     
-    .give-header-attributes(@header1-font-size);
+    .give-large-header-attributes(@header1-font-size);
 }
 
 h2 {
     font-size: @header2-font-size;
     
-    .give-header-attributes(@header2-font-size);
+    .give-large-header-attributes(@header2-font-size);
 }
 
 h3 {
     font-size: @header3-font-size;
     
-    .give-header-attributes(@header3-font-size);
+    .give-large-header-attributes(@header3-font-size);
 }
 
 h4 {
     font-size: @header4-font-size;
     
-    .give-header-attributes(@header4-font-size);
+    margin: @h4-gutter 0;
+    padding: 0;
+    
+    .give-small-header-attributes(@header4-font-size);
+}
+
+h5 {
+    font-size: @header5-font-size;
+    
+    margin: @h5-gutter 0;
+    padding: 0;
+    
+    .give-small-header-attributes(@header5-font-size);
+}
+
+h6 {
+    font-size: @header6-font-size;
+    
+    margin: @h6-gutter 0;
+    padding: 0;
+    
+    .give-small-header-attributes(@header6-font-size);
 }
 
 img {
@@ -83,7 +115,7 @@ a {
     }
 }
 
-.code {
+code {
     font-family: @font-family-monospace;
     font-size: @code-font-size;
 }

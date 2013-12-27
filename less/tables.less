@@ -3,7 +3,7 @@
  *  Contains styling required for tables in Business
  *  Casual.
  *
- *  (C)2013 Jonathan Ballands
+ *  (C)2014 Jonathan Ballands
  */
 
 /*
@@ -70,6 +70,67 @@
     }
 }
 
+.provide-colors() {  
+    
+    // The last-child part prevent double bordering for the
+    // last column of cells
+    
+    td.invert, th.invert {
+        background-color: @darker-gray;
+        color: @white;
+        border-right: 1 solid @table-head-border-color;
+        border-top: 1 solid @table-head-border-color;
+    }
+    td:last-child.invert, th:last-child.invert {
+        background-color: @darker-gray;
+        color: @white;
+        border-right: 0;
+    }
+    
+    td.danger, th.danger {
+        background-color: @danger-background;
+        color: @danger-text;
+        border-right: 1 solid @danger-border;
+        border-top: 1 solid @danger-border;
+    }
+    td:last-child.danger, th:last-child.danger {
+        background-color: @danger-background;
+        color: @danger-text;
+        border-right: 0;
+    }
+    
+    td.warning, th.warning {
+        background-color: @warning-background;
+        color: @warning-text;
+        border-right: 1 solid @warning-border;
+        border-top: 1 solid @warning-border;
+    }
+    td:last-child.warning, th:last-child.warning {
+        background-color: @warning-background;
+        color: @warning-text;
+        border-right: 0;
+    }
+    
+    td.info, th.info {
+        background-color: @info-background;
+        color: @info-text;
+        border-right: 1 solid @info-border;
+        border-top: 1 solid @info-border;
+    }
+    td:last-child.info, th:last-child.info {
+        background-color: @info-background;
+        color: @info-text;
+        border-right: 0;
+    }
+    
+    // No border on top when first row
+    tr:first-child {
+        th, td {
+            border-top: 0;
+        }
+    }
+}
+
 /*
  *  CLASSES
  */
@@ -90,6 +151,9 @@
         
         // Make rows rounded
         .make-rounded();
+        
+        // Give color options
+        .provide-colors();
         
         tr {
             

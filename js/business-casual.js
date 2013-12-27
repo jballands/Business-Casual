@@ -49,11 +49,15 @@ Crossfader.prototype.start = function () {
     }, cf_milliseconds);
 };
 
+function BusinessCasual() {
+    var version = 1.0;
+};
+
 /*
  *  Runtime - starts once page has finished loading
  */
 
-window.onload = function() {
+BusinessCasual.prototype.go = function() {
     
     /*
      *  Hero stuff
@@ -232,3 +236,9 @@ window.onload = function() {
 function hasClass(element, cls) {
     return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
 }
+
+// If the user overrides the "onload" attribute for the page,
+// business-casual.js will be ignored. You will need to use
+// bcgo manually in this case.
+var bc = new BusinessCasual();
+bc.go();
