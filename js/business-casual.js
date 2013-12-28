@@ -212,8 +212,6 @@ BusinessCasual.prototype.go = function() {
             // Activate sticky (scrolling down and the navi begins sticking)
             if (isInRange && !doesExist) {
                 
-                console.log("Is in range!");
-                
                 stickyElement.style.position = "fixed";
                 stickyElement.style.top = currentOffset;
                 stickyElement.style.width = "100%";
@@ -227,6 +225,12 @@ BusinessCasual.prototype.go = function() {
             
             // Already sticky but needs fading (scrolling up and the element is already "stuck")
             else if (isInRange && stickyElement.className.indexOf("hidden") != -1) {
+            
+                // Increase before revealing the navi
+                stuckElements.push(stickyElement);
+                currentOffset = currentOffset + stickyElement.offsetHeight - 1;
+                
+                // Reveal
                 stickyElement.className = stickyElement.className.replace(" hidden","");
             }
             
@@ -247,10 +251,22 @@ BusinessCasual.prototype.go = function() {
                     stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
                 }
                 
+                var shouldFadeOut = (window.pageYOffset >= fadeOut 
+                                    && 
+                                    fadeOut != undefined 
+                                    &&
+                                    stuckElements.indexOf(stickyElement) > -1);
+                
                 // Should fade out
-                if (window.pageYOffset >= fadeOut && fadeOut != undefined) {
+                if (shouldFadeOut) {
                     stickyElement.className = stickyElement.className.replace(" hidden","");
+                    
+                    // Hide
                     stickyElement.className = stickyElement.className + " hidden";
+                    
+                    // Reduce the currentOffset so that the next element slides in nicely
+                    stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
+                    currentOffset = currentOffset - stickyElement.offsetHeight + 1;
                 }
             }
         }
