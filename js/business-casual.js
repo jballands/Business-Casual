@@ -4,6 +4,10 @@
  *  need this file to add Business Casual's dynamic 
  *  content to your webpage.
  *
+ *  I strongly advise that you do not modify this file
+ *  in any way! It's way too complicated, even with my
+ *  lovely comments. :)
+ *
  *  (C)2013 Jonathan Ballands
  */
 
@@ -13,6 +17,12 @@
 
 // Note: Change this to change speed of Crossfaders
 var cf_milliseconds = 5000;
+
+// Used to detect if the window is scrolling up or down
+// Should start at 0
+var scrollPosition = window.pageYOffset;
+var isScrollingUp = false;
+var isScrollingDown = false;
 
 // Crossfader constructor
 function Crossfader(frm, imgList, currImage) {
@@ -24,7 +34,7 @@ function Crossfader(frm, imgList, currImage) {
 // Public method, Crossfader.start();
 Crossfader.prototype.start = function () {
     
-    // this-that syntax because JS is freaking weird
+    // this-that syntax for proper scoping
     var that = this;
     
     // Set up the interval with lambdas; beware of data binding
@@ -49,12 +59,15 @@ Crossfader.prototype.start = function () {
     }, cf_milliseconds);
 };
 
+// Business Casual object constructor so that the user
+// can incorporate more scripts into their project and
+// those scripts won't bump heads with Business Casual
 function BusinessCasual() {
     var version = 1.0;
 };
 
 /*
- *  Runtime - starts once page has finished loading
+ *  go() is the runtime function
  */
 
 BusinessCasual.prototype.go = function() {
@@ -138,9 +151,16 @@ BusinessCasual.prototype.go = function() {
     // Know where all the tops are for each element before scrolling
     for (var i = 0 ; i < stickyElementList.length ; i++) {
         var stickyElement = stickyElementList[i];
-        var thisTop = stickyElement.getBoundingClientRect().top;
+        var thisTop = stickyElement.offsetTop;
         
-        allElements.push({"key": thisTop, "value": stickyElement});
+        // If there is no fade out attribute, undefined will be used
+        var fadeOutId = document.getElementById(stickyElement.getAttribute("fadeOut"));
+        
+        var fadeOut = undefined;
+        if (fadeOutId != null) {
+            var fadeOut = fadeOutId.offsetTop;
+        }
+        allElements.push({"element": stickyElement, "top": thisTop, "bottom": fadeOut});
     }
     
     // Find all the magnetics and adjust them
@@ -155,17 +175,44 @@ BusinessCasual.prototype.go = function() {
     // When the window scrolls, fire an event
     window.onscroll = function(e) {
         
+        // Falsify scrolling for safety         
+        isScrollingUp = false;
+        isScrollingDown = false;
+        
+        // Determine direction of scroll
+        var scroll = window.pageYOffset;
+        if (scroll > scrollPosition) {
+            isScrollingDown = true;
+        }
+        else if (scroll < scrollPosition) {
+            isScrollingUp = true;
+        }
+        
         // For every sticky
         for (var i = 0 ; i < allElements.length ; i++) {
         
             // Get the kvp
             var kvpSticky = allElements[i];
-            var thisTop = kvpSticky["key"];
-            var stickyElement = kvpSticky["value"];
+            var thisTop = kvpSticky["top"];
+            var stickyElement = kvpSticky["element"];
+            var fadeOut = kvpSticky["bottom"];
         
-            // Activate sticky
-            if (window.pageYOffset + currentOffset >= thisTop && 
-                stuckElements.indexOf(stickyElement) == -1) {
+            // Determine if sticky is in range
+            var isBelowTop = window.pageYOffset + currentOffset >= thisTop;
+            var isAboveFade = window.pageYOffset < fadeOut;     // False when fadeOut is undefined
+            var doesExist = stuckElements.indexOf(stickyElement) > -1;
+            
+            // Override boolean if there is no fade out
+            if (fadeOut == undefined) {
+                isAboveFade = true;
+            }
+            
+            var isInRange = isBelowTop && isAboveFade;
+            
+            // Activate sticky (scrolling down and the navi begins sticking)
+            if (isInRange && !doesExist) {
+                
+                console.log("Is in range!");
                 
                 stickyElement.style.position = "fixed";
                 stickyElement.style.top = currentOffset;
@@ -173,20 +220,38 @@ BusinessCasual.prototype.go = function() {
                 
                 stickyElement.nextElementSibling.style.paddingTop = 21;
                 
-                // Subtract one for prettiness
+                // Subtract one for prettiness 
                 currentOffset = currentOffset + stickyElement.offsetHeight - 1;
                 stuckElements.push(stickyElement);
             }
             
-            // Deactiviate sticky; add offsetHeight to calculate from the bottom of the div
-            else if (window.pageYOffset + currentOffset < thisTop + stickyElement.offsetHeight
-                     && stuckElements.indexOf(stickyElement) > -1) {
+            // Already sticky but needs fading (scrolling up and the element is already "stuck")
+            else if (isInRange && stickyElement.className.indexOf("hidden") != -1) {
+                stickyElement.className = stickyElement.className.replace(" hidden","");
+            }
+            
+            // Deactivate sticky
+            else {
                 
-                stickyElement.removeAttribute("style");
-                stickyElement.nextElementSibling.removeAttribute("style"); 
+                var shouldUnsticky = (window.pageYOffset + currentOffset < thisTop + stickyElement.offsetHeight
+                                     &&
+                                     stuckElements.indexOf(stickyElement) > -1);
                 
-                currentOffset = currentOffset - stickyElement.offsetHeight + 1; 
-                stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
+                // Determine what action to take
+                // Should unsticky
+                if (shouldUnsticky) {
+                    stickyElement.removeAttribute("style");
+                    stickyElement.nextElementSibling.removeAttribute("style"); 
+                
+                    currentOffset = currentOffset - stickyElement.offsetHeight + 1; 
+                    stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
+                }
+                
+                // Should fade out
+                if (window.pageYOffset >= fadeOut && fadeOut != undefined) {
+                    stickyElement.className = stickyElement.className.replace(" hidden","");
+                    stickyElement.className = stickyElement.className + " hidden";
+                }
             }
         }
     };
@@ -238,7 +303,7 @@ function hasClass(element, cls) {
 }
 
 // If the user overrides the "onload" attribute for the page,
-// business-casual.js will be ignored. You will need to use
-// bcgo manually in this case.
+// business-casual.js will be ignored. You will need to call
+// go() manually in this case.
 var bc = new BusinessCasual();
 bc.go();

@@ -19,10 +19,22 @@
     opacity: @navigation-bar-opacity;
     z-index: 100;
     
+    -webkit-transition: opacity @navigation-bar-fade-out-time linear;
+    -moz-transition: opacity @navigation-bar-fade-out-time linear;
+    -o-transition: opacity @navigation-bar-fade-out-time linear;
+    transition: opacity @navigation-bar-fade-out-time linear;
+    
+    // visibility: visible;
+    
     &.magnetic {
         position: fixed;
         top: 0;
         width: 100%;
+    }
+    
+    &.hidden {
+        opacity: 0;
+        // visibility: hidden;
     }
 }
 
