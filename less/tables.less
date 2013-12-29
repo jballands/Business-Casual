@@ -123,6 +123,18 @@
         border-right: 0;
     }
     
+    td.success, th.success {
+        background-color: @success-background;
+        color: @success-text;
+        border-right: 1 solid @success-border;
+        border-top: 1 solid @success-border;
+    }
+    td:last-child.success, th:last-child.success {
+        background-color: @success-background;
+        color: @success-text;
+        border-right: 0;
+    }
+    
     // No border on top when first row
     tr:first-child {
         th, td {
