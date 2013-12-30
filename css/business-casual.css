@@ -1,0 +1,760 @@
+/*
+ *  business-casual.less
+ *  The "master" LESS file that imports all other
+ *  LESS files.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  scaffolding.less
+ *  Contains a bunch of variables and initial setup
+ *  for Business Casual.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  Colors
+ */
+/*
+ *  Fonts
+ */
+/*
+ *  Flexor stuff
+ */
+/*
+ *  Hero stuff
+ */
+/*
+ *  Navigation stuff
+ */
+/*
+ *  Well stuff
+ */
+/*
+ *  Button stuff
+ */
+/*
+ *  Table stuff
+ */
+/*
+ *  Other
+ */
+/*
+ *  customize.less
+ *  This is the file you modify to change how Business
+ *  Casual presents itself.
+ *
+ *  If you want to customize Business Casual to your
+ *  tastes, simply modify this file. It is recommended,
+ *  however, that you do not modify any other LESS file!
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  Hero/Sidekick Units
+ */
+/*
+ *  Navigation Bar
+ */
+/*
+ *  Wells
+ */
+/*
+ *  Tables
+ */
+/*
+ *  Buttons
+ */
+/*
+ *  Images
+ */
+/*
+ *  basics.less
+ *  Contains the basic styling for Business Casual.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  MIXINS
+ */
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #282828;
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16pt;
+  font-weight: 300;
+  *zoom: 1;
+}
+body:before,
+body:after {
+  content: "";
+  display: table;
+}
+body:after {
+  clear: both;
+}
+h1 {
+  font-size: 36pt;
+  font-weight: 500;
+  color: #61ebca;
+  font-style: normal;
+}
+h1 span.aside {
+  color: #ffffff;
+  font-size: 24pt;
+  font-style: italic;
+  font-weight: 300;
+  margin-left: 20;
+}
+h1.seperate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
+h2 {
+  font-size: 30pt;
+  font-weight: 500;
+  color: #61ebca;
+  font-style: normal;
+}
+h2 span.aside {
+  color: #ffffff;
+  font-size: 20pt;
+  font-style: italic;
+  font-weight: 300;
+  margin-left: 20;
+}
+h2.seperate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
+h3 {
+  font-size: 24pt;
+  font-weight: 500;
+  color: #61ebca;
+  font-style: normal;
+}
+h3 span.aside {
+  color: #ffffff;
+  font-size: 16pt;
+  font-style: italic;
+  font-weight: 300;
+  margin-left: 20;
+}
+h3.seperate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
+h4 {
+  font-size: 20pt;
+  margin: 20 0;
+  padding: 0;
+  font-weight: 500;
+  color: #ffffff;
+  font-style: normal;
+}
+h4.seperate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
+h5 {
+  font-size: 18pt;
+  margin: 14 0;
+  padding: 0;
+  font-weight: 500;
+  color: #ffffff;
+  font-style: normal;
+}
+h5.seperate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
+h6 {
+  font-size: 16pt;
+  margin: 7 0;
+  padding: 0;
+  font-weight: 500;
+  color: #ffffff;
+  font-style: normal;
+}
+h6.seperate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
+img {
+  vertical-align: middle;
+}
+a {
+  text-decoration: none;
+  color: #61ebca;
+}
+a:hover {
+  color: #ffffff;
+}
+code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 16pt;
+}
+.seperator {
+  width: 100%;
+  height: 1;
+  min-height: 1;
+  border-bottom: 1 solid #171717;
+  margin-top: 25;
+  margin-bottom: 25;
+  *zoom: 1;
+}
+.seperator:before,
+.seperator:after {
+  content: "";
+  display: table;
+}
+.seperator:after {
+  clear: both;
+}
+/*
+ *  flexors.less
+ *  A flexible gridding system that allows you to align
+ *  content properlly. 
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  MIXINS
+ */
+/*
+ *  CLASSES
+ */
+.container {
+  margin: 50 auto;
+  width: 930;
+}
+.flexor {
+  display: block;
+  margin: 0 -10;
+  *zoom: 1;
+  margin-top: 5;
+  margin-bottom: 5;
+}
+.flexor:before,
+.flexor:after {
+  content: "";
+  display: table;
+}
+.flexor:after {
+  clear: both;
+}
+.column-1 {
+  width: 73;
+}
+.column-2 {
+  width: 166;
+}
+.column-3 {
+  width: 259;
+}
+.column-4 {
+  width: 352;
+}
+.column-5 {
+  width: 445;
+}
+.column-6 {
+  width: 538;
+}
+.column-7 {
+  width: 631;
+}
+.column-8 {
+  width: 724;
+}
+.column-9 {
+  width: 817;
+}
+.column-10 {
+  width: 910;
+}
+.column-1, .column-2, .column-3, .column-4, .column-5, .column-6, .column-7, .column-8, .column-9, .column-10 {
+  position: relative;
+  float: left;
+  min-height: 1px;
+  margin: 0 10;
+}
+/*
+ *  heroes.less
+ *  Hero units and sidekick units. 
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  MIXINS
+ */
+/*
+ *  CLASSES
+ */
+.hero-unit {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 550;
+  border-bottom: 1 solid #171717;
+}
+span.hero-unit-text {
+  color: #ffffff;
+  position: relative;
+  z-index: 100;
+}
+span.hero-unit-text .heroic {
+  font-size: 48pt;
+  font-weight: 600;
+  font-style: italic;
+}
+.hero-unit img {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.sidekick-unit {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 270;
+  border-top: 1 solid #171717;
+  border-bottom: 1 solid #171717;
+}
+span.sidekick-unit-text {
+  font-size: 16pt;
+  color: #ffffff;
+  font-weight: 300;
+  font-style: italic;
+  position: relative;
+  z-index: 100;
+}
+.sidekick-unit img {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+/*
+ *  navigation-bar.less
+ *  Contains styling for the built-in navigation bar.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+.navigation-bar {
+  background-color: #f2f2f2;
+  border-bottom: 1 solid #cccccc;
+  border-top: 1 solid #cccccc;
+  padding-top: 12;
+  padding-bottom: 12;
+  font-size: 16pt;
+  font-weight: 300;
+  color: #ababab;
+  opacity: 0.95;
+  z-index: 100;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+.navigation-bar.magnetic {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.navigation-bar.hidden {
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+}
+.navigation-bar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navigation-bar ul.center {
+  text-align: center;
+}
+.navigation-bar ul.right {
+  text-align: right;
+}
+.navigation-bar ul li {
+  display: inline;
+  padding-left: 25;
+  padding-right: 25;
+}
+.navigation-bar ul li:not(:last-child) {
+  border-right: 1 solid #d9d9d9;
+}
+.navigation-bar ul li.logo {
+  font-weight: 600;
+  color: #282828;
+}
+.navigation-bar ul li.active {
+  color: #282828;
+}
+.navigation-bar ul li a {
+  text-decoration: none;
+  color: #ababab;
+}
+.navigation-bar ul li a:hover {
+  text-decoration: none;
+  color: #282828;
+}
+/*
+ *  wells.less
+ *  Contains styling for wells.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+.well {
+  background-color: #222222;
+  color: #ffffff;
+  padding: 15;
+  border: 1px solid #171717;
+  -moz-border-radius: 5;
+  -webkit-border-radius: 5;
+  border-radius: 5;
+}
+/*
+ *  images.less
+ *  Contains styling required for images in Business
+ *  Casual.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  MIXINS
+ */
+/*
+ *  CLASSES
+ */
+img.rounded {
+  -moz-border-radius: 5;
+  -webkit-border-radius: 5;
+  border-radius: 5;
+}
+img.circular {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+img.border {
+  border: 1 solid #171717;
+}
+.crossfader-frame {
+  position: relative;
+  overflow: hidden;
+}
+.crossfader-frame .crossfader-image {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+  transition: opacity 1s linear;
+}
+.crossfader-frame .crossfader-image.rounded {
+  -moz-border-radius: 5;
+  -webkit-border-radius: 5;
+  border-radius: 5;
+}
+.crossfader-frame .crossfader-image.circular {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.crossfader-frame .crossfader-image.border {
+  border: 1 solid #171717;
+}
+.crossfader-frame .crossfader-show {
+  opacity: 1;
+}
+/*
+ *  buttons.less
+ *  Contains the styling for buttons.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+a.button {
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1 solid transparent;
+  white-space: nowrap;
+  padding: 10 10;
+  border: 1 solid #61ebca;
+  border-radius: 5;
+  color: #61ebca;
+  font-size: 16pt;
+  font-style: normal;
+  font-weight: 300;
+}
+a.button:hover {
+  background-color: #ffffff;
+  border: 1 solid #ffffff;
+  color: #171717;
+}
+a.button.large {
+  font-size: 21pt;
+  padding: 15 15;
+}
+a.button.small {
+  font-size: 12pt;
+}
+/*
+ *  tables.less
+ *  Contains styling required for tables in Business
+ *  Casual.
+ *
+ *  (C)2014 Jonathan Ballands
+ */
+/*
+ *  MIXINS
+ */
+/*
+ *  CLASSES
+ */
+.rounded-table {
+  width: 100%;
+  margin-bottom: 16pt;
+  border-spacing: 0;
+  border: 1 solid #171717;
+  border-radius: 5;
+}
+.rounded-table .left {
+  text-align: left;
+}
+.rounded-table .right {
+  text-align: right;
+}
+.rounded-table thead tr:first-child th:first-child,
+.rounded-table tbody tr:first-child th:first-child,
+.rounded-table tfoot tr:first-child th:first-child,
+.rounded-table thead tr:first-child td:first-child,
+.rounded-table tbody tr:first-child td:first-child,
+.rounded-table tfoot tr:first-child td:first-child {
+  border-top-left-radius: 5;
+}
+.rounded-table thead tr:first-child th:last-child,
+.rounded-table tbody tr:first-child th:last-child,
+.rounded-table tfoot tr:first-child th:last-child,
+.rounded-table thead tr:first-child td:last-child,
+.rounded-table tbody tr:first-child td:last-child,
+.rounded-table tfoot tr:first-child td:last-child {
+  border-top-right-radius: 5;
+}
+.rounded-table thead tr:last-child th:first-child,
+.rounded-table tbody tr:last-child th:first-child,
+.rounded-table tfoot tr:last-child th:first-child,
+.rounded-table thead tr:last-child td:first-child,
+.rounded-table tbody tr:last-child td:first-child,
+.rounded-table tfoot tr:last-child td:first-child {
+  border-bottom-left-radius: 5;
+}
+.rounded-table thead tr:last-child th:last-child,
+.rounded-table tbody tr:last-child th:last-child,
+.rounded-table tfoot tr:last-child th:last-child,
+.rounded-table thead tr:last-child td:last-child,
+.rounded-table tbody tr:last-child td:last-child,
+.rounded-table tfoot tr:last-child td:last-child {
+  border-bottom-right-radius: 5;
+}
+.rounded-table thead td.invert,
+.rounded-table tbody td.invert,
+.rounded-table tfoot td.invert,
+.rounded-table thead th.invert,
+.rounded-table tbody th.invert,
+.rounded-table tfoot th.invert {
+  background-color: #222222;
+  color: #ffffff;
+  border-right: 1 solid #171717;
+  border-top: 1 solid #171717;
+}
+.rounded-table thead td:last-child.invert,
+.rounded-table tbody td:last-child.invert,
+.rounded-table tfoot td:last-child.invert,
+.rounded-table thead th:last-child.invert,
+.rounded-table tbody th:last-child.invert,
+.rounded-table tfoot th:last-child.invert {
+  background-color: #222222;
+  color: #ffffff;
+  border-right: 0;
+}
+.rounded-table thead td.danger,
+.rounded-table tbody td.danger,
+.rounded-table tfoot td.danger,
+.rounded-table thead th.danger,
+.rounded-table tbody th.danger,
+.rounded-table tfoot th.danger {
+  background-color: #ff7575;
+  color: #ad0000;
+  border-right: 1 solid #c43333;
+  border-top: 1 solid #c43333;
+}
+.rounded-table thead td:last-child.danger,
+.rounded-table tbody td:last-child.danger,
+.rounded-table tfoot td:last-child.danger,
+.rounded-table thead th:last-child.danger,
+.rounded-table tbody th:last-child.danger,
+.rounded-table tfoot th:last-child.danger {
+  background-color: #ff7575;
+  color: #ad0000;
+  border-right: 0;
+}
+.rounded-table thead td.warning,
+.rounded-table tbody td.warning,
+.rounded-table tfoot td.warning,
+.rounded-table thead th.warning,
+.rounded-table tbody th.warning,
+.rounded-table tfoot th.warning {
+  background-color: #ffef87;
+  color: #c48600;
+  border-right: 1 solid #ffb10a;
+  border-top: 1 solid #ffb10a;
+}
+.rounded-table thead td:last-child.warning,
+.rounded-table tbody td:last-child.warning,
+.rounded-table tfoot td:last-child.warning,
+.rounded-table thead th:last-child.warning,
+.rounded-table tbody th:last-child.warning,
+.rounded-table tfoot th:last-child.warning {
+  background-color: #ffef87;
+  color: #c48600;
+  border-right: 0;
+}
+.rounded-table thead td.info,
+.rounded-table tbody td.info,
+.rounded-table tfoot td.info,
+.rounded-table thead th.info,
+.rounded-table tbody th.info,
+.rounded-table tfoot th.info {
+  background-color: #96daff;
+  color: #005a8a;
+  border-right: 1 solid #0097e8;
+  border-top: 1 solid #0097e8;
+}
+.rounded-table thead td:last-child.info,
+.rounded-table tbody td:last-child.info,
+.rounded-table tfoot td:last-child.info,
+.rounded-table thead th:last-child.info,
+.rounded-table tbody th:last-child.info,
+.rounded-table tfoot th:last-child.info {
+  background-color: #96daff;
+  color: #005a8a;
+  border-right: 0;
+}
+.rounded-table thead td.success,
+.rounded-table tbody td.success,
+.rounded-table tfoot td.success,
+.rounded-table thead th.success,
+.rounded-table tbody th.success,
+.rounded-table tfoot th.success {
+  background-color: #7bc77b;
+  color: #006300;
+  border-right: 1 solid #00a800;
+  border-top: 1 solid #00a800;
+}
+.rounded-table thead td:last-child.success,
+.rounded-table tbody td:last-child.success,
+.rounded-table tfoot td:last-child.success,
+.rounded-table thead th:last-child.success,
+.rounded-table tbody th:last-child.success,
+.rounded-table tfoot th:last-child.success {
+  background-color: #7bc77b;
+  color: #006300;
+  border-right: 0;
+}
+.rounded-table thead tr:first-child th,
+.rounded-table tbody tr:first-child th,
+.rounded-table tfoot tr:first-child th,
+.rounded-table thead tr:first-child td,
+.rounded-table tbody tr:first-child td,
+.rounded-table tfoot tr:first-child td {
+  border-top: 0;
+}
+.rounded-table thead tr th,
+.rounded-table tbody tr th,
+.rounded-table tfoot tr th,
+.rounded-table thead tr td,
+.rounded-table tbody tr td,
+.rounded-table tfoot tr td {
+  background-color: #f2f2f2;
+  color: #222222;
+  padding: 15;
+  vertical-align: top;
+  border-top: 1 solid #ababab;
+  border-right: 1 solid #ababab;
+  font-style: normal;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 16pt;
+}
+.rounded-table thead tr th:last-child,
+.rounded-table tbody tr th:last-child,
+.rounded-table tfoot tr th:last-child,
+.rounded-table thead tr td:last-child,
+.rounded-table tbody tr td:last-child,
+.rounded-table tfoot tr td:last-child {
+  vertical-align: bottom;
+  border-right: 0;
+}
+.rounded-table thead tr:last-child th:first-child,
+.rounded-table thead tr:last-child td:first-child {
+  border-bottom-left-radius: 0;
+}
+.rounded-table thead tr:last-child th:last-child,
+.rounded-table thead tr:last-child td:last-child {
+  border-bottom-right-radius: 0;
+}
+.rounded-table thead tr th,
+.rounded-table thead tr td {
+  vertical-align: bottom;
+  border-bottom: 1 solid #171717;
+  border-right: 1 solid #171717;
+  border-top: 0;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 16pt;
+  background-color: #222222;
+  color: #ffffff;
+}
+.rounded-table thead tr th:last-child,
+.rounded-table thead tr td:last-child {
+  vertical-align: bottom;
+  border-bottom: 1 solid #171717;
+  border-right: 0;
+  background-color: #222222;
+  color: #ffffff;
+}
+.rounded-table.full thead tr th,
+.rounded-table.full thead tr td {
+  padding: 10;
+}
+.rounded-table.full tbody tr:first-child th:first-child,
+.rounded-table.full tfoot tr:first-child th:first-child,
+.rounded-table.full tbody tr:first-child td:first-child,
+.rounded-table.full tfoot tr:first-child td:first-child {
+  border-top-left-radius: 0;
+}
+.rounded-table.full tbody tr:first-child th:last-child,
+.rounded-table.full tfoot tr:first-child th:last-child,
+.rounded-table.full tbody tr:first-child td:last-child,
+.rounded-table.full tfoot tr:first-child td:last-child {
+  border-top-right-radius: 0;
+}
+.rounded-table.full tbody tr th,
+.rounded-table.full tfoot tr th,
+.rounded-table.full tbody tr td,
+.rounded-table.full tfoot tr td {
+  padding: 10;
+}
