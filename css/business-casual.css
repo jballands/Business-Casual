@@ -415,7 +415,7 @@ span.sidekick-unit-text {
   background-color: #222222;
   color: #ffffff;
   padding: 15;
-  border: 1px solid #171717;
+  border: 1 solid #171717;
   -moz-border-radius: 5;
   -webkit-border-radius: 5;
   border-radius: 5;
@@ -601,6 +601,23 @@ a.button.small {
   border-right: 1 solid #c43333;
   border-top: 1 solid #c43333;
 }
+.rounded-table thead td.danger a,
+.rounded-table tbody td.danger a,
+.rounded-table tfoot td.danger a,
+.rounded-table thead th.danger a,
+.rounded-table tbody th.danger a,
+.rounded-table tfoot th.danger a {
+  font-weight: 500;
+  color: #ad0000;
+}
+.rounded-table thead td.danger a:hover,
+.rounded-table tbody td.danger a:hover,
+.rounded-table tfoot td.danger a:hover,
+.rounded-table thead th.danger a:hover,
+.rounded-table tbody th.danger a:hover,
+.rounded-table tfoot th.danger a:hover {
+  color: #610000;
+}
 .rounded-table thead td:last-child.danger,
 .rounded-table tbody td:last-child.danger,
 .rounded-table tfoot td:last-child.danger,
@@ -610,6 +627,23 @@ a.button.small {
   background-color: #ff7575;
   color: #ad0000;
   border-right: 0;
+}
+.rounded-table thead td:last-child.danger a,
+.rounded-table tbody td:last-child.danger a,
+.rounded-table tfoot td:last-child.danger a,
+.rounded-table thead th:last-child.danger a,
+.rounded-table tbody th:last-child.danger a,
+.rounded-table tfoot th:last-child.danger a {
+  font-weight: 500;
+  color: #ad0000;
+}
+.rounded-table thead td:last-child.danger a:hover,
+.rounded-table tbody td:last-child.danger a:hover,
+.rounded-table tfoot td:last-child.danger a:hover,
+.rounded-table thead th:last-child.danger a:hover,
+.rounded-table tbody th:last-child.danger a:hover,
+.rounded-table tfoot th:last-child.danger a:hover {
+  color: #610000;
 }
 .rounded-table thead td.warning,
 .rounded-table tbody td.warning,
@@ -622,6 +656,23 @@ a.button.small {
   border-right: 1 solid #ffb10a;
   border-top: 1 solid #ffb10a;
 }
+.rounded-table thead td.warning a,
+.rounded-table tbody td.warning a,
+.rounded-table tfoot td.warning a,
+.rounded-table thead th.warning a,
+.rounded-table tbody th.warning a,
+.rounded-table tfoot th.warning a {
+  font-weight: 500;
+  color: #c48600;
+}
+.rounded-table thead td.warning a:hover,
+.rounded-table tbody td.warning a:hover,
+.rounded-table tfoot td.warning a:hover,
+.rounded-table thead th.warning a:hover,
+.rounded-table tbody th.warning a:hover,
+.rounded-table tfoot th.warning a:hover {
+  color: #785200;
+}
 .rounded-table thead td:last-child.warning,
 .rounded-table tbody td:last-child.warning,
 .rounded-table tfoot td:last-child.warning,
@@ -631,6 +682,23 @@ a.button.small {
   background-color: #ffef87;
   color: #c48600;
   border-right: 0;
+}
+.rounded-table thead td:last-child.warning a,
+.rounded-table tbody td:last-child.warning a,
+.rounded-table tfoot td:last-child.warning a,
+.rounded-table thead th:last-child.warning a,
+.rounded-table tbody th:last-child.warning a,
+.rounded-table tfoot th:last-child.warning a {
+  font-weight: 500;
+  color: #c48600;
+}
+.rounded-table thead td:last-child.warning a:hover,
+.rounded-table tbody td:last-child.warning a:hover,
+.rounded-table tfoot td:last-child.warning a:hover,
+.rounded-table thead th:last-child.warning a:hover,
+.rounded-table tbody th:last-child.warning a:hover,
+.rounded-table tfoot th:last-child.warning a:hover {
+  color: #785200;
 }
 .rounded-table thead td.info,
 .rounded-table tbody td.info,
@@ -643,6 +711,23 @@ a.button.small {
   border-right: 1 solid #0097e8;
   border-top: 1 solid #0097e8;
 }
+.rounded-table thead td.info a,
+.rounded-table tbody td.info a,
+.rounded-table tfoot td.info a,
+.rounded-table thead th.info a,
+.rounded-table tbody th.info a,
+.rounded-table tfoot th.info a {
+  font-weight: 500;
+  color: #005a8a;
+}
+.rounded-table thead td.info a:hover,
+.rounded-table tbody td.info a:hover,
+.rounded-table tfoot td.info a:hover,
+.rounded-table thead th.info a:hover,
+.rounded-table tbody th.info a:hover,
+.rounded-table tfoot th.info a:hover {
+  color: #00283d;
+}
 .rounded-table thead td:last-child.info,
 .rounded-table tbody td:last-child.info,
 .rounded-table tfoot td:last-child.info,
@@ -652,6 +737,23 @@ a.button.small {
   background-color: #96daff;
   color: #005a8a;
   border-right: 0;
+}
+.rounded-table thead td:last-child.info a,
+.rounded-table tbody td:last-child.info a,
+.rounded-table tfoot td:last-child.info a,
+.rounded-table thead th:last-child.info a,
+.rounded-table tbody th:last-child.info a,
+.rounded-table tfoot th:last-child.info a {
+  font-weight: 500;
+  color: #005a8a;
+}
+.rounded-table thead td:last-child.info a:hover,
+.rounded-table tbody td:last-child.info a:hover,
+.rounded-table tfoot td:last-child.info a:hover,
+.rounded-table thead th:last-child.info a:hover,
+.rounded-table tbody th:last-child.info a:hover,
+.rounded-table tfoot th:last-child.info a:hover {
+  color: #00283d;
 }
 .rounded-table thead td.success,
 .rounded-table tbody td.success,
@@ -664,6 +766,23 @@ a.button.small {
   border-right: 1 solid #00a800;
   border-top: 1 solid #00a800;
 }
+.rounded-table thead td.success a,
+.rounded-table tbody td.success a,
+.rounded-table tfoot td.success a,
+.rounded-table thead th.success a,
+.rounded-table tbody th.success a,
+.rounded-table tfoot th.success a {
+  font-weight: 500;
+  color: #006300;
+}
+.rounded-table thead td.success a:hover,
+.rounded-table tbody td.success a:hover,
+.rounded-table tfoot td.success a:hover,
+.rounded-table thead th.success a:hover,
+.rounded-table tbody th.success a:hover,
+.rounded-table tfoot th.success a:hover {
+  color: #001700;
+}
 .rounded-table thead td:last-child.success,
 .rounded-table tbody td:last-child.success,
 .rounded-table tfoot td:last-child.success,
@@ -673,6 +792,23 @@ a.button.small {
   background-color: #7bc77b;
   color: #006300;
   border-right: 0;
+}
+.rounded-table thead td:last-child.success a,
+.rounded-table tbody td:last-child.success a,
+.rounded-table tfoot td:last-child.success a,
+.rounded-table thead th:last-child.success a,
+.rounded-table tbody th:last-child.success a,
+.rounded-table tfoot th:last-child.success a {
+  font-weight: 500;
+  color: #006300;
+}
+.rounded-table thead td:last-child.success a:hover,
+.rounded-table tbody td:last-child.success a:hover,
+.rounded-table tfoot td:last-child.success a:hover,
+.rounded-table thead th:last-child.success a:hover,
+.rounded-table tbody th:last-child.success a:hover,
+.rounded-table tfoot th:last-child.success a:hover {
+  color: #001700;
 }
 .rounded-table thead tr:first-child th,
 .rounded-table tbody tr:first-child th,
@@ -698,6 +834,23 @@ a.button.small {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 16pt;
+}
+.rounded-table thead tr th a,
+.rounded-table tbody tr th a,
+.rounded-table tfoot tr th a,
+.rounded-table thead tr td a,
+.rounded-table tbody tr td a,
+.rounded-table tfoot tr td a {
+  color: #222222;
+  font-weight: 500;
+}
+.rounded-table thead tr th a:hover,
+.rounded-table tbody tr th a:hover,
+.rounded-table tfoot tr th a:hover,
+.rounded-table thead tr td a:hover,
+.rounded-table tbody tr td a:hover,
+.rounded-table tfoot tr td a:hover {
+  color: #484848;
 }
 .rounded-table thead tr th:last-child,
 .rounded-table tbody tr th:last-child,

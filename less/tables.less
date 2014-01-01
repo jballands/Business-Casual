@@ -92,11 +92,29 @@
         color: @danger-text;
         border-right: 1 solid @danger-border;
         border-top: 1 solid @danger-border;
+        
+        a {
+            font-weight: @font-medium;
+            color: @danger-text;
+            
+            &:hover {
+                color: darken(@danger-text, 15%);
+            }
+        }
     }
     td:last-child.danger, th:last-child.danger {
         background-color: @danger-background;
         color: @danger-text;
         border-right: 0;
+        
+        a {
+            font-weight: @font-medium;
+            color: @danger-text;
+            
+            &:hover {
+                color: darken(@danger-text, 15%);
+            }
+        }
     }
     
     td.warning, th.warning {
@@ -104,11 +122,29 @@
         color: @warning-text;
         border-right: 1 solid @warning-border;
         border-top: 1 solid @warning-border;
+        
+        a {
+            font-weight: @font-medium;
+            color: @warning-text;
+            
+            &:hover {
+                color: darken(@warning-text, 15%);
+            }
+        }
     }
     td:last-child.warning, th:last-child.warning {
         background-color: @warning-background;
         color: @warning-text;
         border-right: 0;
+        
+        a {
+            font-weight: @font-medium;
+            color: @warning-text;
+            
+            &:hover {
+                color: darken(@warning-text, 15%);
+            }
+        }
     }
     
     td.info, th.info {
@@ -116,11 +152,29 @@
         color: @info-text;
         border-right: 1 solid @info-border;
         border-top: 1 solid @info-border;
+        
+        a {
+            font-weight: @font-medium;
+            color: @info-text;
+            
+            &:hover {
+                color: darken(@info-text, 15%);
+            }
+        }
     }
     td:last-child.info, th:last-child.info {
         background-color: @info-background;
         color: @info-text;
         border-right: 0;
+        
+        a {
+            font-weight: @font-medium;
+            color: @info-text;
+            
+            &:hover {
+                color: darken(@info-text, 15%);
+            }
+        }
     }
     
     td.success, th.success {
@@ -128,11 +182,29 @@
         color: @success-text;
         border-right: 1 solid @success-border;
         border-top: 1 solid @success-border;
+        
+        a {
+            font-weight: @font-medium;
+            color: @success-text;
+            
+            &:hover {
+                color: darken(@success-text, 15%);
+            }
+        }
     }
     td:last-child.success, th:last-child.success {
         background-color: @success-background;
         color: @success-text;
         border-right: 0;
+        
+        a {
+            font-weight: @font-medium;
+            color: @success-text;
+            
+            &:hover {
+                color: darken(@success-text, 15%);
+            }
+        }
     }
     
     // No border on top when first row
@@ -184,6 +256,15 @@
                 font-family: @font-family-sans-serif;
                 font-weight: @table-body-font-weight;
                 font-size: @table-body-font-size;
+                
+                a {
+                    color: @table-body-text-color;
+                    font-weight: @font-medium;
+                    
+                    &:hover {
+                        color: lighten(@table-body-text-color, 15%);
+                    }
+                }
             }
             th:last-child, td:last-child {
                 vertical-align: bottom;
