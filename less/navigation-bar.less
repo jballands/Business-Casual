@@ -7,8 +7,8 @@
 
 .navigation-bar {
     background-color: @navigation-bar-color;
-    border-bottom: 1 solid @navigation-bar-border-color; 
-    border-top: 1 solid @navigation-bar-border-color;
+    border-bottom: 1px solid @navigation-bar-border-color; 
+    border-top: 1px solid @navigation-bar-border-color;
 
     padding-top: @navigation-bar-vertical-gutter / 2;
     padding-bottom: @navigation-bar-vertical-gutter / 2;
@@ -60,7 +60,7 @@
     padding-right: @navigation-bar-horizontal-gutter / 2;
     
     &:not(:last-child) {
-        border-right: 1 solid @navigation-bar-divider-color;
+        border-right: 1px solid @navigation-bar-divider-color;
     }
     &.logo {
         font-weight: @navigation-bar-logo-font-weight;
@@ -73,6 +73,8 @@
     & a {
         text-decoration: none;
         color: @navigation-bar-buttons-color;
+        font-weight: @font-light;
+        
         &:hover {
             text-decoration: none;
             color: @navigation-bar-buttons-hover-color;

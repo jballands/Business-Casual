@@ -46,12 +46,12 @@
 .suppress-rounding-bottom() {
     tr:last-child { 
         th:first-child, td:first-child {
-            border-bottom-left-radius: 0;  
+            border-bottom-left-radius: 0px;  
         }
     }
     tr:last-child {
         th:last-child, td:last-child {   
-            border-bottom-right-radius: 0;  
+            border-bottom-right-radius: 0px;  
         }
     }
 }
@@ -60,12 +60,12 @@
 .suppress-rounding-top() {
     tr:first-child { 
         th:first-child, td:first-child {
-            border-top-left-radius: 0;
+            border-top-left-radius: 0px;
         }
     }
     tr:first-child { 
         th:last-child, td:last-child {
-            border-top-right-radius: 0; 
+            border-top-right-radius: 0px; 
         } 
     }
 }
@@ -78,23 +78,38 @@
     td.invert, th.invert {
         background-color: @darker-gray;
         color: @white;
-        border-right: 1 solid @table-head-border-color;
-        border-top: 1 solid @table-head-border-color;
+        border-right: 1px solid @table-head-border-color;
+        border-top: 1px solid @table-head-border-color;
+        
+        a {
+            color: @teal;
+            
+            &:hover {
+                color: @white;
+            }
+        }
     }
     td:last-child.invert, th:last-child.invert {
         background-color: @darker-gray;
         color: @white;
-        border-right: 0;
+        border-right: 0px;
+        
+        a {
+            color: @teal;
+            
+            &:hover {
+                color: @white;
+            }
+        }
     }
     
     td.danger, th.danger {
         background-color: @danger-background;
         color: @danger-text;
-        border-right: 1 solid @danger-border;
-        border-top: 1 solid @danger-border;
+        border-right: 1px solid @danger-border;
+        border-top: 1px solid @danger-border;
         
         a {
-            font-weight: @font-medium;
             color: @danger-text;
             
             &:hover {
@@ -105,10 +120,9 @@
     td:last-child.danger, th:last-child.danger {
         background-color: @danger-background;
         color: @danger-text;
-        border-right: 0;
+        border-right: 0px;
         
         a {
-            font-weight: @font-medium;
             color: @danger-text;
             
             &:hover {
@@ -120,11 +134,10 @@
     td.warning, th.warning {
         background-color: @warning-background;
         color: @warning-text;
-        border-right: 1 solid @warning-border;
-        border-top: 1 solid @warning-border;
+        border-right: 1px solid @warning-border;
+        border-top: 1px solid @warning-border;
         
         a {
-            font-weight: @font-medium;
             color: @warning-text;
             
             &:hover {
@@ -135,10 +148,9 @@
     td:last-child.warning, th:last-child.warning {
         background-color: @warning-background;
         color: @warning-text;
-        border-right: 0;
+        border-right: 0px;
         
         a {
-            font-weight: @font-medium;
             color: @warning-text;
             
             &:hover {
@@ -150,11 +162,10 @@
     td.info, th.info {
         background-color: @info-background;
         color: @info-text;
-        border-right: 1 solid @info-border;
-        border-top: 1 solid @info-border;
+        border-right: 1px solid @info-border;
+        border-top: 1px solid @info-border;
         
         a {
-            font-weight: @font-medium;
             color: @info-text;
             
             &:hover {
@@ -165,10 +176,9 @@
     td:last-child.info, th:last-child.info {
         background-color: @info-background;
         color: @info-text;
-        border-right: 0;
+        border-right: 0px;
         
         a {
-            font-weight: @font-medium;
             color: @info-text;
             
             &:hover {
@@ -180,11 +190,10 @@
     td.success, th.success {
         background-color: @success-background;
         color: @success-text;
-        border-right: 1 solid @success-border;
-        border-top: 1 solid @success-border;
+        border-right: 1px solid @success-border;
+        border-top: 1px solid @success-border;
         
         a {
-            font-weight: @font-medium;
             color: @success-text;
             
             &:hover {
@@ -195,10 +204,9 @@
     td:last-child.success, th:last-child.success {
         background-color: @success-background;
         color: @success-text;
-        border-right: 0;
+        border-right: 0px;
         
         a {
-            font-weight: @font-medium;
             color: @success-text;
             
             &:hover {
@@ -210,7 +218,7 @@
     // No border on top when first row
     tr:first-child {
         th, td {
-            border-top: 0;
+            border-top: 0px;
         }
     }
 }
@@ -225,7 +233,7 @@
     
     // Suppress spacing
     border-spacing: 0;
-    border: 1 solid @table-border-color;
+    border: 1px solid @table-border-color;
     border-radius: @table-edge-radius; 
 
     .provide-text-align();
@@ -249,8 +257,8 @@
                 // Use well gutter size until you know if this is a full table or not
                 padding: @well-gutter-size / 2;
                 vertical-align: top;
-                border-top: 1 solid @table-body-border-color;
-                border-right: 1 solid @table-body-border-color;
+                border-top: 1px solid @table-body-border-color;
+                border-right: 1px solid @table-body-border-color;
                 
                 font-style: @table-body-font-style;
                 font-family: @font-family-sans-serif;
@@ -259,16 +267,15 @@
                 
                 a {
                     color: @table-body-text-color;
-                    font-weight: @font-medium;
                     
                     &:hover {
-                        color: lighten(@table-body-text-color, 15%);
+                        color: lighten(@table-body-text-color, 30%);
                     }
                 }
             }
             th:last-child, td:last-child {
                 vertical-align: bottom;
-                border-right: 0;
+                border-right: 0px;
             }
         }
     }
@@ -282,9 +289,9 @@
         tr {
             th, td {
                 vertical-align: bottom;
-                border-bottom: 1 solid @table-head-border-color;
-                border-right: 1 solid @table-head-border-color;
-                border-top: 0;
+                border-bottom: 1px solid @table-head-border-color;
+                border-right: 1px solid @table-head-border-color;
+                border-top: 0px;
                 
                 font-weight: @table-head-font-weight;
                 font-style: @table-head-font-style;
@@ -295,8 +302,8 @@
             }
             th:last-child, td:last-child {
                 vertical-align: bottom;
-                border-bottom: 1 solid @table-head-border-color;
-                border-right: 0;
+                border-bottom: 1px solid @table-head-border-color;
+                border-right: 0px;
                 
                 background-color: @table-head-background-color;
                 color: @table-head-text-color;
