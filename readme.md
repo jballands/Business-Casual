@@ -19,7 +19,7 @@ This setup is good if you are not particularly fluent in web development but kno
 
 <h3>Advanced Setup</h3>
 
-This setup is good if you want finer control over how Business Casual presents itself. You must have the 
+This setup is good if you want finer control over how Business Casual presents itself. You must have the <code>lessc</code> compiler on your machine to use this setup.
 
 <ol>
   <li>Pull this repository.</li>
