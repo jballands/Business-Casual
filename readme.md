@@ -47,6 +47,8 @@ and <code>/js</code> folders into your project. Each variable should be fairly s
   <code>&lt;link rel="stylesheet" type="text/css" href="css/business-casual.css"&gt;</code></li>
   <li>If you want to use <code>business-casual.js</code>, reference it in the following way in each page:
   <code>&lt;script type="text/javascript" src="js/business-casual.js"&gt;&lt;/script&gt;</code></li>
+  <li>If you are using Javascript directly in your HTML document, ensure that you are kickstarting Busienss Casual using 
+  <code>bc.go();</code>. In other words, insert <code>bc.go();</code> at the end of your <code>&lt;script&gt;</code> tags.</li>
   <li>You may want to rebuild Business Casual using <code>build.sh</code>.</li>
 </ol>
 
