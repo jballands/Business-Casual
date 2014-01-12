@@ -1,0 +1,67 @@
+.italic {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.small-heading {
+    font-size: 18pt;
+    font-weight: 500;
+}
+
+.hljs-comment, .hljs-doctype {
+    color: #4A4A4A;
+}
+
+.hljs-tag, .hljs-keyword {
+    color: #00B3FF;
+}
+
+.hljs-attribute {
+    color: #7FE000;
+}
+
+.hljs-value {
+    color: #FFA200;
+}
+
+.well {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+code {
+    white-space: pre-wrap;
+}
+
+.bc-logo {
+    opacity: 0.6;
+}
+
+.bc-logo:hover {
+    opacity: 1;
+}
+
+span.sidekick-unit-text {
+    font-size: 12pt;
+    text-align: center;
+}
+
+span.sidekick-unit-text ul {
+    margin-top: 100px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+span.sidekick-unit-text ul li {
+    display: inline;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+span.sidekick-unit-text ul li:not(:last-child) {
+    border-right: 1px solid #FFFFFF;
+}

@@ -1,41 +1,27 @@
 <h1>Business Casual readme.md</h1>
 
-For more information on Business Casual, please go to the <a href="http://jonathanballands.me/bc" target="_blank">Business
-Casual website</a>.
+For more information on Business Casual, please go to the <a href="http://jonathanballands.me/bc" target="_blank">Business Casual website</a>.
 
-<h2>Getting Started</h2>
+<h2>Quick Start</h2>
 
-Depending on your ability, choose one of the following setups:
+For a more detailed explaination, please go to the <a href="http://jonathanballands.me/bc#getting-started"
+target="_blank">Getting Started</a>section on the Business Casual website.
 
-<h3>Basic Setup</h3>
+For those of you that are impatient, this quick start guide will help you get started with Business Casual rapidly.
+To understand this section, you should understand web development fairly well. If you find yourself getting lost,
+<a href="http://jonathanballands.me/bc#getting-started" target="_blank">this</a> may be more appropriate.
 
-This setup is good if you are not particularly fluent in web development but know enough to write a small website.
+Let's do this.
 
-<ol>
-  <li>Pull this repository.</li>
-  <li>Locate the <code>/css</code> and <code>/js</code> folders. Copy them.</li>
-  <li>Paste the <code>/css</code> and <code>/js</code> folders into your project.</li>
-</ol>
+Pull this repository to begin. Then, decide if you are going to use Business Casual as is, or if you are
+going to customize it. If you wish it customize Business Casual, you will need the LESS compiler <code>lessc</code>
+from the <a href="http://lesscss.org" target="_blank">LESS website</a>. Ensure <code>lessc</code> is in your
+<code>$PATH</code>. Modify <code>less/customize.less</code> to
+customize Business Casual; all variables should be self-explainitory. Use <code>build.sh</code> to build Business
+Casual's LESS files. Copy and paste the <code>/css</code> and <code>/js</code> directories whereever you feel like it
+and link them to your document as usual.
 
-<h3>Advanced Setup</h3>
-
-This setup is good if you want finer control over how Business Casual presents itself. You must have the <code>lessc</code> compiler on your machine to use this setup.
-
-<ol>
-  <li>Pull this repository.</li>
-  <li>Ensure that you have <code>lessc</code> installed on your machine and that it is in your <code>$PATH</code>.</li>
-  <li>Customize Business Casual in <code>less/customize.less</code> to your liking.</li>
-  <li>Build with <code>build.sh</code>.</li>
-  <li>Copy and paste the <code>/css</code> and <code>/js</code> folders into your project.</li>
-</ol>
-
-<h2>Customization</h2>
-
-You must be using the advanced setup described above to customize Business Casual.
-
-Business Casual is designed to be customized using the <code>/less/customize.less</code> file. Simply change the value
-of a variable <code>customize.less</code>, build with <code>build.sh</code>, and then copy and paste the <code>/css</code>
-and <code>/js</code> folders into your project. Each variable should be fairly self-explanitory.
+Enjoy!
 
 <h2>Troubleshooting</h2>
 
@@ -59,6 +45,15 @@ If none of these resolve the problem, discard your version of Business Casual an
 Read the error; it's likely that <code>build.sh</code> was expecting a different type of value than the one that you provided. It is likely that this is the source of your problem.
 
 If you cannot parse the error, discard your version of Business Casual and repull this repository.
+
+<h4>The build script keeps telling me that I don't have a LESS compiler on my machine.</h4>
+
+To determine if you have <code>less</code>, <code>build.sh</code> simply executes <code>which lessc</code> and checks
+if Bash returned anything. You will get this error when Bash returns nothing. Either you didn't install
+<code>lessc</code> correctly, or you don't have <code>lessc</code> in your <code>$PATH</code>.
+
+You can check to see if <code>lessc</code> is in your path by typing <code>echo $PATH</code> in your Bash shell. If
+it is not there, you should probably modify your <code>.bash_profile</code>.
 
 <h4>I found a bug in Business Casual.</h4>
 

@@ -44,6 +44,7 @@
 }
 
 span.hero-unit-text {
+    display: inline-block;
     color: @hero-unit-text-color;
     .text-adjuster();
     
@@ -57,7 +58,7 @@ span.hero-unit-text {
 //
 //  Suppresses unexpected growth
 //
-.hero-unit img {
+.hero-unit>img {
     .img-adjuster();
 }
 
@@ -73,6 +74,7 @@ span.hero-unit-text {
 }
 
 span.sidekick-unit-text {
+    display: inline-block;
     font-size: @sidekick-unit-font-size;
     color: @sidekick-unit-text-color;
     font-weight: @sidekick-unit-font-weight;
@@ -83,6 +85,6 @@ span.sidekick-unit-text {
 //
 //  Suppresses unexpected growth
 //
-.sidekick-unit img {
+.sidekick-unit>img {
     .img-adjuster();
 }
