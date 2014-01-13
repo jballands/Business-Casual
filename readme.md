@@ -19,7 +19,8 @@ from the <a href="http://lesscss.org" target="_blank">LESS website</a>. Ensure <
 <code>$PATH</code>. Modify <code>less/customize.less</code> to
 customize Business Casual; all variables should be self-explainitory. Use <code>build.sh</code> to build Business
 Casual's LESS files. Copy and paste the <code>/css</code> and <code>/js</code> directories whereever you feel like it
-and link them to your document as usual.
+and link them to your document as usual. If you are using <code>business-casual.js</code> instantiate the
+<code>BusinessCasual</code> class and call the <code>go()</code> method on it.
 
 Enjoy!
 
@@ -33,8 +34,8 @@ Enjoy!
   <code>&lt;link rel="stylesheet" type="text/css" href="css/business-casual.css"&gt;</code></li>
   <li>If you want to use <code>business-casual.js</code>, reference it in the following way in each page:
   <code>&lt;script type="text/javascript" src="js/business-casual.js"&gt;&lt;/script&gt;</code></li>
-  <li>If you are using Javascript directly in your HTML document, ensure that you are kickstarting Business Casual using 
-  <code>bc.go();</code>; in other words, call <code>bc.go();</code> at the end of any Javascript.
+  <li>If you are using <code>business-casual.js</code>, ensure you are instantiating the
+  <code>BusinessCasual</code> class and calling the <code>go()</code> method on it.
   <li>You may want to rebuild Business Casual using <code>build.sh</code>.</li>
 </ol>
 
