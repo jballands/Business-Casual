@@ -31,6 +31,7 @@
                 }
                 
                 // Call go() on Business Casual
+                var bc = new BusinessCasual();
                 bc.go();
                 
                 $("a").smoothScroll({offset: -125, speed: 900, easing: "swing"});
@@ -44,6 +45,7 @@
         </script>
         
         <!-- Remember to add a favicon! -->
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     </head>
     
     <body id="hero-unit">
@@ -300,15 +302,14 @@
 <code>&lt;script type="text/javascript" src="js/business-casual.js"&gt;&lt;/script&gt;</code>
             </div>
             
-            <p>In some cases, <code>business-casual.js</code> may not execute by itself, most notably
-            when there is script elsewhere in your document. If this occurs, you will need to jump start
-            Business Casual.</p>
+            <p>After linking <code>business-casual.js</code> to your document, start it by instantiating
+            Business Casual and then calling the <code>go</code> function on it.</p>
             
             <div class="well">
                     
 <!--Code-->
 <code>window.onload = function() {
-    // Jump start
+    var bc = new BusinessCasual();
     bc.go();
 }</code>
             </div>

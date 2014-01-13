@@ -317,9 +317,3 @@ BusinessCasual.prototype.go = function() {
 function hasClass(element, cls) {
     return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
 }
-
-// If the user overrides the "onload" attribute for the page,
-// business-casual.js will be ignored. You will need to call
-// go() manually in this case.
-var bc = new BusinessCasual();
-bc.go();
