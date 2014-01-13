@@ -312,7 +312,7 @@ span.hero-unit-text .heroic {
   font-weight: 600;
   font-style: italic;
 }
-.hero-unit img {
+.hero-unit > img {
   position: absolute;
   width: 100%;
   top: 0;
