@@ -287,7 +287,7 @@
             <p>Another description on how to customize Business Casual can be found in
             <code>readme.md</code>.</p>
             
-            <h2>Linking</h2>
+            <h2>Linking &amp; Bootstrapping</h2>
             
             <p>Linking <code>business-casual.css</code> to an HTML document is fairly straightforward.</p>
             
@@ -305,17 +305,31 @@
 <code>&lt;script type="text/javascript" src="js/business-casual.js"&gt;&lt;/script&gt;</code>
             </div>
             
-            <p>After linking <code>business-casual.js</code> to your document, start it by instantiating
+            <p>In order for Business Casual's dynamic features to bootstrap to your page, 
+            you will need to start them by instantiating
             Business Casual and then calling the <code>go</code> function on it.</p>
             
-            <div class="well">
-                    
+            <table class="rounded-table bump">
+                <tbody>
+                    <tr class="left">
+                        <th class="invert">
+                            
 <!--Code-->
 <code>window.onload = function() {
     var bc = new BusinessCasual();
     bc.go();
 }</code>
-            </div>
+    
+                        </th>
+                    </tr>
+                    <tr class="left">
+                        <th class="warning">
+                            <span class="bold">Heads up!</span><br/>
+                            Business Casual's dynamic features will not bootstrap to your page if you don't start it.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
             
         </div>
         
@@ -384,10 +398,10 @@
 <code>&lt;h1&gt;Hello world &lt;span class="aside"&gt;Oh hai&lt;/span&gt;&lt;/h1&gt;</code>
                 </div>
                 
-                <h4>Seperators</h4>
+                <h4>Separators</h4>
             
-                <p>Seperators can help make your page more logical. You can apply them to headers or use them
-                seperately.</p>
+                <p>Separators can help make your page more logical. You can apply them to headers or use them
+                separately.</p>
                 
                 <table class="rounded-table bump">
                     <tbody>
@@ -404,9 +418,9 @@
                         <tr class="left">
                             <th class="warning">
                                 <span class="bold">Heads up!</span><br/>
-                                For headers, use the class
-                                <code>seperate</code>, but for divs, use the class
-                                <code>seperator</code>!
+                                At the moment, you will need to mispell separate as <code>seperate</code> and
+                                separator as <code>seperator</code>. I'm working on a patch to fix this 
+                                silly issue.
                             </th>
                         </tr>
                     </tbody>
@@ -1118,6 +1132,8 @@
                            target="_blank"><img src="img/twitter_icon.png" /></a></li>
                     <li><a href="http://www.linkedin.com/pub/jonathan-ballands/3a/b8b/883" 
                            target="_blank"><img src="img/linkedin_icon.png" /></a></li>
+                    <li><a href="https://github.com/jballands" 
+                           target="_blank"><img src="img/github_icon.png" /></a></li>
                 </ul>
             </span>
         </div>
