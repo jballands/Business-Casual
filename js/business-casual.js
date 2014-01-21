@@ -151,7 +151,9 @@ BusinessCasual.prototype.go = function() {
     // Know where all the tops are for each element before scrolling
     for (var i = 0 ; i < stickyElementList.length ; i++) {
         var stickyElement = stickyElementList[i];
-        var thisTop = stickyElement.offsetTop;
+        
+        // Subtract 12 due to padding
+        var thisTop = stickyElement.offsetTop - 12;
         
         // If there is no fade out attribute, undefined will be used
         var fadeOutId = document.getElementById(stickyElement.getAttribute("fadeOut"));
