@@ -8,7 +8,7 @@
  *  in any way! It's way too complicated, even with my
  *  lovely comments. :)
  *
- *  (C)2013 Jonathan Ballands
+ *  (C)2014 Jonathan Ballands
  */
 
 /*
@@ -17,6 +17,9 @@
 
 // Note: Change this to change speed of Crossfaders
 var cf_milliseconds = 5000;
+
+// Note: Change this to change the parallax dampening
+var parallax_dampening = 3;
 
 // Used to detect if the window is scrolling up or down
 // Should start at 0
@@ -193,6 +196,13 @@ BusinessCasual.prototype.go = function() {
         navigationBarHeight = magneticElementList[0].offsetHeight;
     }
     
+    /*
+     *  Parallax Stuff
+     */
+    
+    // Get all the parallax backgrounds
+    var parallaxElementList = document.querySelectorAll(".parallax");
+    
     // When the window scrolls, fire an event
     window.onscroll = function(e) {
         
@@ -309,6 +319,20 @@ BusinessCasual.prototype.go = function() {
                     currentOffset = currentOffset - stickyElement.offsetHeight + 1;
                 }
             }
+        }
+        
+        // For every parallax
+        for (var i = 0 ; i < parallaxElementList.length ; i++) {
+            
+            // Get the specific parallax element, then the image element
+            var parallaxElement = parallaxElementList[i];
+            var imageElement = parallaxElement.getElementsByTagName("img")[0];
+            
+            // Do some calculations and start the parallax
+            var yTop = window.pageYOffset / parallax_dampening;
+            var coords = yTop + "px";
+            
+            imageElement.style.top = coords;
         }
     };
     

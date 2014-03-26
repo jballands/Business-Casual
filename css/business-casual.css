@@ -315,8 +315,7 @@ span.hero-unit-text .heroic {
 .hero-unit > img {
   position: absolute;
   width: 100%;
-  top: 0;
-  left: 0;
+  left: 0px;
 }
 .sidekick-unit {
   position: relative;
@@ -338,8 +337,7 @@ span.sidekick-unit-text {
 .sidekick-unit > img {
   position: absolute;
   width: 100%;
-  top: 0;
-  left: 0;
+  left: 0px;
 }
 /*
  *  navigation-bar.less
