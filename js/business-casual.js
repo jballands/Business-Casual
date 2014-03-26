@@ -169,10 +169,13 @@ BusinessCasual.prototype.go = function() {
         }
         
         // Compute the next line height
-        var nextLineHeight = getComputedStyle(stickyElement.nextElementSibling, null)
-            .getPropertyValue("font-size");
-        nextLineHeight = nextLineHeight.replace("px", "");
-        nextLineHeight = parseInt(nextLineHeight);
+        var nextElement = getComputedStyle(stickyElement.nextElementSibling, null);
+        var nextLineHeight = 0;
+        if (nextElement != null) {
+            nextLineHeight = nextElement.getPropertyValue("font-size");
+            nextLineHeight = nextLineHeight.replace("px", "");
+            nextLineHeight = parseInt(nextLineHeight);
+        }
         
         // Push element into list
         allElements.push({"element": stickyElement, "top": thisTop, "bottom": fadeOut, 
@@ -328,11 +331,13 @@ BusinessCasual.prototype.go = function() {
             var parallaxElement = parallaxElementList[i];
             var imageElement = parallaxElement.getElementsByTagName("img")[0];
             
-            // Do some calculations and start the parallax
-            var yTop = window.pageYOffset / parallax_dampening;
-            var coords = yTop + "px";
-            
-            imageElement.style.top = coords;
+            // If the element isn't viewable yet, don't touch it
+            if (parallaxElement.offsetTop <= window.innerHeight + window.scrollY) {
+                
+                // Do some calculations and start the parallax
+                var parallaxCoords = (window.pageYOffset - parallaxElement.offsetTop) / parallax_dampening;
+                imageElement.style.top = parallaxCoords + "px";
+            }
         }
     };
     
