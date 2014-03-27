@@ -109,9 +109,13 @@ h1 span.aside {
   font-weight: 300;
   margin-left: 20;
 }
+h1.separate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
 h1.seperate {
   padding-bottom: 10;
-  border-bottom: 1px solid #171717;
+  border-bottom: 1 solid #171717;
 }
 h2 {
   font-size: 30pt;
@@ -126,9 +130,13 @@ h2 span.aside {
   font-weight: 300;
   margin-left: 20;
 }
+h2.separate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
 h2.seperate {
   padding-bottom: 10;
-  border-bottom: 1px solid #171717;
+  border-bottom: 1 solid #171717;
 }
 h3 {
   font-size: 24pt;
@@ -143,9 +151,13 @@ h3 span.aside {
   font-weight: 300;
   margin-left: 20;
 }
+h3.separate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
 h3.seperate {
   padding-bottom: 10;
-  border-bottom: 1px solid #171717;
+  border-bottom: 1 solid #171717;
 }
 h4 {
   font-size: 20pt;
@@ -154,6 +166,10 @@ h4 {
   font-weight: 500;
   color: #ffffff;
   font-style: normal;
+}
+h4.separate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
 }
 h4.seperate {
   padding-bottom: 10;
@@ -167,6 +183,10 @@ h5 {
   color: #ffffff;
   font-style: normal;
 }
+h5.separate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
+}
 h5.seperate {
   padding-bottom: 10;
   border-bottom: 1 solid #171717;
@@ -178,6 +198,10 @@ h6 {
   font-weight: 500;
   color: #ffffff;
   font-style: normal;
+}
+h6.separate {
+  padding-bottom: 10;
+  border-bottom: 1 solid #171717;
 }
 h6.seperate {
   padding-bottom: 10;
@@ -196,6 +220,23 @@ a:hover {
 code {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   font-size: 16pt;
+}
+.separator {
+  width: 100%;
+  height: 1px;
+  min-height: 1px;
+  border-bottom: 1px solid #171717;
+  margin-top: 25;
+  margin-bottom: 25;
+  *zoom: 1;
+}
+.separator:before,
+.separator:after {
+  content: "";
+  display: table;
+}
+.separator:after {
+  clear: both;
 }
 .seperator {
   width: 100%;
@@ -247,36 +288,42 @@ code {
   clear: both;
 }
 .column-1 {
-  width: 73;
+  width: 57.5;
 }
 .column-2 {
-  width: 166;
+  width: 135;
 }
 .column-3 {
-  width: 259;
+  width: 212.5;
 }
 .column-4 {
-  width: 352;
+  width: 290;
 }
 .column-5 {
-  width: 445;
+  width: 367.5;
 }
 .column-6 {
-  width: 538;
+  width: 445;
 }
 .column-7 {
-  width: 631;
+  width: 522.5;
 }
 .column-8 {
-  width: 724;
+  width: 600;
 }
 .column-9 {
-  width: 817;
+  width: 677.5;
 }
 .column-10 {
+  width: 755;
+}
+.column-11 {
+  width: 832.5;
+}
+.column-12 {
   width: 910;
 }
-.column-1, .column-2, .column-3, .column-4, .column-5, .column-6, .column-7, .column-8, .column-9, .column-10 {
+.column-1, .column-2, .column-3, .column-4, .column-5, .column-6, .column-7, .column-8, .column-9, .column-10, .column-11, .column-12 {
   position: relative;
   float: left;
   min-height: 1px;
