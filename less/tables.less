@@ -10,63 +10,12 @@
  *  MIXINS
  */
 
-.make-rounded() {
-    tr:first-child { 
-        th:first-child, td:first-child {
-            border-top-left-radius: @table-edge-radius;
-        }
-    }
-    tr:first-child { 
-        th:last-child, td:last-child {
-            border-top-right-radius: @table-edge-radius; 
-        } 
-    }
-    tr:last-child { 
-        th:first-child, td:first-child {
-            border-bottom-left-radius: @table-edge-radius;  
-        }
-    }
-    tr:last-child {
-        th:last-child, td:last-child {   
-            border-bottom-right-radius: @table-edge-radius;  
-        }
-    }
-}
-
 .provide-text-align() {
     .left {
         text-align: left;
     }
     .right {
         text-align: right;
-    }
-}
-
-// Used so that the head doesn't round
-.suppress-rounding-bottom() {
-    tr:last-child { 
-        th:first-child, td:first-child {
-            border-bottom-left-radius: 0px;  
-        }
-    }
-    tr:last-child {
-        th:last-child, td:last-child {   
-            border-bottom-right-radius: 0px;  
-        }
-    }
-}
-
-// Used so that the body doesn't round
-.suppress-rounding-top() {
-    tr:first-child { 
-        th:first-child, td:first-child {
-            border-top-left-radius: 0px;
-        }
-    }
-    tr:first-child { 
-        th:last-child, td:last-child {
-            border-top-right-radius: 0px; 
-        } 
     }
 }
 
@@ -233,19 +182,32 @@
     
     // Suppress spacing
     border-spacing: 0;
-    // border: 1px solid @table-border-color;
-    border-radius: @table-edge-radius; 
 
+    // Align text
     .provide-text-align();
     
     // Affects all cells
     thead, tbody, tfoot {
         
-        // Make rows rounded
-        .make-rounded();
-        
         // Give color options
         .provide-colors();
+        
+        // Round that shit (LESS FAILED ME HERE!!)
+        // Top
+        tr:first-child th:first-child, tr:first-child td:first-child {
+            border-top-left-radius: @table-edge-radius;  
+        }
+        tr:first-child th:last-child, tr:first-child td:last-child {
+            border-top-right-radius: @table-edge-radius;  
+        }
+    
+        // Bottom
+        tr:last-child th:first-child, tr:last-child td:first-child {
+            border-bottom-left-radius: @table-edge-radius;  
+        }
+        tr:last-child th:last-child, tr:last-child td:last-child {
+            border-bottom-right-radius: @table-edge-radius;  
+        }
         
         tr {
             
@@ -283,10 +245,16 @@
     // Only affects head
     thead {
         
-        // Suppress rounding
-        .suppress-rounding-bottom();
+        // Fixes an issue where the head would round
+        tr:last-child th:first-child, tr:last-child td:first-child {
+            border-bottom-left-radius: 0px;  
+        }
+        tr:last-child th:last-child, tr:last-child td:last-child {
+            border-bottom-right-radius: 0px;  
+        }
         
         tr {
+            
             th, td {
                 vertical-align: bottom;
                 // border-bottom: 1px solid @table-head-border-color;
@@ -325,14 +293,19 @@
         
         tbody, tfoot {
             
-            // Suppress rounding
-            .suppress-rounding-top();
-            
             // Use table-cell-padding if this is a full table
             tr {
                 th, td {
                     padding: @table-cell-padding;
                 }
+            }
+            
+            // Fixes an issue where the body's top would unnecessarily round
+            tr:first-child th:first-child, tbody tr:first-child td:first-child {
+                border-top-left-radius: 0px;  
+            }
+            tr:first-child th:last-child, tbody tr:first-child td:last-child {
+                border-top-right-radius: 0px;  
             }
             
         } 

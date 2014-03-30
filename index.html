@@ -41,6 +41,24 @@
                 for (var i = 0 ; i < years.length ; i++) {
                     years[i].innerHTML = new Date().getFullYear();
                 }
+                
+                // Move the scroll provoker
+                var provoker = document.getElementById("scroll-provoker");
+                
+                var provokerWidth = provoker.offsetWidth;
+                var browserWidth = window.innerWidth;
+                var calculatedLeftOffset = (browserWidth / 2) - (provokerWidth / 2);                
+                provoker.style.left = calculatedLeftOffset + "px";
+                
+                $(window).scroll(function() {
+                    var pos = $(window).scrollTop();
+                    if(pos > 50){
+                        $(provoker).fadeOut("fast");
+                    }
+                    else {
+                        $(provoker).fadeIn("fast");
+                    }
+                });
             }
         </script>
         
@@ -52,14 +70,20 @@
         
         <div class="hero-unit parallax">
             <span class="hero-unit-text left">
-                <span class="heroic">Hello, handsome.</span>
-                <br/>Business Casual is clean-cut, formal, and has a good sense of design and style.
-                <br/>Just like you.
+                <span class="heroic">Bandwagoning is dumb.</span>
+                <br/>But parallax is sweet. And with Business Casual v1.1, it's ridiculously simple.
+                <br/>Stay awesome.
                 <br/><br/>
                 <a class="button" target="_blank"
                    href="https://github.com/jballands/Business-Casual">See the repository</a>
             </span>
             <img src="./img/hero-unit.jpg" />
+        </div>
+        
+        <div id="scroll-provoker" style="font-size:13pt;">
+            <img src="./img/arrow_down_white.png" />
+            Scroll down to get your parallax on 
+            <img src="./img/arrow_down_white.png" /> 
         </div>
     
         <div class="navigation-bar sticky">
@@ -75,58 +99,95 @@
         
         <div class="container">
             
+            <div class="flexor" id="landing-icons">
+                <div class="column-4">
+                    <img src="img/framework.png" />
+                </div>
+                <div class="column-4">
+                    <img src="img/rocket.png" />
+                </div>
+                <div class="column-4">
+                    <img src="img/beautiful.png" />
+                </div>
+            </div>
+            
             <p>Originally designed for <a href="http://jonathanballands.me" target="_blank">
-            my personal website</a>, <span class="italic">Business Casual</span> 
-            is a super-minimalistic front-end framework that
-            makes styling online portfolios and personal websites simple.</p>
+            my personal website</a>, Business Casual is a super-minimalistic front-end 
+            framework with 3 design goals: <span class="italic">structured, fast, and beautiful</span>.
+            Business Casual excels when you need a organized, linear website that looks absolutely stunning.</p>
             
-            <p>Business Casual is not responsive, nor is it designed for rich web applications.
-            (If you want a good framework for that, go check out <a href="http://getbootstrap.com"
-            target="_blank">Bootstrap</a> or <a href="http://foundation.zurb.com" target="_blank">
-            Foundation</a>.) What Business Casual excels at, however, is providing a simple, clean
-            look to anything you want to show off online: your portfolio, your organizations's website,
-            your company's homepage...</p>
-            
-            <p>Stay impeccable.</p>
-            
+            <p>Stay awesome.</p>
+
         </div>
-        
+            
         <div class="sidekick-unit parallax">
             <img src="./img/sidekick-unit-1.jpg"/>
         </div>
+           
+        <div class="navigation-bar sticky" fadeOut="about-bc-fadeout">
+            <ul class="center">
+                <li class="logo">About BC</li>
+                <li><a href="#why-bc">Why BC</a></li>
+                <li><a href="#testing">Testing</a></li>
+                <li><a href="#licensing">Licensing</a></li>
+            </ul>
+        </div>
         
-        <div class="container">
-        
-            <h1 class="seperate" id="about">About Business Casual</h1>
+        <div class="container" id="about">
             
-            <p>The latest version of Business Casual is <a href="https://github.com/jballands/Business-Casual/releases" 
-                target="_blank">v1.0.2</a>.</p>
+            <h1 class="separate" id="why-bc">Why Business Casual?</h1>
             
-            <h2>Features</h2>
+            <p>When I was learning web development, I liked to use a lot of frameworks. The problem with
+            today's frameworks, however, is that they have a lot of dependencies. If you want to learn
+            framework B, you have to learn framework A first since framework B uses A. I'm sure
+            A is good and all, but I really don't care, I just want to use B. 
+            I never understood why anyone would do this.</p>
             
-            <h4>Written in LESS</h4>
+            <p>All dependencies do is make your web page slow, inconsistant, and confusing. I wanted
+            to make an easy way for web developers and the average Joe alike to develop beautiful
+            web pages with as little dependencies as possible. I needed to build a framework that has
+            a good sense of style right out of the box, works super fast, has zero dependencies, allows
+            for personalization, and still looks absolutely gorgeous. Is that too much to ask?</p>
             
-            <p>Business Casual's CSS was written completely in the <a href="http://lesscss.org" target="_blank"
-            >LESS</a> stylesheet langauge, making updates and customization a breeze.</p>
+            <p>Not anymore.</p>
             
-            <h4>No jQuery</h4>
+            <h2>Design Goals</h2>
             
-            <p>Business Casual's Javascript has no jQuery dependencies in it, making for faster loading times. In
-            fact, <code>business-casual.js</code> has no dependencies in it at all; only pure Javascript.</p>
+            <p>In general, Business Casual has 3 design goals:</p>
             
-            <h4>Built for the Future</h4>
+            <h4>Be Structured</h4>
             
-            <p>Business Casual was designed for HTML 5 and CSS 3 compliant browsers, meaning that it
-            is built with the latest and greatest web technology in mind.</p>
+            <p>I wanted a framework that had a definite sense of structure and order right out of the box.
+            With Business Casual, all the annoying fiddling and tweeking from standard web programming
+            is handled by the framework, so you can focus more on what matters most: your content.</p>
             
-            <h4>Open Source</h4>
+            <h4>Work Fast</h4>
             
-            <p>Business Casual is completely open source and is currently hosted on
-            <a href="https://github.com/jballands/Business-Casual" target="_blank">GitHub</a> for the world
-            to see. I don't care what you do with it, just remember to include my name somewhere! (See the 
-            <a href="#mit-license">MIT License</a> further down for more information.)</p>
+            <p>Business Casual has been trim and cut to be blazingly fast. You'll only find pure
+            Javascript and LESS code in Business Casual. Not only are loading times quicker, but
+            the code is easier to understand.</p>
             
-            <h2>Browser Testing</h2>
+            <h4>Stay Beautiful</h4>
+            
+            <p>Nobody trusts an ugly website. That's why Business Casual stays beautiful with tasteful
+            colors, fonts, and now with some added parallax to tickle your inner designer's sweet tooth.</p>
+            
+            <p>It's pretty much proven that nobody can ignore parallax.</p>
+            
+            <h2>What's New In v1.1</h2>
+            
+            <p>Coming from v1.0? Here's what's new in v1.1.</p>
+            
+            <ul>
+                <li>Parallax</li>
+                <li>Tweeked UI</li>
+                <li>Like, a bajillion bug fixes</li>
+            </ul>
+            
+            <p>v1.1 was designed to try to be as backwards compatible as possible. You may want to read up on
+            <a href="#flexors">flexors</a> and <a href="#heroes">heroes</a>, though.</p>
+            
+            <h1 class="separate" id="testing">Browser Testing</h1>
             
             <p>The following table depicts which browsers Business Casual has been tested on. If a browser is
             untested, it means that Business Casual may or may not work correctly on that particular browser.</p>
@@ -150,9 +211,9 @@
                 </tbody>
             </table>
             
-            <h2 id="mit-license">MIT License</h2>
-        
-            <p>Please read the following licensing for Business Casual carefully.</p>
+            <h1 class="separate" id="licensing">MIT License</h1>
+            
+            <p>Before using Business Casual, please read the following licensing carefully.</p>
             
             <div class="well">
                 <p>The MIT License</p>
@@ -177,36 +238,69 @@
                 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
                 THE SOFTWARE.</p>
             </div>
+            
         </div>
         
-        <div class="sidekick-unit">
+        <div class="sidekick-unit parallax" id="about-bc-fadeout">
             <img src="./img/sidekick-unit-4.jpg"/>
         </div>
         
-        <div class="container">
+        <div class="navigation-bar sticky" fadeOut="customize-fadeout">
+            <ul class="center">
+                <li class="logo">Getting Started</li>
+                <li><a href="#whats-inside">What's Inside</a></li>
+                <li><a href="#customize">Customize</a></li>
+                <li><a href="#bootstrapping">Bootstrapping</a></li>
+            </ul>
+        </div>
         
-            <h1 class="seperate" id="getting-started">Getting Started</h1>
+        <div class="container" id="getting-started">
             
-            <p>In general, you can either use Business Casual as is or you can customize Business Casual to fit
-            your own sense of style; whatever you do is completely up to you.</p>
+            <p>In general, Business Casual is divided into two parts: the <span class="italic">static</span> part
+            and the <span class="italic">dynamic</span> part.</p>
             
-            <table class="rounded-table">
-                <tbody>
-                    <tr class="left">
-                        <th class="warning">
-                            <span class="bold">Heads up!</span><br/>
-                            If you plan on customizing Business Casual, you should have a LESS compiler and a
-                            Bash shell on your machine. For more information, visit the
-                            <a href="http://lesscss.org" target="_blank">LESS website</a>.
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="flexor">
+                
+                <div class="column-6">
+                    <h4>Static</h4>
+                    
+                    Static features of Business Casual include:
+                    
+                    <ul>
+                        <li>Flexors</li>
+                        <li>Standard navigation bars</li>
+                        <li>Images</li>
+                        <li>Tables</li>
+                        <li>Wells</li>
+                        <li>Buttons</li>
+                        <li>Customization</li>
+                    </ul>
+                </div>
+                
+                <div class="column-6">
+                    <h4>Dynamic</h4>
+                    
+                    Dynamic features of Business Casual include:
+                    
+                    <ul>
+                        <li>Sticky/magnetic navigation bars</li>
+                        <li>Heroes</li>
+                        <li>Crossfaders</li>
+                        <li>Parallax</li>
+                    </ul>
+                </div>
+                
+            </div>
             
-            <h2>Pulling</h2>
+            <p>It's usually easier to include both the static and dynamic parts of Business Casual in your
+            web page, but including only static parts can make your web page faster.</p>
+            
+            <p>These next few sections discuss the process of including Business Casual on your web page.</p>
+            
+            <h1 class="separate" id="whats-inside">What's Inside</h1>
             
             <p>When you pull the Business Casual repository from <a target="_blank"
-            href="https://github.com/jballands/Business-Casual">GitHub</a>, you should be provided with the
+            href="https://github.com/jballands/Business-Casual">GitHub</a>, you will be provided with the
             following:</p>
             
             <table class="rounded-table full">
@@ -254,45 +348,50 @@
                 </tbody>
             </table>
             
-            <h2>Customizing</h2>
+            <h1 class="separate" id="customize">Customizing</h1>
             
-            <p>If you do not plan on customizing Business Casual, skip this step.</p>
+            <p>Business Casual is designed to fit your own sense of style. That's why 
+                <code>customize.less</code> exists.</p>
             
-            <p>In order to customize Business Casual, you will need the LESS compiler on your machine so you can
-            compile from LESS to CSS.
-            The LESS compiler is an executable called <code>lessc</code>. Before continuing,
-            you need to ensure that <code>lessc</code> is installed
-            on your machine and that you have <code>lessc</code> in your <code>$PATH</code>. (If you don't
-            know if <code>lessc</code> is in your path, type <code>which</code> <code>lessc</code> at the Bash prompt.)
-            For more information, visit the <a href="http://lesscss.org" target="_blank">LESS website</a>.</p>
+            <table class="rounded-table">
+                <tbody>
+                    <tr class="left">
+                        <th class="warning">
+                            <span class="bold">Heads up!</span><br/>
+                            If you plan on customizing Business Casual, you should have a LESS compiler and a
+                            Bash shell on your machine. For more information on LESS, visit the
+                            <a href="http://lesscss.org" target="_blank">LESS website</a>.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
             
-            <p>Now, open <code>customize.less</code> in your favorite text editor.</p>
-            
+            <p><code>customize.less</code> has a bunch of definitions for things such as body color, gutter sizes,
+            radii distances, you name it. Each definition name is pretty self explanitory. Once you are happy
+            with your changes, simply run <code>build.sh</code> to rebuild Business Casual.</p>
+
             <table class="rounded-table">
                 <tbody>
                     <tr class="left">
                         <th class="danger">
                             <span class="bold">Careful!</span><br/>
                             Messing with other LESS files in the
-                            <code>/less</code> folder is strongly discouraged
+                            <code>/less</code> directory is strongly discouraged
                             unless you are incredibly sure of what you're doing!
                         </th>
                     </tr>
                 </tbody>
             </table>
             
-            <p>Inside, you will see a bunch of definitions for elements in Business Casual. You can modify
-            these values to change the way Business Casual presents itself. When you are satisfied, simply
-            execute the <code>build.sh</code> Bash script. If errors are produced while running <code>build.sh</code>, 
-            something may be wrong with your version of Business Casual. In this case, you will have to
-            repull and rebuild Business Casual.</p>
-            
             <p>Another description on how to customize Business Casual can be found in
             <code>readme.md</code>.</p>
             
-            <h2>Linking &amp; Bootstrapping</h2>
+            <h1 class="separate">Linking &amp; Bootstrapping</h1>
             
-            <p>Linking <code>business-casual.css</code> to an HTML document is fairly straightforward.</p>
+            <h4>Linking Static Features</h4>
+            
+            <p>Linking <code>business-casual.css</code> to your HTML document will add Business Casual's static
+                features.</p>
             
             <div class="well">
                     
@@ -300,17 +399,34 @@
 <code>&lt;link rel="stylesheet" type="text/css" href="css/business-casual.css"&gt;</code>
             </div>
             
-            <p>If you need it, you can also add <code>business-casual.js</code>.</p>
+            <h4>Bootstrapping Dynamic Features</h4>
             
-            <div class="well">
-                    
+            <p>It's a little bit more complicated to use Business Casual's dynamic features.
+            The first step is to include <code>business-casual-min.js</code> to your HTML document.</p>
+            
+            <table class="rounded-table bump">
+                <tbody>
+                    <tr class="left">
+                        <th class="invert">
+                            
 <!--Code-->
-<code>&lt;script type="text/javascript" src="js/business-casual.js"&gt;&lt;/script&gt;</code>
-            </div>
+<code>&lt;script type="text/javascript" src="js/business-casual-min.js"&gt;&lt;/script&gt;</code>
+    
+                        </th>
+                    </tr>
+                    <tr class="left">
+                        <th class="info">
+                            <span class="bold">FYI</span><br/>
+                            Use <code>business-casual.js</code> for development, but use
+                            <code>business-casual-min.js</code> for deployment.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
             
-            <p>In order for Business Casual's dynamic features to bootstrap to your page, 
-            you will need to start them by instantiating
-            Business Casual and then calling the <code>go</code> function on it.</p>
+            <p>Once this is done, start a <code>script</code> tag in the <code>head</code>
+                of your HTML document. Then, instantiate an instance of Business Casual
+                and call the <code>go</code> function on it to get it to bootstrap.</p>
             
             <table class="rounded-table bump">
                 <tbody>
@@ -328,45 +444,47 @@
                     <tr class="left">
                         <th class="warning">
                             <span class="bold">Heads up!</span><br/>
-                            Business Casual's dynamic features will not bootstrap to your page if you don't start it.
+                            A common bug for Business Casual users is to forget to call <code>go</code>
+                            on an instance of Business Casual. Business Casual's dynamic features will
+                            not bootstrap to your page unless you tell it to do so!
                         </th>
                     </tr>
                 </tbody>
             </table>
-            
+        
         </div>
         
-        <div class="sidekick-unit">
+        <div class="sidekick-unit parallax" id="customize-fadeout">
             <img src="./img/sidekick-unit-2.jpg"/>
         </div>
         
-        <div class="navigation-bar sticky" fadeOut="how-to-use-fade-pt">
+        <div class="navigation-bar sticky">
             <ul class="center">
+                <li class="logo">Docs</li>
                 <li><a href="#basics">Basics</a></li>
                 <li><a href="#flexors">Flexors</a></li>
                 <li><a href="#heroes">Heroes</a></li>
+                
                 <li><a href="#navigation">Navigation</a></li>
                 <li><a href="#images">Images</a></li>
                 <li><a href="#tables">Tables</a></li>
-                <li><a href="#wells">Wells</a></li>
-                <li><a href="#buttons">Buttons</a></li>
+                <li><a href="#wells">Wells &amp; Buttons</a></li>
             </ul>
         </div>
         
-        <div class="container">
-            <h1 class="seperate" id="documentation">Business Casual Documentation</h1>
+        <div class="container" id="documentation">
             
             <!--Basics-->
-            <h2 id="basics">Basics <span class="aside">We need to start somewhere.</span></h2>
+            <h1 class="separate" id="basics">Basics</h1>
                 <!--Doctypes-->
                 <h4>Doctypes</h4>
             
-                <p>You should always start your document with the XHTML doctype.</p>
+                <p>You should always start your document with the HTML doctype.</p>
                 
                 <div class="well">
 
 <!--Code-->
-<code>&lt;!DOCTYPE xhtml&gt;
+<code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
     ...
 &lt;/html&gt;
@@ -406,28 +524,14 @@
                 <p>Separators can help make your page more logical. You can apply them to headers or use them
                 separately.</p>
                 
-                <table class="rounded-table bump">
-                    <tbody>
-                        <tr class="left">
-                            <th class="invert">
+                <div class="well">
                                 
 <!--Code-->
-<code>&lt;h1 class="seperate"&gt;Bacon&lt;/h1&gt;
+<code>&lt;h1 class="separate"&gt;Bacon&lt;/h1&gt;
 
-&lt;div class="seperator"&gt;&lt;/div&gt;</code>
-        
-                            </th>
-                        </tr>
-                        <tr class="left">
-                            <th class="warning">
-                                <span class="bold">Heads up!</span><br/>
-                                At the moment, you will need to mispell separate as <code>seperate</code> and
-                                separator as <code>seperator</code>. I'm working on a patch to fix this 
-                                silly issue.
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
+&lt;div class="separator"&gt;&lt;/div&gt;</code>
+                </div>
+
 
                 <h4>Code</h4>
             
@@ -444,11 +548,11 @@
             </div>
 
             <!--Flexors-->
-            <h2 id="flexors">Flexors <span class="aside">A simple gridding system.</span></h2>
+            <h1 class="separate" id="flexors">Flexors</h1>
 
             <p>Flexor elements allow you to divide your content into columns. The widths of the
             columns are assigned a factor between one and ten, such that the sum of the factors
-            for the flexor is ten.</p>
+            for the flexor is 12.</p>
 
             <h4>Usage</h4>
             
@@ -472,17 +576,7 @@
                     <tr class="left">
                         <th class="danger">
                             <span class="bold">Careful!</span><br/>
-                            The behavior of a flexor is undefined if the sum of the factors is more than ten!
-                        </th>
-                    </tr>
-                    
-                    <tr class="left">
-                        <th class="info">
-                            <span class="bold">FYI</span><br/>
-                            Flexors have a negative margin applied to them so that they align properly
-                            to the left edge of their parent. As a result, you may think that the flexors
-                            below do not take the width of their container. False! "Right-click,
-                            Inspect Element" the flexors below to see for yourself.
+                            The behavior of a flexor is undefined if the sum of the factors is more than 12!
                         </th>
                     </tr>
                 </tbody>
@@ -493,20 +587,20 @@
             <p>Here are some examples of flexors in action.</p>
 
             <div class="flexor">
-                <div class="column-5">
-                    <div class="well">column-5</div>
+                <div class="column-6">
+                    <div class="well">column-6</div>
                 </div>
-                <div class="column-5">
-                    <div class="well">column-5</div>
+                <div class="column-6">
+                    <div class="well">column-6</div>
                 </div>
             </div>
 
             <div class="flexor">
-                <div class="column-3">
-                    <div class="well">column-3</div>
+                <div class="column-4">
+                    <div class="well">column-4</div>
                 </div>
-                <div class="column-3">
-                    <div class="well">column-3</div>
+                <div class="column-4">
+                    <div class="well">column-4</div>
                 </div>
                 <div class="column-4">
                     <div class="well">column-4</div>
@@ -544,10 +638,29 @@
                 <div class="column-1">
                     <div class="well">1</div>
                 </div>
+                <div class="column-1">
+                    <div class="well">1</div>
+                </div>
+                <div class="column-1">
+                    <div class="well">1</div>
+                </div>
             </div>
+            
+            <div class="flexor">
+                <div class="column-7">
+                    <div class="well">column-7</div>
+                </div>
+                <div class="column-2">
+                    <div class="well">column-2</div>
+                </div>
+                <div class="column-3">
+                    <div class="well">column-3</div>
+                </div>
+            </div>
+            
             </p>
 
-            <h2 id="heroes">Heroes <span class="aside">No superpowers required.</span></h2>
+            <h1 id="heroes" class="separate">Heroes</h1>
         
             <p>You can use heroes to welcome vistors to your page and to divide your page up logically.</p>
 
@@ -643,7 +756,19 @@
             Keep in mind, however, that sidekick units are not as tall as hero units and that they do not
             implement the <code>heroic</code> span class in Business Casual.</p>
         
-            <h2 id="navigation">Navigation Bars <span class="aside">The pain is over.</span></h2>
+            <h4>Parallax</h4>
+        
+            <p>Adding parallax to any hero in Business Casual is easy; just add the <code>parallax</code> class.</p>
+        
+            <div class="well">
+
+<!--Code-->
+<code>&lt;div class="sidekick-unit parallax"&gt;
+    &lt;img src="parallaxify-me.jpg" /&gt;
+&lt;/div&gt;</code>
+            </div>
+        
+            <h1 class="separate" id="navigation">Navigation Bars</h1>
         
             <p>Navigation bars are probably the most intricate elements of Business Casual and I am
             very proud to introduce them to you. While you can design your own navigation bars,
@@ -779,7 +904,7 @@
                 </tbody>
             </table>
         
-            <h2 id="images">Images &amp; Crossfaders <span class="aside">Show me what you've got.</span></h2>
+            <h1 id="images" class="separate">Images &amp; Crossfaders</h1>
             
             <p>Any good website has images on it. Business Casual provides you with three options
             when it comes to displaying images.</p>
@@ -817,10 +942,14 @@
                         </th>
                     </tr>
                     <tr>
-                        <th><img src="./img/rasp_cat_2.jpg" class="rounded" style="width:170;height:170;" /></th>
-                        <th><img src="./img/rasp_cat_3.jpg" class="rounded border" style="width:170;height:170;" /></th>
-                        <th><img src="./img/rasp_cat_1.jpg" class="circular" style="width:170;height:170;" /></th>
-                        <th><img src="./img/rasp_cat_4.jpg" class="circular border" style="width:170;height:170;" /></th>
+                        <th style="background-color:#e0e0e0;">
+                            <img src="./img/rasp_cat_2.jpg" class="rounded" style="width:170;height:170;" /></th>
+                        <th style="background-color:#e0e0e0;">
+                            <img src="./img/rasp_cat_3.jpg" class="rounded border" style="width:170;height:170;" /></th>
+                        <th style="background-color:#e0e0e0;">
+                            <img src="./img/rasp_cat_1.jpg" class="circular" style="width:170;height:170;" /></th>
+                        <th style="background-color:#e0e0e0;">
+                            <img src="./img/rasp_cat_4.jpg" class="circular border" style="width:170;height:170;" /></th>
                     </tr>
                 </tbody>
             </table>
@@ -840,7 +969,7 @@
                         <th class="invert">
                             
 <!--Code-->
-<code>&lt;div class="crossfader-frame" style="width:250; height:250;"&gt;
+<code>&lt;div class="crossfader-frame" style="width:250px; height:250px;"&gt;
     &lt;img src="img1.jpg" class="crossfader-image crossfader-show
         rounded" /&gt;
     &lt;img src="img2.jpg" class="crossfader-image rounded" /&gt;
@@ -850,7 +979,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th>
+                        <th style="background-color:#e0e0e0;">
                             <div class="crossfader-frame" \ 
                                  style="width:250;height:250;margin-left:auto;margin-right:auto;">
                                 <img src="./img/rasp_cat_1.jpg" class="crossfader-image crossfader-show rounded" />
@@ -870,7 +999,7 @@
                 </tbody>
             </table>
         
-            <h2 id="tables">Tables <span class="aside">Data points are sexy.</span></h2>
+            <h1 class="separate" id="tables">Tables</h1>
         
             <p>Business Casual provides you with some basic table styling along with cell coloration. Use the
             <code>rounded-table</code> class to use the Business Casual style table. If you are planning on using
@@ -902,7 +1031,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th>
+                        <th style="background-color:#e0e0e0;">
                             <table class="rounded-table full">
                                 <thead>
                                     <tr>
@@ -969,17 +1098,17 @@
                         </th>
                     </tr>
                     <tr>
-                        <th>
+                        <th style="background-color:#e0e0e0;">
                             <table class="rounded-table">
                                 <tbody>
-                                    <tr>
-                                        <th class="left">Data left</th>
+                                    <tr class="left">
+                                        <th>Data left</th>
                                     </tr>
                                     <tr>
                                         <th>More data</th>
                                     </tr>
-                                    <tr>
-                                        <th class="right">Even more data right</th>
+                                    <tr class="right">
+                                        <th>Even more data right</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1012,7 +1141,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th>
+                        <th style="background-color:#e0e0e0;">
                             <table class="rounded-table">
                                 <thead>
                                     <tr>
@@ -1049,7 +1178,7 @@
                 </tbody>
             </table>
         
-            <h2 id="wells">Wells <span class="aside">Well, yeah.</span></h2>
+            <h1 class="separate" id="wells">Wells &amp; Buttons</h1>
         
             <p>Use a well when you want to wrap an element in a box to seperate it from other content. The
             code below is wrapped in a well.</p>
@@ -1060,8 +1189,6 @@
     ...
 &lt;/div&gt;</code>       
             </div>
-        
-            <h2 id="buttons">Buttons <span class="aside">What does this button do?</span></h2>
         
             <p>You can change links into buttons by using the <code>button</code> class on an <code>a</code>
             element. You can make a button appear smaller by using the <code>small</code> class, or larger
@@ -1076,7 +1203,7 @@
 &lt;a class="button large"&gt;Large&lt;/a&gt;</code>       
             </div>
                 </div>
-                <div class="column-3" style="text-align:center;margin-top:30;" id="how-to-use-fade-pt">
+                <div class="column-5" style="text-align:center;margin-top:30;" id="how-to-use-fade-pt">
                     <a class="button small">Small</a>
                     <a class="button">Button</a>
                     <a class="button large">Large</a>
@@ -1084,8 +1211,8 @@
             </div>
             
         </div>
-    
-        <div class="sidekick-unit">
+        
+        <div class="sidekick-unit parallax">
             <img src="./img/sidekick-unit-3.jpg"/>
             <span class="sidekick-unit-text">&copy; <span class="year"></span> All Rights Reserved.
                 Made with love by Jonathan Ballands. Images courtesy of Flickr.<br/><br/>
