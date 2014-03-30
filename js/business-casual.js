@@ -236,12 +236,16 @@ BusinessCasual.prototype.go = function() {
                 var flexorChild = sibling.firstChild;
                 
                 // Bug fix: Skip text nodes
-                while(flexorChild != null && flexorChild.nodeType == 3){;
+                while(flexorChild != null && flexorChild.nodeType == 3) {
                     flexorChild = flexorChild.nextSibling;
                 }
                 
-                if (flexorChild.classList.contains("flexor")) {
-                    flexorChild.style.paddingTop = "21px";
+                // Null check
+                if (flexorChild != null && flexorChild != undefined && flexorChild.classList != null
+                    && flexorChild.classList != undefined) {
+                    if (flexorChild.classList.contains("flexor")) {
+                        flexorChild.style.paddingTop = "21px";
+                    }     
                 }
                 
                 // Subtract one for prettiness 

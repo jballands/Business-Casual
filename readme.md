@@ -5,7 +5,7 @@ For more information on Business Casual, please go to the <a href="http://jonath
 <h2>Quick Start</h2>
 
 For a more detailed explaination, please go to the <a href="http://jonathanballands.me/bc#getting-started"
-target="_blank">Getting Started</a>section on the Business Casual website.
+target="_blank">Getting Started</a> section on the Business Casual website.
 
 For those of you that are impatient, this quick start guide will help you get started with Business Casual rapidly.
 To understand this section, you should understand web development fairly well. If you find yourself getting lost,
