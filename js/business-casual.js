@@ -148,10 +148,8 @@ BusinessCasual.prototype.go = function() {
     
     var stickyElementList = document.querySelectorAll(".sticky");
     var currentOffset = 0;
-    var navigationBarHeight = 0;
     var allElements = [];
     var stuckElements = [];
-    
     
     // Know where all the tops are for each element before scrolling
     for (var i = 0 ; i < stickyElementList.length ; i++) {
@@ -167,19 +165,7 @@ BusinessCasual.prototype.go = function() {
         if (fadeOutId != null) {
             var fadeOut = fadeOutId.offsetTop;
         }
-        
-        // Compute the next line height
-        var nextElement = getComputedStyle(stickyElement.nextElementSibling, null);
-        var nextLineHeight = 0;
-        if (nextElement != null) {
-            nextLineHeight = nextElement.getPropertyValue("font-size");
-            nextLineHeight = nextLineHeight.replace("px", "");
-            nextLineHeight = parseInt(nextLineHeight);
-        }
-        
-        // Push element into list
-        allElements.push({"element": stickyElement, "top": thisTop, "bottom": fadeOut, 
-            "nextLineHeight": parseInt(nextLineHeight)});
+        allElements.push({"element": stickyElement, "top": thisTop, "bottom": fadeOut});
     }
     
     // Find all the magnetics and adjust them
@@ -189,14 +175,6 @@ BusinessCasual.prototype.go = function() {
         magneticElement.style.top = currentOffset;
         
         currentOffset = currentOffset + magneticElement.offsetHeight - 1;
-    }
-    
-    // Establish a navigation bar height, if one exists
-    if (stickyElementList.length > 0) {
-        navigationBarHeight = stickyElementList[0].offsetHeight;
-    }
-    else if (magneticElementList.length > 0) {
-        navigationBarHeight = magneticElementList[0].offsetHeight;
     }
     
     /*
@@ -225,18 +203,11 @@ BusinessCasual.prototype.go = function() {
         // For every sticky
         for (var i = 0 ; i < allElements.length ; i++) {
         
-            // Unpack kvp
+            // Get the kvp
             var kvpSticky = allElements[i];
             var thisTop = kvpSticky["top"];
-            
-            // Check to see if there sound be a 12 pixel pad or not
-            if (stuckElements.length <= 0) {
-                thisTop = thisTop + 12;
-            }
-            
             var stickyElement = kvpSticky["element"];
             var fadeOut = kvpSticky["bottom"];
-            var nextLineHeight = kvpSticky["nextLineHeight"];
         
             // Determine if sticky is in range
             var isBelowTop = window.pageYOffset + currentOffset >= thisTop;
@@ -248,26 +219,30 @@ BusinessCasual.prototype.go = function() {
                 isAboveFade = true;
             }
             
-            // Boolean algebra
             var isInRange = isBelowTop && isAboveFade;
             
-            // Activate sticky (scrolling down and the navi isn't "stuck")
+            // Activate sticky (scrolling down and the navi begins sticking)
             if (isInRange && !doesExist) {
                 
                 stickyElement.style.position = "fixed";
                 stickyElement.style.top = currentOffset;
                 stickyElement.style.width = "100%";
                 
-                // Don't overwrite old padding, if it exists
-                var currentPadding = stickyElement.nextElementSibling.style.paddingTop;
-                if (currentPadding != "") {
-                    currentPadding = parseInt(currentPadding);
+                var sibling = stickyElement.nextElementSibling;
+                sibling.style.paddingTop = "21px";
+                
+                // Bug fix: If the first element in the sibling is a flexor, apply 21px of padding
+                // to it as well
+                var flexorChild = sibling.firstChild;
+                
+                // Bug fix: Skip text nodes
+                while(flexorChild != null && flexorChild.nodeType == 3){;
+                    flexorChild = flexorChild.nextSibling;
                 }
-                else {
-                    currentPadding = 0;
+                
+                if (flexorChild.classList.contains("flexor")) {
+                    flexorChild.style.paddingTop = "21px";
                 }
-                stickyElement.nextElementSibling.style.paddingTop = currentPadding + nextLineHeight + 
-                    Math.floor(nextLineHeight / 2);
                 
                 // Subtract one for prettiness 
                 currentOffset = currentOffset + stickyElement.offsetHeight - 1;
@@ -288,11 +263,9 @@ BusinessCasual.prototype.go = function() {
             // Deactivate sticky
             else {
                 
-                // Boolean algebra
-                var shouldUnsticky = (
-                    (window.pageYOffset + currentOffset - (nextLineHeight / 2) < thisTop + stickyElement.offsetHeight)
-                    &&
-                    (stuckElements.indexOf(stickyElement) > -1));
+                var shouldUnsticky = (window.pageYOffset + currentOffset < thisTop + stickyElement.offsetHeight
+                                     &&
+                                     stuckElements.indexOf(stickyElement) > -1);
                 
                 // Determine what action to take
                 // Should unsticky
