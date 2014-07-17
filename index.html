@@ -12,7 +12,7 @@
         
         <!-- Business Casual -->
         <link rel="stylesheet" type="text/css" href="css/business-casual.css">
-        <script type="text/javascript" src="js/business-casual.js"></script>
+        <script type="text/javascript" src="js/business-casual-min.js"></script>
         
         <!-- Extras -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -174,18 +174,19 @@
             
             <p>It's pretty much proven that nobody can ignore parallax.</p>
             
-            <h2>What's New In v1.1</h2>
+            <h2>What's New In v1.2</h2>
             
-            <p>Coming from v1.0? Here's what's new in v1.1.</p>
+            There are a couple of changes that could cause your website running v1.1 to stop working with v1.2, particularly
+            with <a href="#images">glassboxes</a>.
             
             <ul>
-                <li>Parallax</li>
-                <li>Tweeked UI</li>
-                <li>Like, a bajillion bug fixes</li>
+                <li>Replaced crossfaders with glassboxes</li>
+                <li>Replaced <code>build.sh</code> with Grunt</li>
+                <li>So many bug fixes, oh my gosh</li>
             </ul>
             
-            <p>v1.1 was designed to try to be as backwards compatible as possible. You may want to read up on
-            <a href="#flexors">flexors</a> and <a href="#heroes">heroes</a>, though.</p>
+            <p>Crossfaders were removed because they did not fit the overall look and feel of Business Casual, whereas
+            glassboxes are more cohesive with the overall design and are much more dynamic both for the programmer and the end user.</p>
             
             <h1 class="separate" id="testing">Browser Testing</h1>
             
@@ -285,7 +286,7 @@
                     <ul>
                         <li>Sticky/magnetic navigation bars</li>
                         <li>Heroes</li>
-                        <li>Crossfaders</li>
+                        <li>Glassboxes</li>
                         <li>Parallax</li>
                     </ul>
                 </div>
@@ -468,7 +469,7 @@
                 <li><a href="#navigation">Navigation</a></li>
                 <li><a href="#images">Images</a></li>
                 <li><a href="#tables">Tables</a></li>
-                <li><a href="#wells">Wells &amp; Buttons</a></li>
+                <li><a href="#wells">Assets</a></li>
             </ul>
         </div>
         
@@ -551,7 +552,7 @@
             <h1 class="separate" id="flexors">Flexors</h1>
 
             <p>Flexor elements allow you to divide your content into columns. The widths of the
-            columns are assigned a factor between one and ten, such that the sum of the factors
+            columns are assigned a factor between 1 and 12, such that the sum of the factors
             for the flexor is 12.</p>
 
             <h4>Usage</h4>
@@ -904,7 +905,7 @@
                 </tbody>
             </table>
         
-            <h1 id="images" class="separate">Images &amp; Crossfaders</h1>
+            <h1 id="images" class="separate">Images &amp; Glassboxes</h1>
             
             <p>Any good website has images on it. Business Casual provides you with three options
             when it comes to displaying images.</p>
@@ -954,50 +955,17 @@
                 </tbody>
             </table>
         
-            <p>If you include <code>business-casual.js</code>, you can create slideshows of images by making a
-            crossfader. First, surround all the images you want to appear in the crossfader using the 
-            <code>crossfader-frame</code> class. Then, place <code>img</code> elements inside of the
-            <code>crossfader-frame</code>, giving each the <code>crossfader-image</code> class. Finally, choose
-            an image to kickoff the crossfader by using the <code>crossfader-show</code> class.</p>
-        
-            <p>Make sure that the images are in the relative order you want them to display, starting with the
-            <code>crossfader-show</code> image. Below is an example of how to use a crossfader with a sample.</p>
-        
-            <table class="rounded-table">
-                <tbody>
-                    <tr class="left">
-                        <th class="invert">
-                            
-<!--Code-->
-<code>&lt;div class="crossfader-frame" style="width:250px; height:250px;"&gt;
-    &lt;img src="img1.jpg" class="crossfader-image crossfader-show
-        rounded" /&gt;
-    &lt;img src="img2.jpg" class="crossfader-image rounded" /&gt;
-    &lt;img src="img3.jpg" class="crossfader-image rounded" /&gt;
-&lt;/div&gt;</code>
-           
-                        </th>
-                    </tr>
-                    <tr>
-                        <th style="background-color:#e0e0e0;">
-                            <div class="crossfader-frame" \ 
-                                 style="width:250;height:250;margin-left:auto;margin-right:auto;">
-                                <img src="./img/rasp_cat_1.jpg" class="crossfader-image crossfader-show rounded" />
-                                <img src="./img/rasp_cat_2.jpg" class="crossfader-image rounded" />
-                                <img src="./img/rasp_cat_3.jpg" class="crossfader-image rounded" />
-                            </div>
-                        </th>
-                    </tr>
-                    <tr class="left">
-                        <th class="danger">
-                            <span class="bold">Careful!</span><br/>
-                            Not applying a <code>style</code> attribute to the <code>crossfader-frame</code>
-                            could produce undefined behavior. For safety, make sure that you set the width and
-                            the height of the <code>crossfader-frame</code>!
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
+        </div>
+    
+        <div class="glassbox">
+            <span class="glassbox-caption left">
+                This is some awesome text.
+            </span>
+            <img src="./img/hero-unit.jpg" />
+        </div>
+    
+        <div class="container">
+    
         
             <h1 class="separate" id="tables">Tables</h1>
         

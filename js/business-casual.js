@@ -8,15 +8,12 @@
  *  in any way! It's way too complicated, even with my
  *  lovely comments. :)
  *
- *  (C)2014 Jonathan Ballands
+ *  © 2014 Jonathan Ballands
  */
 
 /*
  *  Class Initializations
  */
-
-// Note: Change this to change speed of Crossfaders
-var cf_milliseconds = 5000;
 
 // Note: Change this to change the parallax dampening
 var parallax_dampening = 3;
@@ -26,41 +23,6 @@ var parallax_dampening = 3;
 var scrollPosition = window.pageYOffset;
 var isScrollingUp = false;
 var isScrollingDown = false;
-
-// Crossfader constructor
-function Crossfader(frm, imgList, currImage) {
-    this.frame = frm;
-    this.imageList = imgList;
-    this.currentImage = currImage;
-}
-
-// Public method, Crossfader.start();
-Crossfader.prototype.start = function () {
-    
-    // this-that syntax for proper scoping
-    var that = this;
-    
-    // Set up the interval with lambdas; beware of data binding
-    setInterval(function() {
-            
-        // Remove crossfader-show from old image
-        var thisImage = that.imageList[that.currentImage];
-        thisImage.className = thisImage.className.replace(" crossfader-show","");
-            
-        // Make sure you go back to the beginning if we are at the last image
-        if (that.currentImage == that.imageList.length - 1) {
-               that.currentImage = 0;
-        }
-        else {
-            that.currentImage++;
-        }
-            
-         // Add crossfader-show to new image
-        thisImage = that.imageList[that.currentImage];
-        thisImage.className = thisImage.className.replace(" crossfader-show","");
-        thisImage.className = thisImage.className + " crossfader-show";
-    }, cf_milliseconds);
-};
 
 // Business Casual object constructor so that the user
 // can incorporate more scripts into their project and
@@ -322,35 +284,40 @@ BusinessCasual.prototype.go = function() {
      *  Image stuff
      */
     
-    // Crossfader
+    // Glassbox
     
-    var crossfaderElementList = document.querySelectorAll(".crossfader-frame");
-    
-    for (var i = 0 ; i < crossfaderElementList.length ; i++) {
+    var glassboxWidth = 0;
+    var glassboxHeight = 0;
+
+    var glassboxList =  document.querySelectorAll("div.glassbox");
+    var glassboxCaptionList =  document.querySelectorAll("span.glassbox-caption");
+
+    // Does a glassbox exist on the page?
+    if (glassboxList.length > 0) {
+        // Just use the first one since they are all the same dimensions
+        glassboxWidth = glassboxList[0].offsetWidth;
+        glassboxHeight = glassboxList[0].offsetHeight;
+    }
+
+    for (var i = 0 ; i < glassboxCaptionList.length ; i++) {
+        var glassboxCaption = glassboxCaptionList[i];
         
-        var crossfaderFrameElement = crossfaderElementList[i];
-        var crossfaderFrameWidth = crossfaderFrameElement.offsetWidth;
-        var crossfaderImageList = crossfaderFrameElement.getElementsByTagName("img");
-        var currentlyDisplaying = 0;
+        var heightOffset = (heroUnitHeight / 2) - (heroUnitText.offsetHeight / 2);
+        var widthOffset = (heroUnitWidth / 2) - (heroUnitText.offsetWidth / 2);
+     
         
-        // Loop through all the images to find the one to show
-        for (var j = 0 ; j < crossfaderImageList.length ; j++) {
-            var crossfaderImage = crossfaderImageList[j];
-            
-            // Should be shown?
-            if (hasClass(crossfaderImage, ".crossfader-show")) {
-                currentlyDisplaying = j;
-            }
-            
-            // Apply id to each image
-            crossfaderImage.width = crossfaderFrameWidth - 2;
-            crossfaderImage.height = crossfaderFrameWidth - 2;
-            crossfaderImage.id = "cf" + j;
+        if (hasClass(heroUnitText, "left")) {
+            heroUnitText.style.left = widthOffset - 2 * (widthOffset / 3);
+            heroUnitText.style.top = heightOffset;
         }
-        
-        // Make a new crossfader
-        var inst = new Crossfader(crossfaderFrameElement, crossfaderImageList, currentlyDisplaying);
-        inst.start();
+        else if (hasClass(heroUnitText, "right")) {
+            heroUnitText.style.left = widthOffset + 2 * (widthOffset / 3);
+            heroUnitText.style.top = heightOffset;
+        }
+        else {
+            heroUnitText.style.left = widthOffset;
+            heroUnitText.style.top = heightOffset;
+        }
     }
 };
 

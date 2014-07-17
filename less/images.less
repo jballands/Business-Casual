@@ -3,7 +3,7 @@
  *  Contains styling required for images in Business
  *  Casual.
  *
- *  (C)2014 Jonathan Ballands
+ *  © 2014 Jonathan Ballands
  */
 
 /*
@@ -36,25 +36,10 @@ img {
     .giveOptions();
 }
 
-.crossfader-frame {
-    position: relative;  
+.glassbox {
+    position: relative; 
     overflow: hidden;
     
-    .crossfader-image {
-        opacity: 0; 
-        position: absolute;
-        top: 0; 
-        left: 0;
-    
-        -webkit-transition: opacity @image-transition-time linear;
-        -moz-transition: opacity @image-transition-time linear;
-        -o-transition: opacity @image-transition-time linear;
-        transition: opacity @image-transition-time linear;
-        
-        .giveOptions();
-    }
-
-    .crossfader-show {
-        opacity: 1;
-    }
+    width: 100%;
+    height: @glassbox-height;
 }

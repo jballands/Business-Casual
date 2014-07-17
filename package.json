@@ -1,0 +1,14 @@
+{
+    "name"          : "business-casual",
+    "version"       : "1.2.0",
+    "author"        : "Jonathan Ballands",
+    "repository"    : "https://github.com/jballands/Business-Casual",
+    "homepage"      : "http://jonathanballands.me/bc",
+    "license"       : "MIT",
+    
+    "devDependencies": {
+        "grunt"                 : "*",
+        "grunt-contrib-less"    : "*",
+        "grunt-contrib-uglify"  : "*"
+    }
+}
