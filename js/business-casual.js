@@ -4,10 +4,6 @@
  *  need this file to add Business Casual's dynamic 
  *  content to your webpage.
  *
- *  I strongly advise that you do not modify this file
- *  in any way! It's way too complicated, even with my
- *  lovely comments. :)
- *
  *  © 2014 Jonathan Ballands
  */
 

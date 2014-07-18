@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                    "js/business-casual.min.js": ["business-casual.js"]
+                    "js/business-casual.min.js": ["js/business-casual.js"]
                 }
             }
         },
@@ -25,20 +25,13 @@ module.exports = function(grunt) {
             options: {
                 compress: true,
                 yuicompress: true,
-                optimization: 2
+                optimization: 2,
+                
             },
-            files: {
-                "css/business-casual.css": ["less/basics.less", 
-                                            "less/business-casual.less", 
-                                            "less/buttons.less", 
-                                            "less/customize.less", 
-                                            "less/flexors.less",
-                                            "less/heroes.less",
-                                            "less/images.less",
-                                            "less/navigation-bar.less",
-                                            "less/scaffolding.less",
-                                            "less/tables.less",
-                                            "less/wells.less"]
+            dist: {  
+                files: {
+                    "css/business-casual.css": ["less/business-casual.less"]
+                }
             }
         }
         

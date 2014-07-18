@@ -12,7 +12,7 @@
         
         <!-- Business Casual -->
         <link rel="stylesheet" type="text/css" href="css/business-casual.css">
-        <script type="text/javascript" src="js/business-casual-min.js"></script>
+        <script type="text/javascript" src="js/business-casual.min.js"></script>
         
         <!-- Extras -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -41,24 +41,6 @@
                 for (var i = 0 ; i < years.length ; i++) {
                     years[i].innerHTML = new Date().getFullYear();
                 }
-                
-                // Move the scroll provoker
-                var provoker = document.getElementById("scroll-provoker");
-                
-                var provokerWidth = provoker.offsetWidth;
-                var browserWidth = window.innerWidth;
-                var calculatedLeftOffset = (browserWidth / 2) - (provokerWidth / 2);                
-                provoker.style.left = calculatedLeftOffset + "px";
-                
-                $(window).scroll(function() {
-                    var pos = $(window).scrollTop();
-                    if(pos > 50){
-                        $(provoker).fadeOut("fast");
-                    }
-                    else {
-                        $(provoker).fadeIn("fast");
-                    }
-                });
             }
         </script>
         
@@ -70,20 +52,16 @@
         
         <div class="hero-unit parallax">
             <span class="hero-unit-text left">
-                <span class="heroic">Bandwagoning is dumb.</span>
-                <br/>But parallax is sweet. And with Business Casual v1.1, it's ridiculously simple.
-                <br/>Stay awesome.
+                <span class="heroic">Settle for nothing.</span>
+                <br/>I depended on Business Casual to land my dream job and show the world what I can do. It worked.
+                <br/>If I wouldn't use it, there's no use making it. Say hello to Business Casual v1.2.
                 <br/><br/>
                 <a class="button" target="_blank"
                    href="https://github.com/jballands/Business-Casual">See the repository</a>
+                <a class="button" target="_blank"
+                   href="https://github.com/jballands/Business-Casual/releases">See formal releases</a>
             </span>
             <img src="./img/hero-unit.jpg" />
-        </div>
-        
-        <div id="scroll-provoker" style="font-size:13pt;">
-            <img src="./img/arrow_down_white.png" />
-            Scroll down to get your parallax on 
-            <img src="./img/arrow_down_white.png" /> 
         </div>
     
         <div class="navigation-bar sticky">
@@ -113,7 +91,7 @@
             
             <p>Originally designed for <a href="http://jonathanballands.me" target="_blank">
             my personal website</a>, Business Casual is a super-minimalistic front-end 
-            framework with 3 design goals: <span class="italic">structured, fast, and beautiful</span>.
+            framework with 3 design goals: structured, fast, and beautiful.
             Business Casual excels when you need a organized, linear website that looks absolutely stunning.</p>
             
             <p>Stay awesome.</p>
@@ -135,21 +113,19 @@
         
         <div class="container" id="about">
             
-            <h1 class="separate" id="why-bc">Why Business Casual?</h1>
+            <h1 class="separate" id="why-bc">Why Business Casual</h1>
             
-            <p>When I was learning web development, I liked to use a lot of frameworks. The problem with
-            today's frameworks, however, is that they have a lot of dependencies. If you want to learn
-            framework B, you have to learn framework A first since framework B uses A. I'm sure
-            A is good and all, but I really don't care, I just want to use B. 
-            I never understood why anyone would do this.</p>
+            <p>If there are two things that you need to know about web development, it's these:
+            1) today's web frameworks have a ton of dependencies, and 2) web developers like to make even
+            the simpliest ideas as confusing as possible. The result is that, while you want to make a beautiful
+            website, you're stuck looking at something like <a href="http://html9responsiveboilerstrapjs.com/" target="_blank">this</a>.</p>
             
-            <p>All dependencies do is make your web page slow, inconsistant, and confusing. I wanted
-            to make an easy way for web developers and the average Joe alike to develop beautiful
-            web pages with as little dependencies as possible. I needed to build a framework that has
-            a good sense of style right out of the box, works super fast, has zero dependencies, allows
-            for personalization, and still looks absolutely gorgeous. Is that too much to ask?</p>
+            <p>Whether you're familar with making websites or not, you'll probably download vast amounts of
+            software just so you can make your personal website or portfolio. What you really need is a 
+            framework that not only looks good, but also is straightforward, honest, and contains very
+            few dependencies.</p>
             
-            <p>Not anymore.</p>
+            <p>Lo and behold, Business Casual: the framework that let's you that have your cake and eat it too.</p>
             
             <h2>Design Goals</h2>
             
@@ -164,15 +140,13 @@
             <h4>Work Fast</h4>
             
             <p>Business Casual has been trim and cut to be blazingly fast. You'll only find pure
-            Javascript and LESS code in Business Casual. Not only are loading times quicker, but
-            the code is easier to understand.</p>
+            Javascript and LESS code in Business Casual. Better yet, the code is still readable.</p>
             
             <h4>Stay Beautiful</h4>
             
-            <p>Nobody trusts an ugly website. That's why Business Casual stays beautiful with tasteful
-            colors, fonts, and now with some added parallax to tickle your inner designer's sweet tooth.</p>
-            
-            <p>It's pretty much proven that nobody can ignore parallax.</p>
+            <p>Nobody trusts an ugly website. That's why Business Casual stays pretty with tasteful fonts, colors,
+            and elements that helps the overall design of your website maintain a clean and professional look without taking itself
+            too seriously.
             
             <h2>What's New In v1.2</h2>
             
@@ -180,9 +154,10 @@
             with <a href="#images">glassboxes</a>.
             
             <ul>
-                <li>Replaced crossfaders with glassboxes</li>
-                <li>Replaced <code>build.sh</code> with Grunt</li>
-                <li>So many bug fixes, oh my gosh</li>
+                <li>Replaced crossfader elements with glassbox elements</li>
+                <li>Replaced the <code>build.sh</code> build script with Grunt</li>
+                <li>More detailed documentation</li>
+                <li>Random bug fixes from v1.1</li>
             </ul>
             
             <p>Crossfaders were removed because they did not fit the overall look and feel of Business Casual, whereas
@@ -250,15 +225,15 @@
             <ul class="center">
                 <li class="logo">Getting Started</li>
                 <li><a href="#whats-inside">What's Inside</a></li>
-                <li><a href="#customize">Customize</a></li>
+                <li><a href="#customize">Customizing</a></li>
                 <li><a href="#bootstrapping">Bootstrapping</a></li>
             </ul>
         </div>
         
         <div class="container" id="getting-started">
             
-            <p>In general, Business Casual is divided into two parts: the <span class="italic">static</span> part
-            and the <span class="italic">dynamic</span> part.</p>
+            <p>In general, Business Casual is divided into two parts: the static part
+            and the dynamic part.</p>
             
             <div class="flexor">
                 
@@ -302,12 +277,12 @@
             
             <p>When you pull the Business Casual repository from <a target="_blank"
             href="https://github.com/jballands/Business-Casual">GitHub</a>, you will be provided with the
-            following:</p>
+            following assets: (If a particular asset is greyed out, then don't sweat it too much.)</p>
             
             <table class="rounded-table full">
                 <thead>
                     <tr>
-                        <th>File</th>
+                        <th style="width:175px">File</th>
                         <th>Description</th>
                     </tr>
                 </thead>
@@ -315,10 +290,6 @@
                     <tr>
                         <th><code>index.html</code></th>
                         <th class="left">This HTML document.</th>
-                    </tr>
-                    <tr>
-                        <th><code>build.sh</code></th>
-                        <th class="left">A shell script that builds Business Casual for you.</th>
                     </tr>
                     <tr>
                         <th><code>css/</code></th>
@@ -332,7 +303,7 @@
                     <tr>
                         <th><code>less/</code></th>
                         <th class="left">A directory containing LESS files that are used to build Business Casual.
-                        This is also where <code>customize.less</code> is located.</th>
+                        This<br/>is where <code>customize.less</code> is located.</th>
                     </tr>
                     <tr>
                         <th><code>img/</code></th>
@@ -343,56 +314,112 @@
                         <th class="left">The MIT License for Business Casual.</th>
                     </tr>
                     <tr>
-                        <th><code>readme.md</code></th>
-                        <th class="left">A markdown file for GitHub. Don't sweat this.</th>
+                        <th><code class="grayed-out">gruntfile.js</code></th>
+                        <th class="left">Instructions for Grunt so that it can build Business Casual.</th>
+                    </tr>
+                    <tr>
+                        <th><code class="grayed-out">package.json</code></th>
+                        <th class="left">Defines what Grunt needs to build Business Casual.</th>
+                    </tr>
+                    <tr>
+                        <th><code class="grayed-out">readme.md</code></th>
+                        <th class="left">A markdown file for GitHub.</th>
+                    </tr>
+                    <tr>
+                        <th><code class="grayed-out">.gitignore</code></th>
+                        <th class="left">Lets source control know what not to push to GitHub.</th>
                     </tr>
                 </tbody>
             </table>
             
-            <h1 class="separate" id="customize">Customizing</h1>
+            <h1 class="separate" id="customize">Customizing Business Casual</h1>
             
-            <p>Business Casual is designed to fit your own sense of style. That's why 
-                <code>customize.less</code> exists.</p>
+            <p>If you just want to use Business Casual as is with its prebuilt <code>business-casual.css</code> and <code>business-casual.min.js</code> files,
+            then you can skip this part. Otherwise, read on.</p>
+            
+            <p>To make customization of Business Casual easy, I created a LESS file known as <code>customize.less</code> where you can tweak
+            things like colors, gutter sizes, radii distances and the like in a single location. If you are really adventurous, you can even modify <code>business-casual.js</code>
+            to make the framework's dynamic features behave a little differently.</p>
+            
+            <p>Unfortunately, if you want to customize Business Casual, you will have to rebuild Business Casual.</p>
             
             <table class="rounded-table">
                 <tbody>
                     <tr class="left">
                         <th class="warning">
                             <span class="bold">Heads up!</span><br/>
-                            If you plan on customizing Business Casual, you should have a LESS compiler and a
-                            Bash shell on your machine. For more information on LESS, visit the
-                            <a href="http://lesscss.org" target="_blank">LESS website</a>.
+                            Customizing Business Casual means you will have to rebuild Business Casual with 
+                            <a href="http://gruntjs.com/" target="_blank">Grunt</a>, which requires you to install a few
+                            dependencies on your machine.
                         </th>
                     </tr>
                 </tbody>
             </table>
             
-            <p><code>customize.less</code> has a bunch of definitions for things such as body color, gutter sizes,
-            radii distances, you name it. Each definition name is pretty self explanitory. Once you are happy
-            with your changes, simply run <code>build.sh</code> to rebuild Business Casual.</p>
-
-            <table class="rounded-table">
-                <tbody>
-                    <tr class="left">
-                        <th class="danger">
-                            <span class="bold">Careful!</span><br/>
-                            Messing with other LESS files in the
-                            <code>/less</code> directory is strongly discouraged
-                            unless you are incredibly sure of what you're doing!
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
+            <p>I can already hear your complaints and you're right. I will say, however, that <a href="http://gruntjs.com/" target="_blank">Grunt</a> is a super handy build 
+            automator for Node that takes care of LESS compilation and Javascript minification for you without having to explicitly
+            install a LESS compiler (like you did with <code>build.sh</code>) and a Javascript minifier. The pros outweigh the cons, in my opinion. I'll
+            walk you through the process:</p>
             
-            <p>Another description on how to customize Business Casual can be found in
-            <code>readme.md</code>.</p>
+            <h2>Setup and Run</h2>
             
-            <h1 class="separate">Linking &amp; Bootstrapping</h1>
+            <ol>
+                <li>Install <a href="http://nodejs.org/" target="_blank">Node</a>. If you have Homebrew installed, run:<br/><br/>
+                <table class="rounded-table">
+                    <tbody>
+                        <tr class="left">
+                            <th class="invert">
+                                <code>$ brew install node</code>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                </li>
+                <li>Install <code>grunt-cli</code> using the Node Package Manager (<code>npm</code>) by running:<br/><br/>
+                <table class="rounded-table">
+                    <tbody>
+                        <tr class="left">
+                            <th class="invert">
+                                <code>$ npm install -g grunt-cli</code>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                </li>
+                
+                <li>Install Business Casual's build dependencies by navigating to the root of your copy of Business Casual and running:<br/><br/>
+                <table class="rounded-table">
+                    <tbody>
+                        <tr class="left">
+                            <th class="invert">
+                                <code>$ npm install</code>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                </li>
+                
+                <li>Build Business Casual by navigating to the root of your copy of Business Casual and running:<br/><br/>
+                <table class="rounded-table">
+                    <tbody>
+                        <tr class="left">
+                            <th class="invert">
+                                <code>$ grunt</code>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                Grunt will then attempt to build Business Casual. Grunt will let you know if the build succeeded or finished with errors. In the latter case,
+                Grunt will show you what prevented the build from completing successfully.
+                </li>
+            </ol>
+            
+            <h1 class="separate" id="bootstrapping">Linking &amp; Bootstrapping</h1>
             
             <h4>Linking Static Features</h4>
             
             <p>Linking <code>business-casual.css</code> to your HTML document will add Business Casual's static
-                features.</p>
+                features:</p>
             
             <div class="well">
                     
@@ -403,7 +430,7 @@
             <h4>Bootstrapping Dynamic Features</h4>
             
             <p>It's a little bit more complicated to use Business Casual's dynamic features.
-            The first step is to include <code>business-casual-min.js</code> to your HTML document.</p>
+            The first step is to include <code>business-casual.min.js</code> to your HTML document:</p>
             
             <table class="rounded-table bump">
                 <tbody>
@@ -411,15 +438,22 @@
                         <th class="invert">
                             
 <!--Code-->
-<code>&lt;script type="text/javascript" src="js/business-casual-min.js"&gt;&lt;/script&gt;</code>
+<code>&lt;script type="text/javascript" src="js/business-casual.min.js"&gt;&lt;/script&gt;</code>
     
                         </th>
                     </tr>
                     <tr class="left">
+                        <th class="warning">
+                            <span class="bold">Heads up!</span><br/>
+                            In v1.1, the deployment Javascript is called <code>business-casual-min.js</code>. In v1.2, 
+                            the deployment Javascript is correctly called <code>business-casual.min.js</code>.
+                        </th>
+                    </tr>
+                    <tr class="left">
                         <th class="info">
-                            <span class="bold">FYI</span><br/>
+                            <span class="bold">Pro tip</span><br/>
                             Use <code>business-casual.js</code> for development, but use
-                            <code>business-casual-min.js</code> for deployment.
+                            <code>business-casual.min.js</code> for deployment.
                         </th>
                     </tr>
                 </tbody>
@@ -427,7 +461,7 @@
             
             <p>Once this is done, start a <code>script</code> tag in the <code>head</code>
                 of your HTML document. Then, instantiate an instance of Business Casual
-                and call the <code>go</code> function on it to get it to bootstrap.</p>
+                and call the <code>go</code> function on it to get the framework to bootstrap:</p>
             
             <table class="rounded-table bump">
                 <tbody>
@@ -445,7 +479,7 @@
                     <tr class="left">
                         <th class="warning">
                             <span class="bold">Heads up!</span><br/>
-                            A common bug for Business Casual users is to forget to call <code>go</code>
+                            A common issue is to forget to call <code>go</code>
                             on an instance of Business Casual. Business Casual's dynamic features will
                             not bootstrap to your page unless you tell it to do so!
                         </th>
@@ -576,7 +610,7 @@
                     
                     <tr class="left">
                         <th class="danger">
-                            <span class="bold">Careful!</span><br/>
+                            <span class="bold">Watch out!</span><br/>
                             The behavior of a flexor is undefined if the sum of the factors is more than 12!
                         </th>
                     </tr>
