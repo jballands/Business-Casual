@@ -1,327 +1,179 @@
 /*
  *  business-casual.js
- *  The JavaScript portion of Business Casual. You
- *  need this file to add Business Casual's dynamic 
- *  content to your webpage.
+ *  The JavaScript portion of Business Casual. You need this file to add Business Casual's
+ *  dynamic content to your webpage.
+ *
+ *  If you wish to modify this Javascript file, it is recommended that you
+ *  read this carefully, as this is the only documentation on the subject. :)
+ *
+ *  Firstly, Business Casual abstracts out each dynamic element in the DOM
+ *  as a Javascript object that always meets the following requirements:
+ *      1) The constructor for each of these objects takes exactly one
+ *         parameter called "elem".
+ *      2) The object defines one public function called "execute()" that
+ *         takes no paramters.
+ *  
+ *  Furthermore, Business Casual abstracts out one "god object" named
+ *  "BusinessCasual" that bootstraps each Javascript object to its corresponding
+ *  DOM element and calls the "execute()" function on it.
+ *
+ *  Here is an overview of the lifecycle:
+ *      1) Business Casual user instantiates an instance of "BusinessCasual" and calls
+ *         the "bootstrap()" function on it from some other script.
+ *      2) The "bootstrap()" function will traverse the DOM and bootstrap a DOM element
+ *         to its corresponding Javascript object, using the "availables" array as a
+ *         reference. Each Javascript object will be pushed into the "elements" array for
+ *         future reference.
+ *      3) "bootstrap()" will then call a private function called "run()" on "BusinessCasual"
+ *         that will loop through each element and call "execute()" on it.
+ *
+ *  When designing your own custom Javascript object for use with Business Casual:
+ *      1) Your constructor must always take exactly one paramter called "elem", the element
+ *         that the Javascript object bootstrapped to. Your constructor should also prep your 
+ *         DOM object for the "execute()" function that will be called next by the "BusinessCasual"
+ *         object.
+ *      2) Your object must contain one public function called "execute()" that takes no parameters.
+ *         This is where you will describe what happens in the DOM dynamically. You should only
+ *         describe what occurs as the user interacts with your object in the "execute()" function
+ *         to avoid a slight delay when a user loads your webpage.
+ *      3) Insert a new object into the "availables" array that contains two members: "query", the
+ *         query that Business Casual should use when it traverses the DOM for your object, and 
+ *         "ref", a referece to your object.
  *
  *  © 2014 Jonathan Ballands
  */
 
-/*
- *  Class Initializations
- */
-
-// Note: Change this to change the parallax dampening
-var parallax_dampening = 3;
-
-// Used to detect if the window is scrolling up or down
-// Should start at 0
-var scrollPosition = window.pageYOffset;
-var isScrollingUp = false;
-var isScrollingDown = false;
-
-// Business Casual object constructor so that the user
-// can incorporate more scripts into their project and
-// those scripts won't bump heads with Business Casual
 function BusinessCasual() {
-    var version = 1.0;
-};
+    
+    this.version = 1.2;
+
+    this.availables = [
+        {query : "div.hero-unit", ref : HeroUnit},
+        {query : "div.sidekick-unit", ref : SidekickUnit},
+        {query : "div.parallax", ref : Parallax}
+    ];
+    
+    var elements = [];
+    
+    function run() {
+        for (var i = 0 ; i < elements.length ; i++) {
+            var element = elements[i];
+            element.execute();
+        }
+    }
+    
+    this.bootstrap = function() {
+        for (var i = 0 ; i < this.availables.length ; i++) {
+            var available = this.availables[i];
+            var results = document.querySelectorAll(available.query);
+            for (var j = 0 ; j < results.length ; j++) {
+                var result = results[j];
+                elements.push(new available.ref(result));
+            }
+        }
+        run();
+    }
+
+}
 
 /*
- *  go() is the runtime function
+ *  ---------------
+ *  Element Objects
+ *  ---------------
  */
 
-BusinessCasual.prototype.go = function() {
+function HeroUnit(elem) {
     
-    /*
-     *  Hero stuff
-     */
+    var width = elem.offsetWidth;
+    var height = elem.offsetHeight;
     
-    // Hero units
+    var text = elem.querySelectorAll("span.hero-unit-text");
     
-    var heroUnitWidth = 0;
-    var heroUnitHeight = 0;
-
-    var heroUnitList =  document.querySelectorAll("div.hero-unit");
-    var heroUnitTextList =  document.querySelectorAll("span.hero-unit-text");
-
-    // Does a hero unit exist on the page?
-    if (heroUnitList.length > 0) {
-        // Just use the first one since they are all the same dimensions
-        heroUnitWidth = heroUnitList[0].offsetWidth;
-        heroUnitHeight = heroUnitList[0].offsetHeight;
-    }
-
-    for (var i = 0 ; i < heroUnitTextList.length ; i++) {
-        var heroUnitText = heroUnitTextList[i];
+    if (text.length > 0) {
+        text = text[0];
         
-        var heightOffset = (heroUnitHeight / 2) - (heroUnitText.offsetHeight / 2);
-        var widthOffset = (heroUnitWidth / 2) - (heroUnitText.offsetWidth / 2);
+        var heightOffset = (height / 2) - (text.offsetHeight / 2);
+        var widthOffset = (width / 2) - (text.offsetWidth / 2);
      
         
-        if (hasClass(heroUnitText, "left")) {
-            heroUnitText.style.left = widthOffset - 2 * (widthOffset / 3);
-            heroUnitText.style.top = heightOffset;
+        if (hasClass(text, "left")) {
+            text.style.left = widthOffset - 2 * (widthOffset / 3);
+            text.style.top = heightOffset;
         }
-        else if (hasClass(heroUnitText, "right")) {
-            heroUnitText.style.left = widthOffset + 2 * (widthOffset / 3);
-            heroUnitText.style.top = heightOffset;
+        else if (hasClass(text, "right")) {
+            text.style.left = widthOffset + 2 * (widthOffset / 3);
+            text.style.top = heightOffset;
         }
         else {
-            heroUnitText.style.left = widthOffset;
-            heroUnitText.style.top = heightOffset;
+            text.style.left = widthOffset;
+            text.style.top = heightOffset;
         }
-    }
-    
-    // Sidekick units
-    
-    var sidekickUnitWidth = 0;
-    var sidekickUnitHeight = 0;
-
-    var sidekickUnitList =  document.querySelectorAll("div.sidekick-unit");
-    var sidekickUnitTextList =  document.querySelectorAll("span.sidekick-unit-text");
-
-    // Does a hero unit exist on the page?
-    if (sidekickUnitList.length > 0) {
-        // Just use the first one since they are all the same dimensions
-        sidekickUnitWidth = sidekickUnitList[0].offsetWidth;
-        sidekickUnitHeight = sidekickUnitList[0].offsetHeight;
     }
 
-    for (var i = 0 ; i < sidekickUnitTextList.length ; i++) {
-        var sidekickUnitText = sidekickUnitTextList[i];
-        
-        var heightOffset = (sidekickUnitHeight / 2) - (sidekickUnitText.offsetHeight / 2);
-        var widthOffset = (sidekickUnitWidth / 2) - (sidekickUnitText.offsetWidth / 2);
-     
-        sidekickUnitText.style.left = widthOffset;
-        sidekickUnitText.style.top = heightOffset;
-    }
+}
+HeroUnit.prototype.execute = function() {
     
-    /*
-     *  Navigation stuff
-     */
+    // Nothing to do...
     
-    // Sticky/Magnetic
-    
-    var stickyElementList = document.querySelectorAll(".sticky");
-    var currentOffset = 0;
-    var allElements = [];
-    var stuckElements = [];
-    
-    // Know where all the tops are for each element before scrolling
-    for (var i = 0 ; i < stickyElementList.length ; i++) {
-        var stickyElement = stickyElementList[i];
-        
-        // Subtract 12 due to padding
-        var thisTop = stickyElement.offsetTop - 12;
-        
-        // If there is no fade out attribute, undefined will be used
-        var fadeOutId = document.getElementById(stickyElement.getAttribute("fadeOut"));
-        
-        var fadeOut = undefined;
-        if (fadeOutId != null) {
-            var fadeOut = fadeOutId.offsetTop;
-        }
-        allElements.push({"element": stickyElement, "top": thisTop, "bottom": fadeOut});
-    }
-    
-    // Find all the magnetics and adjust them
-    var magneticElementList = document.querySelectorAll(".magnetic");
-    for (var i = 0 ; i < magneticElementList.length ; i++) {
-        var magneticElement = magneticElementList[i];
-        magneticElement.style.top = currentOffset;
-        
-        currentOffset = currentOffset + magneticElement.offsetHeight - 1;
-    }
-    
-    /*
-     *  Parallax Stuff
-     */
-    
-    // Get all the parallax backgrounds
-    var parallaxElementList = document.querySelectorAll(".parallax");
-    
-    // When the window scrolls, fire an event
-    window.onscroll = function(e) {
-        
-        // Falsify scrolling for safety         
-        isScrollingUp = false;
-        isScrollingDown = false;
-        
-        // Determine direction of scroll
-        var scroll = window.pageYOffset;
-        if (scroll > scrollPosition) {
-            isScrollingDown = true;
-        }
-        else if (scroll < scrollPosition) {
-            isScrollingUp = true;
-        }
-        
-        // For every sticky
-        for (var i = 0 ; i < allElements.length ; i++) {
-        
-            // Get the kvp
-            var kvpSticky = allElements[i];
-            var thisTop = kvpSticky["top"];
-            var stickyElement = kvpSticky["element"];
-            var fadeOut = kvpSticky["bottom"];
-        
-            // Determine if sticky is in range
-            var isBelowTop = window.pageYOffset + currentOffset >= thisTop;
-            var isAboveFade = window.pageYOffset < fadeOut;     // False when fadeOut is undefined
-            var doesExist = stuckElements.indexOf(stickyElement) > -1;
-            
-            // Override boolean if there is no fade out
-            if (fadeOut == undefined) {
-                isAboveFade = true;
-            }
-            
-            var isInRange = isBelowTop && isAboveFade;
-            
-            // Activate sticky (scrolling down and the navi begins sticking)
-            if (isInRange && !doesExist) {
-                
-                stickyElement.style.position = "fixed";
-                stickyElement.style.top = currentOffset;
-                stickyElement.style.width = "100%";
-                
-                var sibling = stickyElement.nextElementSibling;
-                sibling.style.paddingTop = "21px";
-                
-                // Bug fix: If the first element in the sibling is a flexor, apply 21px of padding
-                // to it as well
-                var flexorChild = sibling.firstChild;
-                
-                // Bug fix: Skip text nodes
-                while(flexorChild != null && flexorChild.nodeType == 3) {
-                    flexorChild = flexorChild.nextSibling;
-                }
-                
-                // Null check
-                if (flexorChild != null && flexorChild != undefined && flexorChild.classList != null
-                    && flexorChild.classList != undefined) {
-                    if (flexorChild.classList.contains("flexor")) {
-                        flexorChild.style.paddingTop = "21px";
-                    }     
-                }
-                
-                // Subtract one for prettiness 
-                currentOffset = currentOffset + stickyElement.offsetHeight - 1;
-                stuckElements.push(stickyElement);
-            }
-            
-            // Already sticky but needs fading (scrolling up and the element is already "stuck")
-            else if (isInRange && stickyElement.className.indexOf("hidden") != -1) {
-            
-                // Increase before revealing the navi
-                stuckElements.push(stickyElement);
-                currentOffset = currentOffset + stickyElement.offsetHeight - 1;
-                
-                // Reveal
-                stickyElement.className = stickyElement.className.replace(" hidden","");
-            }
-            
-            // Deactivate sticky
-            else {
-                
-                var shouldUnsticky = (window.pageYOffset + currentOffset < thisTop + stickyElement.offsetHeight
-                                     &&
-                                     stuckElements.indexOf(stickyElement) > -1);
-                
-                // Determine what action to take
-                // Should unsticky
-                if (shouldUnsticky) {
-                    stickyElement.removeAttribute("style");
-                    stickyElement.nextElementSibling.removeAttribute("style"); 
-                
-                    currentOffset = currentOffset - stickyElement.offsetHeight + 1; 
-                    stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
-                }
-                
-                var shouldFadeOut = (window.pageYOffset >= fadeOut 
-                                    && 
-                                    fadeOut != undefined 
-                                    &&
-                                    stuckElements.indexOf(stickyElement) > -1);
-                
-                // Should fade out
-                if (shouldFadeOut) {
-                    stickyElement.className = stickyElement.className.replace(" hidden","");
-                    
-                    // Hide
-                    stickyElement.className = stickyElement.className + " hidden";
-                    
-                    // Reduce the currentOffset so that the next element slides in nicely
-                    stuckElements.splice(stuckElements.indexOf(stickyElement), 1);
-                    currentOffset = currentOffset - stickyElement.offsetHeight + 1;
-                }
-            }
-        }
-        
-        // For every parallax
-        for (var i = 0 ; i < parallaxElementList.length ; i++) {
-            
-            // Get the specific parallax element, then the image element
-            var parallaxElement = parallaxElementList[i];
-            var imageElement = parallaxElement.getElementsByTagName("img")[0];
-            
-            // If the element isn't viewable yet, don't touch it
-            if (parallaxElement.offsetTop <= window.innerHeight + window.scrollY) {
-                
-                // Do some calculations and start the parallax
-                var parallaxCoords = (window.pageYOffset - parallaxElement.offsetTop) / parallax_dampening;
-                imageElement.style.top = parallaxCoords + "px";
-            }
-        }
-    };
-    
-    /*
-     *  Image stuff
-     */
-    
-    // Glassbox
-    
-    var glassboxWidth = 0;
-    var glassboxHeight = 0;
+}
 
-    var glassboxList =  document.querySelectorAll("div.glassbox");
-    var glassboxCaptionList =  document.querySelectorAll("span.glassbox-caption");
+function SidekickUnit(elem) {
+    
+    var width = elem.offsetWidth;
+    var height = elem.offsetHeight;
 
-    // Does a glassbox exist on the page?
-    if (glassboxList.length > 0) {
-        // Just use the first one since they are all the same dimensions
-        glassboxWidth = glassboxList[0].offsetWidth;
-        glassboxHeight = glassboxList[0].offsetHeight;
-    }
+    var text =  elem.querySelectorAll("span.sidekick-unit-text");
+    
+    if (text.length > 0) {
+        text = text[0];
+    
+        var heightOffset = (height / 2) - (text.offsetHeight / 2);
+        var widthOffset = (width / 2) - (text.offsetWidth / 2);
 
-    for (var i = 0 ; i < glassboxCaptionList.length ; i++) {
-        var glassboxCaption = glassboxCaptionList[i];
+        text.style.left = widthOffset;
+        text.style.top = heightOffset;
+    }
+    
+}
+SidekickUnit.prototype.execute = function() {
+    
+    // Nothing to do...
+    
+}
+
+function Parallax(elem) {
+    
+    this.mElem = elem;
+    this.dampening = 3;
+    
+}
+Parallax.prototype.execute = function() {
+
+    var that = this; 
+    window.onscroll = function() {
         
-        var heightOffset = (heroUnitHeight / 2) - (heroUnitText.offsetHeight / 2);
-        var widthOffset = (heroUnitWidth / 2) - (heroUnitText.offsetWidth / 2);
-     
+        // TODO: Right now, only the last unit will recieve parallax. Somehow you need to register
+        // these things with a ScrollerAssistant or something
         
-        if (hasClass(heroUnitText, "left")) {
-            heroUnitText.style.left = widthOffset - 2 * (widthOffset / 3);
-            heroUnitText.style.top = heightOffset;
-        }
-        else if (hasClass(heroUnitText, "right")) {
-            heroUnitText.style.left = widthOffset + 2 * (widthOffset / 3);
-            heroUnitText.style.top = heightOffset;
-        }
-        else {
-            heroUnitText.style.left = widthOffset;
-            heroUnitText.style.top = heightOffset;
+        var imageElement = that.mElem.getElementsByTagName("img")[0];
+            
+        // If the element isn't viewable yet, don't touch it
+        if (that.mElem.offsetTop <= window.innerHeight + window.scrollY) {
+                
+            // Do some calculations and start the parallax
+            var parallaxCoords = (window.pageYOffset - that.mElem.offsetTop) / that.dampening;
+            imageElement.style.top = parallaxCoords + "px";
         }
     }
-};
+    
+}
 
 /*
+ *  -------
  *  Helpers
+ *  -------
  */
 
-// For Internet Explorer compatibility
 // http://stackoverflow.com/questions/5898656/test-if-an-element-contains-a-class
 function hasClass(element, cls) {
     return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
