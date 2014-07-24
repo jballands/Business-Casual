@@ -40,6 +40,17 @@
  *         query that Business Casual should use when it traverses the DOM for your object, and 
  *         "ref", a referece to your object.
  *
+ *  Due to the nature of browser environment variables (window.location, window.onscroll, etc.),
+ *  an object that wants to use one of these services should:
+ *      1) Never explicitly define the browser environment variable, as this can cause other parts
+ *         of Business Casual to fail.
+ *      2) Should subscribe to the service needed (for example, if you need scrolling, subscribe
+ *         to the "ScrollingService").
+ *
+ *  Simply call "scrollingService.subscribe()" to inject a lambda function you define into the service.
+ *  Your lambda function should take no arguments. Once you have subscribed to a service, your function
+ *  will be called anytime the service is invoked.
+ *
  *  © 2014 Jonathan Ballands
  */
 
@@ -149,11 +160,8 @@ function Parallax(elem) {
 }
 Parallax.prototype.execute = function() {
 
-    var that = this; 
-    window.onscroll = function() {
-        
-        // TODO: Right now, only the last unit will recieve parallax. Somehow you need to register
-        // these things with a ScrollerAssistant or something
+    var that = this;
+    scrollingService.subscribe(function() {
         
         var imageElement = that.mElem.getElementsByTagName("img")[0];
             
@@ -164,9 +172,54 @@ Parallax.prototype.execute = function() {
             var parallaxCoords = (window.pageYOffset - that.mElem.offsetTop) / that.dampening;
             imageElement.style.top = parallaxCoords + "px";
         }
-    }
+        
+    });  
+}
+
+function Magnetic(elem) {
+
+    
     
 }
+Magnetic.prototype.execute = function() {
+    
+    
+    
+}
+
+function Sticky(elem) {
+
+    // Do somthing...
+    
+}
+Sticky.prototype.execute = function() {
+    
+    // Do something...
+    
+}
+
+/*
+ *  --------
+ *  Services
+ *  --------
+ */
+
+function ScrollingService() {
+    
+    var subscribers = [];
+    
+    this.subscribe = function(func) {
+        subscribers.push(func);
+    }
+    
+    window.onscroll = function() {
+        for (var i = 0 ; i < subscribers.length ; i++) {
+            subscribers[i]();
+        }
+    }
+}
+
+var scrollingService = new ScrollingService();
 
 /*
  *  -------
