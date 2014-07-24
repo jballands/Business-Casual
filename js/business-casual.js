@@ -3,9 +3,6 @@
  *  The JavaScript portion of Business Casual. You need this file to add Business Casual's
  *  dynamic content to your webpage.
  *
- *  If you wish to modify this Javascript file, it is recommended that you
- *  read this carefully, as this is the only documentation on the subject. :)
- *
  *  Firstly, Business Casual abstracts out each dynamic element in the DOM
  *  as a Javascript object that always meets the following requirements:
  *      1) The constructor for each of these objects takes exactly one
@@ -41,15 +38,15 @@
  *         "ref", a referece to your object.
  *
  *  Due to the nature of browser environment variables (window.location, window.onscroll, etc.),
- *  an object that wants to use one of these services should:
+ *  an object that wants to use one of these variables should:
  *      1) Never explicitly define the browser environment variable, as this can cause other parts
  *         of Business Casual to fail.
- *      2) Should subscribe to the service needed (for example, if you need scrolling, subscribe
+ *      2) Should subscribe to the relevant service (for example, if you need scrolling, subscribe
  *         to the "ScrollingService").
  *
- *  Simply call "scrollingService.subscribe()" to inject a lambda function you define into the service.
- *  Your lambda function should take no arguments. Once you have subscribed to a service, your function
- *  will be called anytime the service is invoked.
+ *  To use one of the Business Casual services, call "subscribe()" on the service that you want to subscribe.
+ *  You will pass one argument to "subscribe()" called "func", a lambda function that you want to run when
+ *  the service gets called.
  *
  *  © 2014 Jonathan Ballands
  */
@@ -178,12 +175,12 @@ Parallax.prototype.execute = function() {
 
 function Magnetic(elem) {
 
-    
+    // Do something...
     
 }
 Magnetic.prototype.execute = function() {
     
-    
+    // Do something...
     
 }
 
@@ -220,6 +217,31 @@ function ScrollingService() {
 }
 
 var scrollingService = new ScrollingService();
+
+/*
+ *  -----------
+ *  Broadcaster
+ *  -----------
+ */
+
+function Broadcaster() {
+    
+    var channels = {};
+    
+    this.hasChannel = function(c) {
+        for (channel in channels) {
+            if (c == channel) {
+                return true;
+            }
+        } 
+        return false;
+    }
+    
+    this.addChannel = function(name, value) {
+        channels.name = value;
+    }
+    
+}
 
 /*
  *  -------

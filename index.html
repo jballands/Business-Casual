@@ -160,13 +160,16 @@
                     
                     <ul>
                         <li>Replaced crossfader elements with glassbox elements</li>
-                        <li>Completely redesigned <code>business-casual.js</code></li>
+                        <li>A structured <code>business-casual.js</code> for extensibility</li>
                         <li>Replaced the <code>build.sh</code> build script with Grunt</li>
                         <li>More detailed documentation</li>
                         <li>Random bug fixes from v1.1</li>
                     </ul>
                     <p>Of course, v1.2 is backwards compatible with all other versions of Business Casual.</p>
                 </div>
+                
+                <p>The <a href="dev.html" target="_blank">developer page</a> was also created for those who are more well-versed in web development to
+                peruse. In particular, the developer page describes how to properly extend Business Casual with LESS code and Javascript.</p>
                 
             </div>
 
@@ -506,7 +509,6 @@
                 <li><a href="#basics">Basics</a></li>
                 <li><a href="#flexors">Flexors</a></li>
                 <li><a href="#heroes">Heroes</a></li>
-                
                 <li><a href="#navigation">Navigation</a></li>
                 <li><a href="#images">Images</a></li>
                 <li><a href="#tables">Tables</a></li>
@@ -871,7 +873,7 @@
                             <th class="info">
                                 <span class="bold">Pro Tip</span><br/>
                                 If you include <code>business-casual.js</code>,
-                                you can put multiple <code>magnetic</code> navigation bars on the page and
+                                you can put multiple navigation bars on the page and
                                 Business Casual will intelligently stack them one after another, depending
                                 on their relative order on the page.
                             </th>
@@ -900,14 +902,6 @@
     ...
 &lt;/div&gt;</code>
     
-                        </th>
-                    </tr>
-                    <tr class="left">
-                        <th class="info">
-                            <span class="bold">Pro Tip</span><br/>
-                            Just like before, Business Casual is smart enough to stack <code>sticky</code>
-                            navigation bars one after another depending on their relative order on the
-                            page.
                         </th>
                     </tr>
                 </tbody>
@@ -941,6 +935,14 @@
                             <span class="bold">Heads up!</span><br/>
                             Make sure that the ID of the element you choose for the navigation bar to fade out
                             at appears below the navigation bar itself.
+                        </th>
+                    </tr>
+                    <tr class="left">
+                        <th class="info">
+                            <span class="bold">Pro tip</span><br/>
+                            The <code>fadeOut</code> attribute only works with <code>sticky</code> navigation
+                            bars at this time. A patch will be released in the future to allow this feature to
+                            work with <code>magnetic</code> navigation bars.
                         </th>
                     </tr>
                 </tbody>

@@ -1,0 +1,58 @@
+<!DOCTYPE xhtml>
+<html lang="en">
+    
+    <head>
+        <!-- Meta -->
+        <meta name="description" lang="en" 
+              content="The super-minimalistic front-end framework." />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <!-- Title -->
+        <title>BC Dev</title>
+        
+        <!-- Business Casual -->
+        <link rel="stylesheet" type="text/css" href="css/business-casual.css">
+        <script type="text/javascript" src="js/old-bc.js"></script>
+        <script type="text/javascript" src="js/business-casual.js"></script>
+        
+        <!-- Extras -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="js/highlight.pack.js"></script>
+        
+        <!-- jQuery is required for smooth scroll, NOT BC! :) -->
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="js/jquery.smooth-scroll.min.js"></script>
+        
+        <!-- highlight.js init and smooth scroll -->
+        <script>
+            window.onload = function() {
+                var codeBlocks = document.querySelectorAll("code");
+                for (var i = 0 ; i < codeBlocks.length ; i++) {
+                    hljs.highlightBlock(codeBlocks[i]);
+                }
+                
+                // Call go() on Business Casual
+                var bc = new BusinessCasual();
+                bc.bootstrap();
+                
+                $("a").smoothScroll({offset: -125, speed: 900, easing: "swing"});
+                
+                // Set up copyright
+                var years = document.querySelectorAll("span.year");
+                for (var i = 0 ; i < years.length ; i++) {
+                    years[i].innerHTML = new Date().getFullYear();
+                }
+            }
+        </script>
+        
+        <!-- Remember to add a favicon! -->
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+    
+    <body>
+        
+        <!-- Write something... -->
+        
+    </body>
+    
+</html>
