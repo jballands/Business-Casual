@@ -58,7 +58,9 @@ function BusinessCasual() {
     this.availables = [
         {query : "div.hero-unit", ref : HeroUnit},
         {query : "div.sidekick-unit", ref : SidekickUnit},
-        {query : "div.parallax", ref : Parallax}
+        {query : "div.parallax", ref : Parallax},
+        {query : "div.magnetic", ref: Magnetic},
+        {query : "div.sticky", ref : Sticky}
     ];
     
     var elements = [];
@@ -175,18 +177,36 @@ Parallax.prototype.execute = function() {
 
 function Magnetic(elem) {
 
-    // Do something...
+    // Sanity check
+    if (!broadcaster.hasChannel(naviOffset)) {
+        broadcaster.setChannel(naviOffset, 0);
+    }
+    
+    var magneticNavis =  elem.querySelectorAll("div.magnetic");
+    for (var i = 0 ; i < magneticNavis.length ; i++) {
+        var magneticNavi = magneticNavis[i];
+        var mOffset = broadcaster.getChannel(naviOffset);
+        magneticNavi.style.top = mOffset;
+        broadcaster.setChannel(mOffset + magneticNavi.offsetHeight - 1);
+    }
     
 }
 Magnetic.prototype.execute = function() {
     
-    // Do something...
+    // Nothing to do...
     
 }
 
 function Sticky(elem) {
 
-    // Do somthing...
+    // Sanity check
+    if (!broadcaster.hasChannel(naviOffset)) {
+        broadcaster.setChannel(naviOffset, 0);
+    }
+    
+    
+    
+    // Do something...
     
 }
 Sticky.prototype.execute = function() {
@@ -237,11 +257,17 @@ function Broadcaster() {
         return false;
     }
     
-    this.addChannel = function(name, value) {
+    this.getChannel = function(name) {
+        return channels.name;
+    }
+    
+    this.setChannel = function(name, value) {
         channels.name = value;
     }
     
 }
+
+var broadcaster = new Broadcaster();
 
 /*
  *  -------
