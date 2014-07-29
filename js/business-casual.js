@@ -178,17 +178,14 @@ Parallax.prototype.execute = function() {
 function Magnetic(elem) {
 
     // Sanity check
-    if (!broadcaster.hasChannel(naviOffset)) {
-        broadcaster.setChannel(naviOffset, 0);
+    if (!broadcaster.hasChannel("naviOffset")) {
+        broadcaster.setChannel("naviOffset", 0);
     }
     
-    var magneticNavis =  elem.querySelectorAll("div.magnetic");
-    for (var i = 0 ; i < magneticNavis.length ; i++) {
-        var magneticNavi = magneticNavis[i];
-        var mOffset = broadcaster.getChannel(naviOffset);
-        magneticNavi.style.top = mOffset;
-        broadcaster.setChannel(mOffset + magneticNavi.offsetHeight - 1);
-    }
+    // Get the offset channel, set the top value, and reset the channel
+    var mOffset = broadcaster.getChannel("naviOffset");
+    elem.style.top = mOffset;
+    broadcaster.setChannel("naviOffset", mOffset + magneticNavi.offsetHeight - 1);
     
 }
 Magnetic.prototype.execute = function() {
@@ -198,20 +195,128 @@ Magnetic.prototype.execute = function() {
 }
 
 function Sticky(elem) {
-
+    
     // Sanity check
-    if (!broadcaster.hasChannel(naviOffset)) {
-        broadcaster.setChannel(naviOffset, 0);
+    if (!broadcaster.hasChannel("naviOffset")) {
+        broadcaster.setChannel("naviOffset", 0);
     }
     
+    this.fader = document.getElementById(elem.getAttribute("fadeOut"));
+    this.faderTop = undefined;
+    if (this.fader != null) {
+        this.faderTop = this.fader.offsetTop;
+    }
     
-    
-    // Do something...
+    this.top = elem.offsetTop - 12;     // Subtract 12 for padding
+    this.isStuck = false;
+    this.mElem = elem;
     
 }
 Sticky.prototype.execute = function() {
     
-    // Do something...
+    var that =  this;
+    
+    scrollingService.subscribe(function() {
+        
+        console.log("mOffsetHeight -> " + broadcaster.getChannel("naviOffset"));
+        
+        // Determine if sticky is in range
+        var isBelowTop = window.pageYOffset + broadcaster.getChannel("naviOffset") >= that.top;
+        var isAboveFade = window.pageYOffset < that.faderTop;     // False when fader is undefined
+        
+        // Override boolean if there is no fader
+        if (that.fader == undefined) {
+            isAboveFade = true;
+        }
+        
+        var isInRange = isBelowTop && isAboveFade;
+        
+        // Already sticky but needs fading (scrolling up and the element is already "stuck")
+        if (isInRange && that.mElem.className.indexOf("hidden") != -1) {
+
+            // Increase before revealing the navi
+            that.isStuck = true;
+            var mOffset = broadcaster.getChannel("naviOffset");
+            broadcaster.setChannel("naviOffset", mOffset + that.mElem.offsetHeight - 1);
+
+            // Reveal
+            that.mElem.className = that.mElem.className.replace(" hidden","");
+        }
+        
+        // Activate sticky (scrolling down and the navi begins sticking)
+        else if (isInRange && !that.isStuck) {
+            
+            that.mElem.style.position = "fixed";
+            that.mElem.style.top = broadcaster.getChannel("naviOffset");
+            that.mElem.style.width = "100%";
+
+            var sibling = that.mElem.nextElementSibling;
+            sibling.style.paddingTop = "21px";
+
+            // Bug fix: If the first element in the sibling is a flexor, apply 21px of padding
+            // to it as well
+            var flexorChild = sibling.firstChild;
+
+            // Bug fix: Skip text nodes
+            while(flexorChild != null && flexorChild.nodeType == 3) {
+                flexorChild = flexorChild.nextSibling;
+            }
+
+            // Null check
+            if (flexorChild != null && flexorChild != undefined && flexorChild.classList != null
+                && flexorChild.classList != undefined) {
+                if (flexorChild.classList.contains("flexor")) {
+                    flexorChild.style.paddingTop = "21px";
+                }     
+            }
+
+            // Subtract one for prettiness 
+            var mOffset = broadcaster.getChannel("naviOffset");
+            broadcaster.setChannel("naviOffset", mOffset + that.mElem.offsetHeight - 1);
+            that.isStuck = true;
+        }
+        
+        // Deactivate sticky
+        else {
+
+            var shouldUnsticky = (window.pageYOffset + broadcaster.getChannel("naviOffset") < that.top + that.mElem.offsetHeight
+                                 &&
+                                 that.isStuck);
+
+            // Determine what action to take
+            // Should unsticky
+            if (shouldUnsticky) {
+                that.mElem.removeAttribute("style");
+                that.mElem.nextElementSibling.removeAttribute("style"); 
+                
+                var mOffset = broadcaster.getChannel("naviOffset");
+                broadcaster.setChannel("naviOffset", mOffset - that.mElem.offsetHeight + 1);
+                
+                that.isStuck = false;
+            }
+
+            var shouldFadeOut = (window.pageYOffset >= that.faderTop
+                                && 
+                                that.fader != undefined 
+                                &&
+                                that.isStuck);
+
+            // Should fade out
+            if (shouldFadeOut) {
+                that.mElem.className = that.mElem.className.replace(" hidden","");
+
+                // Hide
+                that.mElem.className = that.mElem.className + " hidden";
+
+                // Reduce the currentOffset so that the next element slides in nicely
+                var mOffset = broadcaster.getChannel("naviOffset");
+                broadcaster.setChannel("naviOffset", mOffset - that.mElem.offsetHeight + 1);
+                
+                that.isStuck = false;
+            }
+        }
+        
+    });
     
 }
 

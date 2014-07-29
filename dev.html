@@ -8,12 +8,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
         <!-- Title -->
-        <title>BC Dev</title>
+        <title>Business Casual Dev</title>
         
         <!-- Business Casual -->
         <link rel="stylesheet" type="text/css" href="css/business-casual.css">
         <script type="text/javascript" src="js/old-bc.js"></script>
-        <script type="text/javascript" src="js/business-casual.js"></script>
+        <script type="text/javascript" src="js/business-casual.min.js"></script>
         
         <!-- Extras -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -46,12 +46,161 @@
         </script>
         
         <!-- Remember to add a favicon! -->
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon-dev.ico">
     </head>
     
     <body>
+    
+        <div class="hero-unit parallax" id="hero-unit">
+            <span class="hero-unit-text left">
+                <span class="heroic">Start here.</span>
+                <br/>Building a great website from scratch is hard. Why reinvent the wheel?
+                <br/>Take a look at how Business Casual works and go from there.
+                <br/><br/>
+                <a class="button" target="_blank"
+                   href="https://github.com/jballands/Business-Casual">See the repository</a>
+                <a class="button" target="_blank"
+                   href="https://github.com/jballands/Business-Casual/releases">See all releases</a>
+            </span>
+            <img src="./img/dev/hero-unit.jpg" />
+        </div>
         
-        <!-- Write something... -->
+        <div class="navigation-bar sticky">
+            <ul class="center">
+                <li><a href="#hero-unit"><img src="./img/business-casual-dev-logo.png" 
+                    style="margin-top:-5;width:25;" class="bc-logo" /></a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#less">LESS</a></li>
+                <li><a href="#javascript" target="_blank">Javascript</a></li>
+                <li><a href="https://github.com/jballands/Business-Casual" target="_blank">Repository</a></li>
+            </ul>
+        </div>
+        
+        <div class="container">
+            
+            <div class="flexor">
+                
+                <div class="column-3">
+                    <img src="img/dev/gears.png" id="backwards-icon" />
+                </div>
+                <div class="column-9">
+                    <p>Let's be real: nothing beats a custom-made website built from the ground up. There's nothing really as
+                    difficult, either. But you're better than frameworks! What are you to do?</p>
+                    
+                    <p>Business Casual is a framework I originally built for
+                    <a href="http://jonathanballands.me" target="_blank">my personal website</a>, and now I'm sharing what I've learned
+                    with you. See what makes Business Casual tick and extend it with your own features, or just take bits and
+                    pieces to work with your own code. I promise I won't mind.</p>
+                    
+                    <p>Why reinvent the wheel? Stay awesome.</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="sidekick-unit parallax">
+            <img src="./img/dev/sidekick-unit-1.jpg"/>
+        </div>
+        
+        <div class="container">
+            
+            <h1 class="separate" id="getting-started">Getting Started</h1>
+            
+        </div>
+        
+        <div class="sidekick-unit parallax">
+            <img src="./img/dev/sidekick-unit-2.jpg"/>
+        </div>
+        
+        <div class="container">
+            
+            <h1 class="separate" id="less">Introduction to BC LESS</h1>
+            
+            <p>All of the static features of Business Casual are handled by files located in the <code>less/</code> directory.
+            These features include:</p>
+            
+            <ul>
+                <li>Flexors</li>
+                <li>Standard navigation bars</li>
+                <li>Images</li>
+                <li>Tables</li>
+                <li>Wells</li>
+                <li>Buttons</li>
+                <li>Customization</li>
+            </ul>
+            
+            <p>All files in the <code>less/</code> directory are compiled with Grunt and Node. If you need help setting up Grunt,
+            see the <a href="#getting-started">Getting Started</a> section.</p>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr class="left">
+                        <th class="warning">
+                            <span class="bold">Heads up!</span><br/>
+                            This section assumes you know how to write LESS code. It is not recommended
+                            that you go on, otherwise. Go to the <a href="http://lesscss.org/" target="_blank">LESS website</a> to learn more.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Basics</h2>
+            
+        </div>
+        
+        <div class="sidekick-unit parallax">
+            <img src="./img/dev/sidekick-unit-3.jpg"/>
+        </div>
+        
+        <div class="container">
+            
+            <h1 class="separate" id="javascript">Introduction to BC Javascript</h1>
+            
+            <p>All of the dynamic features of Business Casual are handled by a file called <code>business-casual.js</code>. These features
+            include:</p>
+            
+            <ul>
+                <li>Sticky/magnetic navigation bars</li>
+                <li>Heroes</li>
+                <li>Glassboxes</li>
+                <li>Parallax</li>
+            </ul>
+            
+            <p><code>business-casual.js</code> is minimized with Grunt and Node. If you need help setting up Grunt,
+            see the <a href="#getting-started">Getting Started</a> section.</p>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr class="left">
+                        <th class="warning">
+                            <span class="bold">Heads up!</span><br/>
+                            This section assumes you understand and are comfortable with Javascript code. It is not recommended
+                            that you go on, otherwise.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Basics</h2>
+            
+        </div>
+        
+        <div class="sidekick-unit parallax">
+            <img src="./img/dev/sidekick-unit-4.jpg"/>
+            <span class="sidekick-unit-text">&copy; <span class="year"></span> All Rights Reserved.
+                Made with love by Jonathan Ballands. Images courtesy of Flickr.<br/><br/>
+                <ul>
+                    <li><a href="https://www.facebook.com/jon.ballands" 
+                           target="_blank"><img src="img/facebook_icon.png" /></a></li>
+                    <li><a href="https://twitter.com/jballands" 
+                           target="_blank"><img src="img/twitter_icon.png" /></a></li>
+                    <li><a href="http://www.linkedin.com/pub/jonathan-ballands/3a/b8b/883" 
+                           target="_blank"><img src="img/linkedin_icon.png" /></a></li>
+                    <li><a href="https://github.com/jballands" 
+                           target="_blank"><img src="img/github_icon.png" /></a></li>
+                </ul>
+            </span>
+        </div>
         
     </body>
     
