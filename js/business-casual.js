@@ -60,7 +60,8 @@ function BusinessCasual() {
         {query : "div.sidekick-unit", ref : SidekickUnit},
         {query : "div.parallax", ref : Parallax},
         {query : "div.magnetic", ref: Magnetic},
-        {query : "div.sticky", ref : Sticky}
+        {query : "div.sticky", ref : Sticky},
+        {query : "div.glassbox", ref: Glassbox}
     ];
     
     var elements = [];
@@ -320,6 +321,63 @@ Sticky.prototype.execute = function() {
     
 }
 
+function Glassbox(elem) {
+    
+    // Get all the images first
+    var slideList = elem.getElementsByClassName("slide");
+    for (var i = 0 ; i < slideList.length ; i++) {
+        // Do something...
+    }
+    
+    // Define variables
+    this.width = elem.offsetWidth;
+    this.height = elem.offsetHeight
+    this.isAnimating = false;
+    
+    // Place the arrows
+    var leftArrow = elem.getElementsByClassName("left-arrow")[0];
+    var rightArrow = elem.getElementsByClassName("right-arrow")[0];
+    leftArrow.style.top = (this.height / 2) - (leftArrow.offsetHeight / 2);
+    rightArrow.style.top = (this.height / 2) - (rightArrow.offsetHeight / 2);
+    rightArrow.style.left = this.width - rightArrow.offsetWidth;
+    
+    /*
+     *  Helper functions for Glassbox
+     */
+    
+    this.slideInLeft = function(dist, elem) {
+        elem.style["-webkit-transform"] = "translate(" + (dist * -1) + "px, 0px)";
+        elem.style["-moz-transform"] = "translate(" + (dist * -1) + "px, 0px)";
+        elem.style["-ms-transform"] = "translate(" + (dist * -1) + "px, 0px)";
+        elem.style["-o-transform"] = "translate(" + (dist * -1) + "px, 0px)";
+        elem.style["transform"] = "translate(" + (dist * -1) + "px, 0px)";
+    }
+    this.slideOutLeft = function(dist, elem) {
+        elem.style["-webkit-transform"] = "translate(0px, " + (dist * -1) + ")";
+        elem.style["-moz-transform"] = "translate(0px, " + (dist * -1) + ")";
+        elem.style["-ms-transform"] = "translate(0px, " + (dist * -1) + ")";
+        elem.style["-o-transform"] = "translate(0px, " + (dist * -1) + ")";
+        elem.style["transform"] = "translate(0px, " + (dist * -1) + ")";
+    }
+    this.slideInRight = function(dist, elem) {
+        elem.style["-webkit-transform"] = "translate(" + (dist) + "px, 0px)";
+        elem.style["-moz-transform"] = "translate(" + (dist) + "px, 0px)";
+        elem.style["-ms-transform"] = "translate(" + (dist) + "px, 0px)";
+        elem.style["-o-transform"] = "translate(" + (dist) + "px, 0px)";
+        elem.style["transform"] = "translate(" + (dist) + "px, 0px)";
+    }
+    this.slideOutRight = function(dist, elem) {
+        elem.style["-webkit-transform"] = "translate(0px, " + (dist) + ")";
+        elem.style["-moz-transform"] = "translate(0px, " + (dist) + ")";
+        elem.style["-ms-transform"] = "translate(0px, " + (dist) + ")";
+        elem.style["-o-transform"] = "translate(0px, " + (dist) + ")";
+        elem.style["transform"] = "translate(0px, " + (dist) + ")";
+    }
+}
+Glassbox.prototype.execute = function() {
+    // Do something...
+}
+
 /*
  *  --------
  *  Services
@@ -340,7 +398,6 @@ function ScrollingService() {
         }
     }
 }
-
 var scrollingService = new ScrollingService();
 
 /*
