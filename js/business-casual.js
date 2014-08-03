@@ -376,19 +376,23 @@ function Glassbox(elem) {
     // Handle click events
     var that = this;
     leftArrow.onclick = function() {
-        if (that.currentSlide == 0) {
+        if (that.currentSlide <= 0) {
             that.animateToSlide(0, that.slideList.length - 1);
+            that.currentSlide = that.slideList.length - 1;
         }
         else {
             that.animateToSlide(that.currentSlide, that.currentSlide - 1);
+            that.currentSlide = that.currentSlide - 1;
         }
     }
     rightArrow.onclick = function() {
-        if (that.currentSlide == that.slideList.length - 1) {
+        if (that.currentSlide >= that.slideList.length - 1) {
             that.animateToSlide(that.currentSlide, 0);
+            that.currentSlide = 0;
         }
         else {
             that.animateToSlide(that.currentSlide, that.currentSlide + 1);
+            that.currentSlide = that.currentSlide + 1;
         }
     }
     
@@ -396,50 +400,47 @@ function Glassbox(elem) {
      *  Helper functions for Glassbox
      */
     
-    function slideInLeft(dist, elem) {
+    function slideInLeft(elem) {
+        elem.style.left = parseInt(elem.offsetWidth) * -1;
         elem.style.transition = "1s";
         elem.style.left = 0;
     }
-    function slideOutLeft(dist, elem) {
+    function slideOutLeft(elem) {
+        elem.style.left = 0;
         elem.style.transition = "1s";
-        elem.style.left = dist * -1;
+        elem.style.left = parseInt(elem.offsetWidth) * -1;
     }
-    function slideInRight(dist, elem) {
+    function slideInRight(elem) {
+        elem.style.left = parseInt(elem.offsetWidth);
         elem.style.transition = "1s";
         elem.style.left = 0;
     }
-    function slideOutRight(dist, elem) {
+    function slideOutRight(elem) {
+        elem.style.left = 0;
         elem.style.transition = "1s";
-        elem.style.left = dist;
+        elem.style.left = parseInt(elem.offsetWidth)
     }
     
     this.animateToSlide = function(from, to) {
         
-        if (from < to) {
-            slideOutLeft(parseInt(this.width), this.slideList[from]);
-            slideInRight(parseInt(this.width), this.slideList[to]);
-            this.currentSlide = to;
+        if (to == 0 && from == this.slideList.length - 1) {
+            slideOutLeft(this.slideList[from]);
+            slideInRight(this.slideList[to]);
         }
         
-        // Slide in from the right and out to the left
-        else if (to == 0 && from == this.slideList.length - 1) {
-            slideOutLeft(parseInt(this.width), this.slideList[from]);
-            // Make sure we re-adjust the to slide since it'll be on the wrong side for the animation
-            this.slideList[to].style.left = parseInt(this.width);
-            slideInRight(parseInt(this.width), this.slideList[to]);
+        else if (to == this.slideList.length - 1 && from == 0) {
+            slideOutRight(this.slideList[from]);
+            slideInLeft(this.slideList[to]);
+        }
+        
+        else if (from < to) {
+            slideOutLeft(this.slideList[from]);
+            slideInRight(this.slideList[to]);
         }
         
         else if (from > to) {
-            slideOutRight(parseInt(this.width), this.slideList[from]);
-            // this.slideList[to].className = this.slideList[to].className + " glassbox-present";
-            slideInLeft(parseInt(this.width), this.slideList[to]);
-        }
-        
-        else {
-            slideOutRight(parseInt(this.width), this.slideList[from]);
-            // Make sure we re-adjust the to slide since it'll be on the wrong side for the animation
-            this.slideList[to].style.left = parseInt(this.width) * -1;
-            slideInLeft(parseInt(this.width), this.slideList[to]);
+            slideOutRight(this.slideList[from]);
+            slideInLeft(this.slideList[to]);
         }
     }
     
