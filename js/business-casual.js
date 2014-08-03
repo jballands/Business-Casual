@@ -278,7 +278,8 @@ Sticky.prototype.execute = function() {
         // Deactivate sticky
         else {
 
-            var shouldUnsticky = (window.pageYOffset + broadcaster.getChannel("naviOffset") < that.top + that.mElem.offsetHeight
+            var shouldUnsticky = (window.pageYOffset + broadcaster.getChannel("naviOffset") 
+                                 < that.top + that.mElem.offsetHeight
                                  &&
                                  that.isStuck);
 
@@ -321,13 +322,18 @@ Sticky.prototype.execute = function() {
 
 function Glassbox(elem) {
     
+    // Define variables
+    this.width = elem.offsetWidth;
+    this.height = elem.offsetHeight;
+    // this.isAnimating = false;
+    
     // Get all the images
     this.slideList = elem.getElementsByClassName("glassbox-slide");
     this.currentSlide = undefined;
     for (var i = 0 ; i < this.slideList.length ; i++) {
-        
         if (this.slideList[i].className.indexOf("glassbox-present") != -1) {
             this.currentSlide = i;
+            this.slideList[i].style.left = 0;
         }
     }
     
@@ -336,12 +342,18 @@ function Glassbox(elem) {
         this.slideList[0].className =  this.slideList[0].className.replace(" glassbox-present", "");
         this.slideList[0].className = this.slideList[0].className + " glassbox-present";
         this.currentSlide = 0;
+        this.slideList[0].style.left = 0;
     }
     
-    // Define variables
-    this.width = elem.offsetWidth;
-    this.height = elem.offsetHeight
-    this.isAnimating = false;
+    // Now, adjust the positions of every other slide so that they slide in neatly
+    for (var i = 0 ; i < this.slideList.length ; i++) {
+        if (i < this.currentSlide) {
+            this.slideList[i].style.left = -1 * parseInt(this.width);
+        }
+        else if (i > this.currentSlide) {
+            this.slideList[i].style.left = parseInt(this.width);
+        }
+    }
     
     // Place the arrows
     var leftArrow = elem.getElementsByClassName("glassbox-left-arrow")[0];
@@ -359,41 +371,82 @@ function Glassbox(elem) {
         caption.style.top = this.height - captionHeight - 25;
     }
     
+    /* vvvvvvvv BROKEN :( vvvvvvvv */
+    
+    // Handle click events
+    var that = this;
+    leftArrow.onclick = function() {
+        if (that.currentSlide == 0) {
+            that.animateToSlide(0, that.slideList.length - 1);
+        }
+        else {
+            that.animateToSlide(that.currentSlide, that.currentSlide - 1);
+        }
+    }
+    rightArrow.onclick = function() {
+        if (that.currentSlide == that.slideList.length - 1) {
+            that.animateToSlide(that.currentSlide, 0);
+        }
+        else {
+            that.animateToSlide(that.currentSlide, that.currentSlide + 1);
+        }
+    }
+    
     /*
      *  Helper functions for Glassbox
      */
     
-    this.slideInLeft = function(dist, elem) {
-        elem.style["-webkit-transform"] = "translate(" + (dist * -1) + "px, 0px)";
-        elem.style["-moz-transform"] = "translate(" + (dist * -1) + "px, 0px)";
-        elem.style["-ms-transform"] = "translate(" + (dist * -1) + "px, 0px)";
-        elem.style["-o-transform"] = "translate(" + (dist * -1) + "px, 0px)";
-        elem.style["transform"] = "translate(" + (dist * -1) + "px, 0px)";
+    function slideInLeft(dist, elem) {
+        elem.style.transition = "1s";
+        elem.style.left = 0;
     }
-    this.slideOutLeft = function(dist, elem) {
-        elem.style["-webkit-transform"] = "translate(0px, " + (dist * -1) + ")";
-        elem.style["-moz-transform"] = "translate(0px, " + (dist * -1) + ")";
-        elem.style["-ms-transform"] = "translate(0px, " + (dist * -1) + ")";
-        elem.style["-o-transform"] = "translate(0px, " + (dist * -1) + ")";
-        elem.style["transform"] = "translate(0px, " + (dist * -1) + ")";
+    function slideOutLeft(dist, elem) {
+        elem.style.transition = "1s";
+        elem.style.left = dist * -1;
     }
-    this.slideInRight = function(dist, elem) {
-        elem.style["-webkit-transform"] = "translate(" + (dist) + "px, 0px)";
-        elem.style["-moz-transform"] = "translate(" + (dist) + "px, 0px)";
-        elem.style["-ms-transform"] = "translate(" + (dist) + "px, 0px)";
-        elem.style["-o-transform"] = "translate(" + (dist) + "px, 0px)";
-        elem.style["transform"] = "translate(" + (dist) + "px, 0px)";
+    function slideInRight(dist, elem) {
+        elem.style.transition = "1s";
+        elem.style.left = 0;
     }
-    this.slideOutRight = function(dist, elem) {
-        elem.style["-webkit-transform"] = "translate(0px, " + (dist) + ")";
-        elem.style["-moz-transform"] = "translate(0px, " + (dist) + ")";
-        elem.style["-ms-transform"] = "translate(0px, " + (dist) + ")";
-        elem.style["-o-transform"] = "translate(0px, " + (dist) + ")";
-        elem.style["transform"] = "translate(0px, " + (dist) + ")";
+    function slideOutRight(dist, elem) {
+        elem.style.transition = "1s";
+        elem.style.left = dist;
     }
+    
+    this.animateToSlide = function(from, to) {
+        
+        if (from < to) {
+            slideOutLeft(parseInt(this.width), this.slideList[from]);
+            slideInRight(parseInt(this.width), this.slideList[to]);
+            this.currentSlide = to;
+        }
+        
+        // Slide in from the right and out to the left
+        else if (to == 0 && from == this.slideList.length - 1) {
+            slideOutLeft(parseInt(this.width), this.slideList[from]);
+            // Make sure we re-adjust the to slide since it'll be on the wrong side for the animation
+            this.slideList[to].style.left = parseInt(this.width);
+            slideInRight(parseInt(this.width), this.slideList[to]);
+        }
+        
+        else if (from > to) {
+            slideOutRight(parseInt(this.width), this.slideList[from]);
+            // this.slideList[to].className = this.slideList[to].className + " glassbox-present";
+            slideInLeft(parseInt(this.width), this.slideList[to]);
+        }
+        
+        else {
+            slideOutRight(parseInt(this.width), this.slideList[from]);
+            // Make sure we re-adjust the to slide since it'll be on the wrong side for the animation
+            this.slideList[to].style.left = parseInt(this.width) * -1;
+            slideInLeft(parseInt(this.width), this.slideList[to]);
+        }
+    }
+    
+    /* ^^^^^^^^ BROKEN :( ^^^^^^^^ */
 }
 Glassbox.prototype.execute = function() {
-    // Do something...
+    // Nothing to do...
 }
 
 /*
