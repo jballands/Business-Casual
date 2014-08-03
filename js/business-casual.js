@@ -325,129 +325,68 @@ function Glassbox(elem) {
     // Define variables
     this.width = elem.offsetWidth;
     this.height = elem.offsetHeight;
-    // this.isAnimating = false;
-    
-    // Get all the images
-    this.slideList = elem.getElementsByClassName("glassbox-slide");
     this.currentSlide = undefined;
-    for (var i = 0 ; i < this.slideList.length ; i++) {
-        if (this.slideList[i].className.indexOf("glassbox-present") != -1) {
+    this.isAnimating = false;
+    this.slideList = [];
+    
+    // Figure out what the user defined as the first slide
+    var mChildren = elem.getElementsByClassName("glassbox-slide");
+    for (var i = 0 ; i < mChildren.length ; i++) {
+        if (mChildren[i].className.indexOf("glassbox-present") != -1) {
             this.currentSlide = i;
-            this.slideList[i].style.left = 0;
+            mChildren[i].style.left = 0;
         }
+        this.slideList.push(mChildren[i].cloneNode(true));
     }
-    
-    // If the user didn't define a slide to present, default to the first slide
+    // If the user didn't define a present slide, default to the first one
     if (this.currentSlide == undefined) {
-        this.slideList[0].className =  this.slideList[0].className.replace(" glassbox-present", "");
-        this.slideList[0].className = this.slideList[0].className + " glassbox-present";
         this.currentSlide = 0;
-        this.slideList[0].style.left = 0;
     }
     
-    // Now, adjust the positions of every other slide so that they slide in neatly
+    // Adjust text for each slide (this will persist after the next operation)
     for (var i = 0 ; i < this.slideList.length ; i++) {
-        if (i < this.currentSlide) {
-            this.slideList[i].style.left = -1 * parseInt(this.width);
-        }
-        else if (i > this.currentSlide) {
-            this.slideList[i].style.left = parseInt(this.width);
-        }
+        
+        // Obtain values from the original elements on the DOM
+        var mCaption = mChildren[i].getElementsByClassName("glassbox-caption")[0];
+        var captionPreferredWidth = this.width - 15;
+        var captionHeight = mCaption.offsetHeight;
+        
+        // Then apply those values to their corresponding cloned elements
+        var caption = this.slideList[i].getElementsByClassName("glassbox-caption")[0];
+        caption.style.width = captionPreferredWidth + "px";
+        caption.style.top = this.height - captionHeight - 25;
     }
     
-    // Place the arrows
+    // Destroy all the glassbox-slide nodes
+    while (mChildren[0]) {
+       mChildren[0].parentNode.removeChild(mChildren[0]);
+    }
+
+    // Now, in order, put the slide that comes left, the slide itself, and the slide that comes right
+    // back into the DOM
+    var leftChild = this.slideList[(this.currentSlide - 1).mod(this.slideList.length)];
+    var rightChild = this.slideList[(this.currentSlide + 1).mod(this.slideList.length)];
+    elem.appendChild(leftChild);
+    elem.appendChild(this.slideList[this.currentSlide]);
+    elem.appendChild(rightChild);
+    
+    // The left child gets scooted left and the right scooted right
+    mChildren = elem.getElementsByClassName("glassbox-slide");
+    mChildren[0].style.left = mChildren[0].offsetWidth * -1;
+    mChildren[mChildren.length - 1].style.left = mChildren[mChildren.length - 1].offsetWidth;
+    
+    // Place the clicking arrows
     var leftArrow = elem.getElementsByClassName("glassbox-left-arrow")[0];
     var rightArrow = elem.getElementsByClassName("glassbox-right-arrow")[0];
     leftArrow.style.top = (this.height / 2) - (leftArrow.offsetHeight / 2);
     rightArrow.style.top = (this.height / 2) - (rightArrow.offsetHeight / 2);
     rightArrow.style.left = this.width - rightArrow.offsetWidth;
     
-    // Format the captions for every slide (the ones that don't need to be shown will automatically hide)
-    for (var i = 0 ; i < this.slideList.length ; i++) {
-        var caption = this.slideList[i].getElementsByClassName("glassbox-caption")[0];
-        var captionPreferredWidth = this.width - 15;
-        caption.style.width = captionPreferredWidth + "px";
-        var captionHeight = caption.offsetHeight;
-        caption.style.top = this.height - captionHeight - 25;
-    }
-    
-    /* vvvvvvvv BROKEN :( vvvvvvvv */
-    
-    // Handle click events
-    var that = this;
-    leftArrow.onclick = function() {
-        if (that.currentSlide <= 0) {
-            that.animateToSlide(0, that.slideList.length - 1);
-            that.currentSlide = that.slideList.length - 1;
-        }
-        else {
-            that.animateToSlide(that.currentSlide, that.currentSlide - 1);
-            that.currentSlide = that.currentSlide - 1;
-        }
-    }
-    rightArrow.onclick = function() {
-        if (that.currentSlide >= that.slideList.length - 1) {
-            that.animateToSlide(that.currentSlide, 0);
-            that.currentSlide = 0;
-        }
-        else {
-            that.animateToSlide(that.currentSlide, that.currentSlide + 1);
-            that.currentSlide = that.currentSlide + 1;
-        }
-    }
-    
-    /*
-     *  Helper functions for Glassbox
-     */
-    
-    function slideInLeft(elem) {
-        elem.style.left = parseInt(elem.offsetWidth) * -1;
-        elem.style.transition = "1s";
-        elem.style.left = 0;
-    }
-    function slideOutLeft(elem) {
-        elem.style.left = 0;
-        elem.style.transition = "1s";
-        elem.style.left = parseInt(elem.offsetWidth) * -1;
-    }
-    function slideInRight(elem) {
-        elem.style.left = parseInt(elem.offsetWidth);
-        elem.style.transition = "1s";
-        elem.style.left = 0;
-    }
-    function slideOutRight(elem) {
-        elem.style.left = 0;
-        elem.style.transition = "1s";
-        elem.style.left = parseInt(elem.offsetWidth)
-    }
-    
-    this.animateToSlide = function(from, to) {
-        
-        if (to == 0 && from == this.slideList.length - 1) {
-            slideOutLeft(this.slideList[from]);
-            slideInRight(this.slideList[to]);
-        }
-        
-        else if (to == this.slideList.length - 1 && from == 0) {
-            slideOutRight(this.slideList[from]);
-            slideInLeft(this.slideList[to]);
-        }
-        
-        else if (from < to) {
-            slideOutLeft(this.slideList[from]);
-            slideInRight(this.slideList[to]);
-        }
-        
-        else if (from > to) {
-            slideOutRight(this.slideList[from]);
-            slideInLeft(this.slideList[to]);
-        }
-    }
-    
-    /* ^^^^^^^^ BROKEN :( ^^^^^^^^ */
 }
 Glassbox.prototype.execute = function() {
+    
     // Nothing to do...
+
 }
 
 /*
@@ -512,4 +451,10 @@ var broadcaster = new Broadcaster();
 // http://stackoverflow.com/questions/5898656/test-if-an-element-contains-a-class
 function hasClass(element, cls) {
     return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
+}
+
+// Modulo fix
+// http://javascript.about.com/od/problemsolving/a/modulobug.htm
+Number.prototype.mod = function(n) {
+    return ((this%n)+n)%n;
 }
