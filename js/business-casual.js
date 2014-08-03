@@ -218,9 +218,7 @@ Sticky.prototype.execute = function() {
     var that =  this;
     
     scrollingService.subscribe(function() {
-        
-        console.log("mOffsetHeight -> " + broadcaster.getChannel("naviOffset"));
-        
+
         // Determine if sticky is in range
         var isBelowTop = window.pageYOffset + broadcaster.getChannel("naviOffset") >= that.top;
         var isAboveFade = window.pageYOffset < that.faderTop;     // False when fader is undefined
@@ -323,10 +321,21 @@ Sticky.prototype.execute = function() {
 
 function Glassbox(elem) {
     
-    // Get all the images first
-    var slideList = elem.getElementsByClassName("slide");
-    for (var i = 0 ; i < slideList.length ; i++) {
-        // Do something...
+    // Get all the images
+    this.slideList = elem.getElementsByClassName("glassbox-slide");
+    this.currentSlide = undefined;
+    for (var i = 0 ; i < this.slideList.length ; i++) {
+        
+        if (this.slideList[i].className.indexOf("glassbox-present") != -1) {
+            this.currentSlide = i;
+        }
+    }
+    
+    // If the user didn't define a slide to present, default to the first slide
+    if (this.currentSlide == undefined) {
+        this.slideList[0].className =  this.slideList[0].className.replace(" glassbox-present", "");
+        this.slideList[0].className = this.slideList[0].className + " glassbox-present";
+        this.currentSlide = 0;
     }
     
     // Define variables
@@ -335,11 +344,20 @@ function Glassbox(elem) {
     this.isAnimating = false;
     
     // Place the arrows
-    var leftArrow = elem.getElementsByClassName("left-arrow")[0];
-    var rightArrow = elem.getElementsByClassName("right-arrow")[0];
+    var leftArrow = elem.getElementsByClassName("glassbox-left-arrow")[0];
+    var rightArrow = elem.getElementsByClassName("glassbox-right-arrow")[0];
     leftArrow.style.top = (this.height / 2) - (leftArrow.offsetHeight / 2);
     rightArrow.style.top = (this.height / 2) - (rightArrow.offsetHeight / 2);
     rightArrow.style.left = this.width - rightArrow.offsetWidth;
+    
+    // Format the captions for every slide (the ones that don't need to be shown will automatically hide)
+    for (var i = 0 ; i < this.slideList.length ; i++) {
+        var caption = this.slideList[i].getElementsByClassName("glassbox-caption")[0];
+        var captionPreferredWidth = this.width - 15;
+        caption.style.width = captionPreferredWidth + "px";
+        var captionHeight = caption.offsetHeight;
+        caption.style.top = this.height - captionHeight - 25;
+    }
     
     /*
      *  Helper functions for Glassbox
