@@ -61,7 +61,8 @@ function BusinessCasual() {
         {query : "div.parallax", ref : Parallax},
         {query : "div.magnetic", ref: Magnetic},
         {query : "div.sticky", ref : Sticky},
-        {query : "div.glassbox", ref: Glassbox}
+        {query : "div.glassbox", ref : Glassbox},
+        {query : "div.crossfader-frame", ref : Crossfader}
     ];
     
     var elements = [];
@@ -478,7 +479,6 @@ function Glassbox(elem) {
         
         // Defined the event handler
         function eventHandler() {
-            console.log("Handler called");
             
             // Kill off the first node in the DOM
             mState[0].parentNode.removeChild(mState[0]);
@@ -504,6 +504,56 @@ Glassbox.prototype.execute = function() {
     
     // Nothing to do...
 
+}
+
+function Crossfader(elem) {
+    
+    this.imageList = elem.getElementsByTagName("img");
+    this.currentImage = undefined;
+    this.cf_milliseconds = 5000;
+    
+    for (var j = 0 ; j < this.imageList.length ; j++) {
+        var crossfaderImage = this.imageList[j];
+
+        // Should be shown?
+        if (crossfaderImage.className.indexOf("crossfader-show") != -1) {
+            this.currentImage = j;
+        }
+
+        // Apply id to each image
+        crossfaderImage.width = elem.offsetWidth - 2;
+        crossfaderImage.height = elem.offsetWidth - 2;
+        crossfaderImage.id = "cf" + j;
+    }
+    
+    // this-that syntax for proper scoping
+    var that = this;
+    
+    // Set up the interval with lambdas; beware of data binding
+    setInterval(function() {
+        
+        // Remove crossfader-show from old image
+        var thisImage = that.imageList[that.currentImage];
+        thisImage.className = thisImage.className.replace(" crossfader-show","");
+            
+        // Make sure you go back to the beginning if we are at the last image
+        if (that.currentImage == that.imageList.length - 1) {
+               that.currentImage = 0;
+        }
+        else {
+            that.currentImage++;
+        }
+            
+         // Add crossfader-show to new image
+        thisImage = that.imageList[that.currentImage];
+        thisImage.className = thisImage.className.replace(" crossfader-show","");
+        thisImage.className = thisImage.className + " crossfader-show";
+    }, this.cf_milliseconds);
+}
+Crossfader.prototype.execute =  function() {
+    
+    // Nothing to do...
+    
 }
 
 /*
