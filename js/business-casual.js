@@ -380,6 +380,7 @@ function Glassbox(elem) {
     var leftArrow = elem.getElementsByClassName("glassbox-left-arrow")[0];
     var rightArrow = elem.getElementsByClassName("glassbox-right-arrow")[0];
     leftArrow.style.top = (this.height / 2) - (leftArrow.offsetHeight / 2);
+    leftArrow.style.left = 0;
     rightArrow.style.top = (this.height / 2) - (rightArrow.offsetHeight / 2);
     rightArrow.style.left = this.width - rightArrow.offsetWidth;
     
@@ -430,7 +431,6 @@ function Glassbox(elem) {
         
         // Defined the event handler
         function eventHandler() {
-            console.log("Handler called");
             
             // Kill off the last node in the DOM
             mState[2].parentNode.removeChild(mState[2]);
