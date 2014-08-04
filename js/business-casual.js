@@ -382,6 +382,123 @@ function Glassbox(elem) {
     rightArrow.style.top = (this.height / 2) - (rightArrow.offsetHeight / 2);
     rightArrow.style.left = this.width - rightArrow.offsetWidth;
     
+    // At this point, the DOM is setup for the glassbox. Now its time to handle clicks
+    
+    // Helpers
+    function slideToFore(elem) {
+        elem.style.transition = "1s";
+        elem.style.left = 0;
+    }
+    function slideToLeft(elem) {
+        elem.style.transition = "1s";
+        elem.style.left = parseInt(elem.offsetWidth) * -1;
+    }
+    function slideToRight(elem) {
+        elem.style.transition = "1s";
+        elem.style.left = parseInt(elem.offsetWidth)
+    }
+    function stopAnimatating(elem) {
+        elem.style.transition = "";
+    }
+    
+    // Use this-that technique
+    var that = this;
+    
+    // Left arrow handler
+    leftArrow.onclick = function() {
+        
+        // Don't do anything until the animation has finished 
+        if (that.isAnimating) {
+            return;
+        }
+        
+        // Get the current state of the DOM
+        var mState = elem.getElementsByClassName("glassbox-slide");
+        var incoming = mState[0];
+        var outgoing = mState[1];
+        
+        // Animate the fore slide out to the right
+        slideToFore(incoming);
+        slideToRight(outgoing);
+        
+        // Is animating; block events
+        that.isAnimating = true;
+        
+        // Once the animation finishes, do some housekeeping on the DOM
+        var trans = whichTransitionEvent(incoming);
+        
+        // Defined the event handler
+        function eventHandler() {
+            console.log("Handler called");
+            
+            // Kill off the last node in the DOM
+            mState[2].parentNode.removeChild(mState[2]);
+            
+            // Update the current slide
+            that.currentSlide = (that.currentSlide - 1).mod(that.slideList.length);
+            
+            // Insert the next expected node into the DOM
+            var expected = that.slideList[(that.currentSlide - 1).mod(that.slideList.length)];
+            stopAnimatating(expected);
+            
+            var before = elem.firstChild;
+            elem.insertBefore(expected, before);
+            expected.style.left = expected.offsetWidth * -1;
+            
+            // Allow another click
+            that.isAnimating = false;
+            incoming.removeEventListener(trans, eventHandler);
+        }
+        
+        incoming.addEventListener(trans, eventHandler, false);
+    }
+    
+    // Right arrow handler
+    rightArrow.onclick = function() {
+        
+        // Don't do anything until the animation has finished
+        if (that.isAnimating) {
+            return;
+        }
+        
+        // Get the current state of the DOM
+        var mState = elem.getElementsByClassName("glassbox-slide");
+        var incoming = mState[2];
+        var outgoing = mState[1];
+        
+        // Animate the fore slide out to the right
+        slideToFore(incoming);
+        slideToLeft(outgoing);
+        
+        // Is animating; block events
+        that.isAnimating = true;
+        
+        // Once the animation finishes, do some housekeeping on the DOM
+        var trans = whichTransitionEvent(incoming);
+        
+        // Defined the event handler
+        function eventHandler() {
+            console.log("Handler called");
+            
+            // Kill off the first node in the DOM
+            mState[0].parentNode.removeChild(mState[0]);
+            
+            // Update the current slide
+            that.currentSlide = (that.currentSlide + 1).mod(that.slideList.length);
+            
+            // Insert the next expected node into the DOM
+            var expected = that.slideList[(that.currentSlide + 1).mod(that.slideList.length)];
+            stopAnimatating(expected);
+            elem.appendChild(expected);
+            expected.style.left = expected.offsetWidth;
+            
+            // Allow another click
+            that.isAnimating = false;
+            incoming.removeEventListener(trans, eventHandler);
+        }
+        
+        incoming.addEventListener(trans, eventHandler, false);
+    }
 }
 Glassbox.prototype.execute = function() {
     
@@ -457,4 +574,22 @@ function hasClass(element, cls) {
 // http://javascript.about.com/od/problemsolving/a/modulobug.htm
 Number.prototype.mod = function(n) {
     return ((this%n)+n)%n;
+}
+
+// Thanks to Modernizr for this code!
+// http://modernizr.com/
+function whichTransitionEvent(el){
+    var t;
+    var transitions = {
+      'transition':'transitionend',
+      'OTransition':'oTransitionEnd',
+      'MozTransition':'transitionend',
+      'WebkitTransition':'webkitTransitionEnd'
+    }
+
+    for(t in transitions){
+        if( el.style[t] !== undefined ){
+            return transitions[t];
+        }
+    }
 }
