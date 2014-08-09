@@ -108,7 +108,7 @@
             
             <h1 class="separate" id="structure">Overall Structure</h1>
             
-            <p>In general, the structure of Business Casual can be broken down into three parts:
+            <p>In general, the structure of Business Casual can be broken down into three parts:</p>
             
                 <ol>
                     <li>The development part</li>
@@ -116,17 +116,127 @@
                     <li>The production part</li>
                 </ol>
                 
-            The development part is the part the we, the developers, directly interact with to code Business Casual. The development part is made up
-            of:
+            <p>You can think of the building part as the ice cream in an ice cream sandwich, binding
+            the two chocolate cake pieces together. Both the development part and the production part define
+            the same rules and instructions; the way those pieces appear, however, are very different.</p>
             
-                <ul>
-                    <li>LESS</li>
-                    <li>Javascript</li>
-                </ul>
+            <p>The following graphic depicts the Business Casual development workflow, abstracting out the
+            development, building, and production parts:</p>
             
-            </p>
+            <div style="text-align:center;">
+                <img src="img/dev/structure.png" style="width:550px;"/>
+            </div>
             
-            <img src="img/dev/structure.png" style="width:550px;"/>
+            <h2>The Development Part</h2>
+            
+            <p>This part of the Business Casual workflow is where you'll actually write code. The development
+            part is written in two programming languages: LESS and Javascript.</p>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr class="left">
+                        <th class="info">
+                            <span class="bold">Pro tip</span><br/>
+                            LESS is a CSS pre-processor that allows you to use logic, control paths, and variables in your stylesheets.
+                            Once you have written LESS code, you need to compile that code into CSS in order for it to work in the
+                            browser. <a href="http://lesscss.org/" target="_blank">Click here</a> to learn more.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>LESS code exists in the <code>/less</code> directory and is broken down into 11 files. Out of these files, 4 of them
+            are important in order to understand the structure of Business Casual:</p>
+            
+            <table class="rounded-table full">
+                <thead>
+                    <tr>
+                        <th style="width:275px">File</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><code>basics.less</code></th>
+                        <th class="left">Defines basic HTML features that are styled in Business Casual, like <code>h1</code>
+                            and <code>code</code> tags.</th>
+                    </tr>
+                    <tr>
+                        <th><code>business-casual.less</code></th>
+                        <th class="left">The "god file" that imports all other LESS files.</th>
+                    </tr>
+                    <tr>
+                        <th><code>customize.less</code></th>
+                        <th class="left">Defines all customizable attributes for easy modification. This file is intended to
+                        be modified.</th>
+                    </tr>
+                    <tr>
+                        <th><code>scaffolding.less</code></th>
+                        <th class="left">Defines the default values for the values in <code>customize.less</code>. This file is
+                        not intended to be modified.</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>If you wish to add another LESS file to extend Business Casual, by all means do so; just remember to add an import
+            statement in <code>business-casual.less</code>.</p>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr class="left">
+                        <th class="warning">
+                            <span class="bold">Heads up!</span><br/>
+                            The order of the import statements in <code>business-casual.less</code> matter! When you add your own
+                            import statement, you should always add it to the end of <code>business-casual.less</code> for safety.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>Javascript code exists in the <code>/js</code> directory under the file <code>business-casual.js</code> and is
+            minimized directly by Grunt. Since this
+            file has a very particular stucture to it, we will discuss this file in detail in the
+            <a href="#javascript">Javascript</a> section.</p>
+            
+            <h2>The Building Part</h2>
+            
+            <p>Once you have finished writting Javascript and LESS code, it's time to "build" Business Casual by running
+            it through a task runner known as <a href="http://gruntjs.com/" target="_blank">Grunt</a>.
+            "Building" refers to the process of verifying, consolidating, and shrinking
+            your code to something smaller and more manageable.</p>
+            
+            <p>Grunt is a piece of software that automates the building process for you. Grunt is written in Javascript (traditionally
+            a language for web browsers) and therefore must run on a platform called 
+            <a href="http://nodejs.org/" target="_blank">Node</a>. The process for installation is described
+            on the <a href="index.html#customize" target="_blank">main Business Casual website</a>.</p>
+            
+            <p>Grunt uses two plugins to build your code: <code>lessc</code> and Uglify. <code>lessc</code> is a LESS compiler
+            that takes all your LESS files and consolidates them into a single CSS file. Uglify is a Javascript compiler
+            that minimizes your Javascript to reduce its file size and loading times. These plugins are installed
+            using the <code>npm install</code> command on your command line.</p>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr class="left">
+                        <th class="info">
+                            <span class="bold">Pro tip</span><br/>
+                            Uglify gets its name because minimized Javascript is completely incomprehensible, i.e. ugly.
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>The Production Part</h2>
+            
+            <p>This is the part of the Business Casaul workflow that you will use to style your website. There are only two
+            files that you have to include in your HTML code to style it with Business Casual: <code>business-casual.css</code>
+            and <code>business-casual.min.js</code>.</p>
+            
+            <p>Both <code>business-casual.css</code> and <code>business-casual.min.js</code> are much smaller than their
+            developmental counterparts. Grunt will report exactly how much your code was reduced when you run it. For example,
+            LESS starting at 22.45kB will shrink to 18.21kB, and Javascript starting at 21.44kB will shrink to 7.56kB. This is
+            beneficial because it reduces the amount of dependencies in your website and it allows your website to load
+            much faster.</p>
             
         </div>
         
@@ -153,7 +263,7 @@
         <div class="sidekick-unit parallax">
             <img src="./img/dev/sidekick-unit-4.jpg"/>
             <span class="sidekick-unit-text">&copy; <span class="year"></span> All Rights Reserved.
-                Made with love by Jonathan Ballands. Images courtesy of Flickr.<br/><br/>
+                Made with love by Jonathan Ballands in Austin, TX. Images courtesy of Flickr.<br/><br/>
                 <ul>
                     <li><a href="https://www.facebook.com/jon.ballands" 
                            target="_blank"><img src="img/main/facebook_icon.png" /></a></li>
