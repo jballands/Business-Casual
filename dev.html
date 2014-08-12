@@ -228,7 +228,7 @@
             
             <h2>The Production Part</h2>
             
-            <p>This is the part of the Business Casaul workflow that you will use to style your website. There are only two
+            <p>This is the part of the Business Casual workflow that you will use to style your website. There are only two
             files that you have to include in your HTML code to style it with Business Casual: <code>business-casual.css</code>
             and <code>business-casual.min.js</code>.</p>
             
@@ -247,6 +247,22 @@
         <div class="container">
             
             <h1 class="separate" id="javascript">Business Casual Javascript</h1>
+            
+            <p>If you ever got to look at
+            <a href="https://github.com/jballands/Business-Casual/blob/602bfc5a222dca3ace436d0b4e496bde2a94034e/js/business-casual.js"
+               target="_blank">older versions</a> of <code>business-casual.js</code>, you knew that the code was complicated and hard
+            to extend.
+            Starting with BC v1.2, <code>business-casual.js</code> has been completely refactored to alleviate many of problems encountered
+            when working with BC JS. Some of the design goals for the refactoring of BC JS are described below:</p>
+            
+            <ul>
+                <li>Create a one-to-one relationship between DOM elements and JS objects</li>
+                <li>Abstract out the complicated parts of Javascript programming to make BC easier to extend</li>
+                <li>Force JS objects to interact with browser properties through a well-defined JS framework</li>
+                <li>Prevent spaghetti code from occuring</li>
+            </ul>
+            
+            <p></p>
             
         </div>
         
