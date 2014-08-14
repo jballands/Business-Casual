@@ -262,7 +262,78 @@
                 <li>Prevent spaghetti code from occuring</li>
             </ul>
             
-            <p></p>
+            <p>The following sections briefly discuss the different parts of BC JS and how you can interact with them to add your own dynamic features
+            to Business Casual.</p>
+            
+            <h2>Overview</h2>
+            
+            <div class="flexor" id="landing-icons">
+                <div class="column-7">
+                    <img src="img/dev/bcjs.png" style="width:425px;"/>
+                </div>
+                <div class="column-5" style="text-align:left">
+                    <p>In general, BC JS is made up of four important components:</p>
+                    <ul>
+                        <li>The <code>BusinessCasual</code> object</li>
+                        <li>The <code>Service</code> objects</li>
+                        <li>The <code>Broadcaster</code> object</li>
+                        <li>BC DOM objects</li>
+                    </ul>
+                    <p>Each of these four components work together in order to create dynamic features in Business Casual. Before we go in depth on each
+                    component, let's briefly discuss each of their roles in Business Casual:</p>
+                </div>
+                    
+            </div>
+            
+            <h4>The BusinessCasual Object</h4>
+            
+            <p>The <code>BusinessCasual</code> object is a singleton object that acts as the controller for all of BC JS. This object acts as the face of BC JS,
+            kicking off all the processes necessary for BC JS to work.
+            
+            <h4>BC DOM Objects</h4>
+            
+            <p>BC DOM Objects are the bread and butter of BC JS. BC DOM Objects are objects that embody the behavior of a particular Business Casual feature as a
+            prototype. In other words, for each Business Casual dynamic feature, there exists a BC DOM Object that defines the behaviors of that particular feature.</p>
+            
+            <h4>The Service Objects</h4>
+            
+            <p>The <code>Service</code> objects are special objects designed to wrap around browser environment variables so that many BC DOM Objects can touch
+            the same variable at once. BC DOM Objects can subscribe to a particular service to take advantage of a particular browser environment variable without
+            interfering with other BC DOM Objects.</p>
+            
+            <h4>The Broadcaster Object</h4>
+            
+            <p>The <code>Broadcaster</code> object is a singleton object that allows variables to be shared across BC DOM Objects. <code>Broadcaster</code>
+            provides a safe way for BC DOM Objects to create global variables and have them shared amongst themselves.</p>
+            
+            <h2>Implementing Your Own Features</h2>
+                
+            <p>To implement your own custom feature within Business Casual, you will have to either extend the functionality of an existing
+            BC DOM Object, or create your own DOM object for use in HTML, and then write the BC JS code to give it dynamic features. We will assume,
+            for this walkthorugh, that you want to do the latter.</p>
+            
+            <p>In general, there are five steps to
+            implementing your custom feature:</p>
+            
+            <ol>
+                <li>Design your DOM object</li>
+                <li>Add your DOM object as an "available"</li>
+                <li>Write a constructor</li>
+                <li>Write an execute function</li>
+                <li>Test your feature</li>
+            </ol>
+            
+            <p>We will now walk through each step of the process to help you understand them in greater detail.</p>
+            
+            <h4>Design Your Object</h4>
+            
+            <h4>Add as an "Available"</h4>
+            
+            <h4>Implement Constructor</h4>
+            
+            <h4>Implement Execute Function</h4>
+            
+            <h4>Test</h4>
             
         </div>
         
