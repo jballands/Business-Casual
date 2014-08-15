@@ -104,6 +104,15 @@
             <img src="./img/dev/sidekick-unit-1.jpg"/>
         </div>
         
+        <div class="navigation-bar sticky" fadeOut="structure-fadeout">
+            <ul class="center">
+                <li class="logo">Structure</li>
+                <li><a href="#development">Development</a></li>
+                <li><a href="#building">Building</a></li>
+                <li><a href="#production">Production</a></li>
+            </ul>
+        </div>
+        
         <div class="container">
             
             <h1 class="separate" id="structure">Overall Structure</h1>
@@ -127,7 +136,7 @@
                 <img src="img/dev/structure.png" style="width:550px;"/>
             </div>
             
-            <h2>The Development Part</h2>
+            <h2 id="development">The Development Part</h2>
             
             <p>This part of the Business Casual workflow is where you'll actually write code. The development
             part is written in two programming languages: LESS and Javascript.</p>
@@ -198,7 +207,7 @@
             file has a very particular stucture to it, we will discuss this file in detail in the
             <a href="#javascript">Javascript</a> section.</p>
             
-            <h2>The Building Part</h2>
+            <h2 id="building">The Building Part</h2>
             
             <p>Once you have finished writting Javascript and LESS code, it's time to "build" Business Casual by running
             it through a task runner known as <a href="http://gruntjs.com/" target="_blank">Grunt</a>.
@@ -226,7 +235,7 @@
                 </tbody>
             </table>
             
-            <h2>The Production Part</h2>
+            <h2 id="production">The Production Part</h2>
             
             <p>This is the part of the Business Casual workflow that you will use to style your website. There are only two
             files that you have to include in your HTML code to style it with Business Casual: <code>business-casual.css</code>
@@ -240,8 +249,19 @@
             
         </div>
         
-        <div class="sidekick-unit parallax">
+        <div class="sidekick-unit parallax" id="structure-fadeout">
             <img src="./img/dev/sidekick-unit-2.jpg"/>
+        </div>
+        
+        <div class="navigation-bar sticky">
+            <ul class="center">
+                <li class="logo">JS</li>
+                <li><a href="#whats-inside">Overview</a></li>
+                <li><a href="#whats-inside">Controller</a></li>
+                <li><a href="#customize">BC DOM Objects</a></li>
+                <li><a href="#bootstrapping">Services</a></li>
+                <li><a href="#bootstrapping">Broadcaster</a></li>
+            </ul>
         </div>
         
         <div class="container">
@@ -279,61 +299,58 @@
                         <li>The <code>Broadcaster</code> object</li>
                         <li>BC DOM objects</li>
                     </ul>
-                    <p>Each of these four components work together in order to create dynamic features in Business Casual. Before we go in depth on each
-                    component, let's briefly discuss each of their roles in Business Casual:</p>
+                    <p>Each of these four components work together in order to create dynamic features in Business Casual. Let's discuss
+                    the role of each component in Business Casual and how they work:</p>
                 </div>
                     
             </div>
             
-            <h4>The BusinessCasual Object</h4>
-            
-            <p>The <code>BusinessCasual</code> object is a singleton object that acts as the controller for all of BC JS. This object acts as the face of BC JS,
-            kicking off all the processes necessary for BC JS to work.
-            
-            <h4>BC DOM Objects</h4>
-            
-            <p>BC DOM Objects are the bread and butter of BC JS. BC DOM Objects are objects that embody the behavior of a particular Business Casual feature as a
-            prototype. In other words, for each Business Casual dynamic feature, there exists a BC DOM Object that defines the behaviors of that particular feature.</p>
-            
-            <h4>The Service Objects</h4>
-            
-            <p>The <code>Service</code> objects are special objects designed to wrap around browser environment variables so that many BC DOM Objects can touch
-            the same variable at once. BC DOM Objects can subscribe to a particular service to take advantage of a particular browser environment variable without
-            interfering with other BC DOM Objects.</p>
-            
-            <h4>The Broadcaster Object</h4>
-            
-            <p>The <code>Broadcaster</code> object is a singleton object that allows variables to be shared across BC DOM Objects. <code>Broadcaster</code>
-            provides a safe way for BC DOM Objects to create global variables and have them shared amongst themselves.</p>
-            
-            <h2>Implementing Your Own Features</h2>
+            <h2>The BusinessCasual Object</h2>
                 
-            <p>To implement your own custom feature within Business Casual, you will have to either extend the functionality of an existing
-            BC DOM Object, or create your own DOM object for use in HTML, and then write the BC JS code to give it dynamic features. We will assume,
-            for this walkthorugh, that you want to do the latter.</p>
+            <p>The <code>BusinessCasual</code> object is a singleton object that acts the controller for all of Business Casual.
+            Each of the BC DOM are invoked via the <code>BusinessCasual</code> object, and the entire bootstrapping and execution
+            process is choreographed by this object.</p>
             
-            <p>In general, there are five steps to
-            implementing your custom feature:</p>
+            <h4>Properties</h4>
             
-            <ol>
-                <li>Design your DOM object</li>
-                <li>Add your DOM object as an "available"</li>
-                <li>Write a constructor</li>
-                <li>Write an execute function</li>
-                <li>Test your feature</li>
-            </ol>
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th><code>version</code></th>
+                        <th class="left">The version that this particular <code>business-casual.js</code> file conforms to.</th>
+                    </tr>
+                    <tr>
+                        <th><code>availables</code></th>
+                        <th class="left">A dictionary of possible queries and their corresponding BC DOM objects. It is because of
+                        this dictionary that the <code>BusinessCasual</code> object knows how to form a one-to-one relationship between
+                        BC DOM objects and real DOM objects.</th>
+                    </tr>
+                    <tr>
+                        <th><code>elements</code></th>
+                        <th class="left">An array of all the BC DOM objects that are currently in existance.</th>
+                    </tr>
+                </tbody>
+            </table>
             
-            <p>We will now walk through each step of the process to help you understand them in greater detail.</p>
+            <h4>Functions</h4>
             
-            <h4>Design Your Object</h4>
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th><code>bootstrap</code></th>
+                        <th class="left">Browses the <code>availables</code> dictionary and makes a query on the document. If the
+                        document returns any matches, this function will instatiate the corresponding BC DOM object and append it
+                        into the <code>elements</code> array.</th>
+                    </tr>
+                    <tr>
+                        <th><code>run</code></th>
+                        <th class="left">Loops through each element in the <code>elements</code> array and calls <code>execute</code>
+                        on it.</th>
+                    </tr>
+                </tbody>
+            </table>
             
-            <h4>Add as an "Available"</h4>
-            
-            <h4>Implement Constructor</h4>
-            
-            <h4>Implement Execute Function</h4>
-            
-            <h4>Test</h4>
+            <h4>What's Important?</h4>
             
         </div>
         

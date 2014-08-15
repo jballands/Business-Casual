@@ -233,7 +233,7 @@
             <img src="./img/main/sidekick-unit-4.jpg"/>
         </div>
         
-        <div class="navigation-bar sticky" fadeOut="customize-fadeout">
+        <div class="navigation-bar sticky" fadeOut="getting-started-fadeout">
             <ul class="center">
                 <li class="logo">Getting Started</li>
                 <li><a href="#whats-inside">What's Inside</a></li>
@@ -462,7 +462,7 @@
             
             <p>Once this is done, start a <code>script</code> tag in the <code>head</code>
                 of your HTML document. Then, instantiate an instance of Business Casual
-                and call the <code>go</code> function on it to get the framework to bootstrap:</p>
+                and call the <code>bootstrap</code> function on it to get the framework to bootstrap:</p>
             
             <table class="rounded-table bump">
                 <tbody>
@@ -472,17 +472,9 @@
 <!--Code-->
 <code>window.onload = function() {
     var bc = new BusinessCasual();
-    bc.go();
+    bc.bootstrap();
 }</code>
     
-                        </th>
-                    </tr>
-                    <tr class="left">
-                        <th class="warning">
-                            <span class="bold">Heads up!</span><br/>
-                            A common issue is to forget to call <code>go()</code>
-                            on an instance of Business Casual. Business Casual's dynamic features will
-                            not bootstrap to your page unless you explicitly tell it to do so.
                         </th>
                     </tr>
                 </tbody>
@@ -490,7 +482,7 @@
         
         </div>
         
-        <div class="sidekick-unit parallax" id="customize-fadeout">
+        <div class="sidekick-unit parallax" id="getting-started-fadeout">
             <img src="./img/main/sidekick-unit-2.jpg"/>
         </div>
         
