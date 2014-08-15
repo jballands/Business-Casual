@@ -256,11 +256,11 @@
         <div class="navigation-bar sticky">
             <ul class="center">
                 <li class="logo">JS</li>
-                <li><a href="#whats-inside">Overview</a></li>
-                <li><a href="#whats-inside">Controller</a></li>
-                <li><a href="#customize">BC DOM Objects</a></li>
-                <li><a href="#bootstrapping">Services</a></li>
-                <li><a href="#bootstrapping">Broadcaster</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#controller">Controller</a></li>
+                <li><a href="#bc-dom-objects">BC DOM Objects</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#broadcaster">Broadcaster</a></li>
             </ul>
         </div>
         
@@ -285,7 +285,7 @@
             <p>The following sections briefly discuss the different parts of BC JS and how you can interact with them to add your own dynamic features
             to Business Casual.</p>
             
-            <h2>Overview</h2>
+            <h2 id="overview">Overview</h2>
             
             <div class="flexor" id="landing-icons">
                 <div class="column-7">
@@ -305,10 +305,10 @@
                     
             </div>
             
-            <h2>The BusinessCasual Object</h2>
+            <h2 id="controller">The BusinessCasual Object</h2>
                 
             <p>The <code>BusinessCasual</code> object is a singleton object that acts the controller for all of Business Casual.
-            Each of the BC DOM are invoked via the <code>BusinessCasual</code> object, and the entire bootstrapping and execution
+            Each of the BC DOM objects are invoked via the <code>BusinessCasual</code> object, and the entire bootstrapping and execution
             process is choreographed by this object.</p>
             
             <h4>Properties</h4>
@@ -351,6 +351,110 @@
             </table>
             
             <h4>What's Important?</h4>
+            
+            <ol>
+                <li>The <code>BusinessCasual</code> object acts as the controller for BC JS.</li>
+                <li>The <code>bootstrap</code> function is the same function that you call in <code>script</code> tags 
+                    in your HTML code.</li>
+                <li>This object uses its <code>availables</code> dictionary to make one-to-one relationships between BC DOM
+                    objects and real DOM objects.</li>
+            </ol>
+            
+            <h2 id="bc-dom-objects">The BC DOM Objects</h2>
+            
+            <p>BC DOM objects define the behavior of an instance of a particular dynamic feature in Business Casual. For example,
+            there exists a <code>sticky</code> BC DOM object to define the behavior of the <code>sticky</code> feature.
+            There can exist infinitely many BC DOM objects, and exactly one instance of a BC DOM object will be mapped
+            to exactly one instance of its corresponding real DOM object. So, if there are 5 <code>sticky</code> elements,
+            there will be 5 <code>sticky</code> BC DOM objects, where each BC DOM object is completely self-contained.</p>
+            
+            <h4>Functions</h4>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th>Constructor</th>
+                        <th class="left">Each BC DOM object needs to implement its own constructor. It is here that the BC DOM
+                        object will describe what it needs to do when the <code>BusinessCasual</code> object asks it to bootstrap
+                        to a particular element in the DOM. In other words, any initialization that needs to be done during
+                        the bootstrapping process needs to be performed in this function.
+                        <br/><br/>
+                        The constructor must take exactly one argument called <code>elem</code>, which is the element
+                        that the <code>BusinessCasual</code> object is asking this object to bootstrap itself to.</th>
+                    </tr>
+                    <tr>
+                        <th><code>execute</code></th>
+                        <th class="left">When the webpage finishes bootstrapping, the <code>BusinessCasual</code> object
+                        will then begin calling this function on each BC DOM object in existance. It is here that the BC DOM
+                        object will describe what it needs to do when the webpage is running. This function takes no arguments.</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>What's Important?</h4>
+            
+            <ol>
+                <li>For each instance of a dynamic feature, there will exist exactly one instance of its corresponding
+                    BC DOM object.</li>
+                <li>The <code>BusinessCasual</code> object will instantiate as many instances of a BC DOM object as it needs
+                    and automatically call the appropriate functions on it.</li>
+                <li>Each of the described functions are only executed once by the <code>BusinessCasual</code> object. It is the 
+                    responsibility of the BC DOM object to retrieve the approriate service for indefinite operation.</li>
+                <li>The constructor must take exactly one argument called <code>elem</code>, the element that the
+                    <code>BusinessCasual</code> object is asking this object to bootstrap itself to. The <code>execute</code>
+                    function must take no arguments.</li>
+            </ol>
+            
+            <h2 id="services">The Service Objects</h2>
+            
+            <p>Javascript allows you to assign functions to browser properties, like <code>onscroll</code> for example,
+            so that you can define your own custom functionalit to them. Unfortunately, you can only assign a single
+            function to a browser property, which means performing multiple tasks for a browser property can get a little crazy.</p>
+            
+            <p>The <code>Service</code> objects in BC JS attempt to alleviate this problem by providing a safe route for BC DOM objects
+            to take when they want to utilize a particular browser property.</p>
+            
+            <h4>Properties</h4>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th><code>subscribers</code></th>
+                        <th class="left">Functions that were provided by instances of BC DOM objects that perform an action
+                        the BC DOM object wants based on this service.</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>Functions</h4>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th><code>subscribe</code></th>
+                        <th class="left">Given a function <code>func</code>, adds it to a subscriber list to get
+                        invoked when the browser property is called. For example, in the <code>ScrollingService</code>, functions
+                        may subscribe to the service to get invoked when the webpage scrolls.</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>What's Important?</h4>
+            
+            <ol>
+                <li>Services are simply wrappers around browser properties that make it safe for multiple instances of BC DOM objects
+                    to touch a browser variable at the same time.</li>
+                <li>All services are static prototypes. So, to subscribe to the <code>ScrollingService</code>, simply call
+                    <code>ScrollingService.subscribe(func)</code>.</li>
+                <li>Services take functions provided by instances of BC DOM objects and queue them for execution when the browser
+                    property is invoked.</li>
+                <li>You cannot unsubscribe from a service once you have subscribed to it.</li>
+            </ol>
+            
+            <h2 id="broadcaster">The Broadcaster Object</h2>
+            
+            <p>The <code>Broadcaster</code> object is a singleton object that allows instances of a BC DOM object to share variables
+            amongst themselves. In other words, the <code>Broadcaster</code> provides a safe way to define global variables.</p>
             
         </div>
         

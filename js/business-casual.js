@@ -162,7 +162,7 @@ function Parallax(elem) {
 Parallax.prototype.execute = function() {
 
     var that = this;
-    scrollingService.subscribe(function() {
+    ScrollingService.subscribe(function() {
         
         var imageElement = that.mElem.getElementsByTagName("img")[0];
             
@@ -180,14 +180,14 @@ Parallax.prototype.execute = function() {
 function Magnetic(elem) {
 
     // Sanity check
-    if (!broadcaster.hasChannel("naviOffset")) {
-        broadcaster.setChannel("naviOffset", 0);
+    if (!Broadcaster.hasChannel("naviOffset")) {
+        Broadcaster.setChannel("naviOffset", 0);
     }
     
     // Get the offset channel, set the top value, and reset the channel
-    var mOffset = broadcaster.getChannel("naviOffset");
+    var mOffset = Broadcaster.getChannel("naviOffset");
     elem.style.top = mOffset;
-    broadcaster.setChannel("naviOffset", mOffset + magneticNavi.offsetHeight - 1);
+    Broadcaster.setChannel("naviOffset", mOffset + magneticNavi.offsetHeight - 1);
     
 }
 Magnetic.prototype.execute = function() {
@@ -199,8 +199,8 @@ Magnetic.prototype.execute = function() {
 function Sticky(elem) {
     
     // Sanity check
-    if (!broadcaster.hasChannel("naviOffset")) {
-        broadcaster.setChannel("naviOffset", 0);
+    if (!Broadcaster.hasChannel("naviOffset")) {
+        Broadcaster.setChannel("naviOffset", 0);
     }
     
     this.fader = document.getElementById(elem.getAttribute("fadeOut"));
@@ -218,10 +218,10 @@ Sticky.prototype.execute = function() {
     
     var that =  this;
     
-    scrollingService.subscribe(function() {
+    ScrollingService.subscribe(function() {
 
         // Determine if sticky is in range
-        var isBelowTop = window.pageYOffset + broadcaster.getChannel("naviOffset") >= that.top;
+        var isBelowTop = window.pageYOffset + Broadcaster.getChannel("naviOffset") >= that.top;
         var isAboveFade = window.pageYOffset < that.faderTop;     // False when fader is undefined
         
         // Override boolean if there is no fader
@@ -236,8 +236,8 @@ Sticky.prototype.execute = function() {
 
             // Increase before revealing the navi
             that.isStuck = true;
-            var mOffset = broadcaster.getChannel("naviOffset");
-            broadcaster.setChannel("naviOffset", mOffset + that.mElem.offsetHeight - 1);
+            var mOffset = Broadcaster.getChannel("naviOffset");
+            Broadcaster.setChannel("naviOffset", mOffset + that.mElem.offsetHeight - 1);
 
             // Reveal
             that.mElem.className = that.mElem.className.replace(" hidden","");
@@ -247,7 +247,7 @@ Sticky.prototype.execute = function() {
         else if (isInRange && !that.isStuck) {
             
             that.mElem.style.position = "fixed";
-            that.mElem.style.top = broadcaster.getChannel("naviOffset");
+            that.mElem.style.top = Broadcaster.getChannel("naviOffset");
             that.mElem.style.width = "100%";
 
             var sibling = that.mElem.nextElementSibling;
@@ -271,15 +271,15 @@ Sticky.prototype.execute = function() {
             }
 
             // Subtract one for prettiness 
-            var mOffset = broadcaster.getChannel("naviOffset");
-            broadcaster.setChannel("naviOffset", mOffset + that.mElem.offsetHeight - 1);
+            var mOffset = Broadcaster.getChannel("naviOffset");
+            Broadcaster.setChannel("naviOffset", mOffset + that.mElem.offsetHeight - 1);
             that.isStuck = true;
         }
         
         // Deactivate sticky
         else {
 
-            var shouldUnsticky = (window.pageYOffset + broadcaster.getChannel("naviOffset") 
+            var shouldUnsticky = (window.pageYOffset + Broadcaster.getChannel("naviOffset") 
                                  < that.top + that.mElem.offsetHeight
                                  &&
                                  that.isStuck);
@@ -290,8 +290,8 @@ Sticky.prototype.execute = function() {
                 that.mElem.removeAttribute("style");
                 that.mElem.nextElementSibling.removeAttribute("style"); 
                 
-                var mOffset = broadcaster.getChannel("naviOffset");
-                broadcaster.setChannel("naviOffset", mOffset - that.mElem.offsetHeight + 1);
+                var mOffset = Broadcaster.getChannel("naviOffset");
+                Broadcaster.setChannel("naviOffset", mOffset - that.mElem.offsetHeight + 1);
                 
                 that.isStuck = false;
             }
@@ -310,8 +310,8 @@ Sticky.prototype.execute = function() {
                 that.mElem.className = that.mElem.className + " hidden";
 
                 // Reduce the currentOffset so that the next element slides in nicely
-                var mOffset = broadcaster.getChannel("naviOffset");
-                broadcaster.setChannel("naviOffset", mOffset - that.mElem.offsetHeight + 1);
+                var mOffset = Broadcaster.getChannel("naviOffset");
+                Broadcaster.setChannel("naviOffset", mOffset - that.mElem.offsetHeight + 1);
                 
                 that.isStuck = false;
             }
@@ -563,20 +563,18 @@ Crossfader.prototype.execute =  function() {
  */
 
 function ScrollingService() {
-    
-    var subscribers = [];
-    
-    this.subscribe = function(func) {
-        subscribers.push(func);
-    }
-    
-    window.onscroll = function() {
-        for (var i = 0 ; i < subscribers.length ; i++) {
-            subscribers[i]();
-        }
+    // Nothing to do...
+}
+ScrollingService.subscribers = [];
+ScrollingService.subscribe = function(func) {
+    ScrollingService.subscribers.push(func);
+}    
+window.onscroll = function() {
+    for (var i = 0 ; i < ScrollingService.subscribers.length ; i++) {
+        ScrollingService.subscribers[i]();
     }
 }
-var scrollingService = new ScrollingService();
+
 
 /*
  *  -----------
@@ -585,29 +583,23 @@ var scrollingService = new ScrollingService();
  */
 
 function Broadcaster() {
-    
-    var channels = {};
-    
-    this.hasChannel = function(c) {
-        for (channel in channels) {
-            if (c == channel) {
-                return true;
-            }
-        } 
-        return false;
-    }
-    
-    this.getChannel = function(name) {
-        return channels.name;
-    }
-    
-    this.setChannel = function(name, value) {
-        channels.name = value;
-    }
-    
+    // Nothing to do...
 }
-
-var broadcaster = new Broadcaster();
+Broadcaster.channels = {};
+Broadcaster.hasChannel = function(c) {
+    for (channel in Broadcaster.channels) {
+        if (c == channel) {
+            return true;
+        }
+    } 
+    return false;
+}
+Broadcaster.getChannel = function(name) {
+    return Broadcaster.channels.name;
+}
+Broadcaster.setChannel = function(name, value) {
+    Broadcaster.channels.name = value;
+}
 
 /*
  *  -------
