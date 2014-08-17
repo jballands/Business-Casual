@@ -71,7 +71,7 @@
                     style="margin-top:-5;width:25;" class="bc-logo" /></a></li>
                 <li><a href="./index.html" target="_blank"><img src="./img/main/business-casual-logo.png" 
                     style="margin-top:-5;width:25;" class="bc-logo" /></a></li>
-                <li><a href="#structure">Structure</a></li>
+                <li><a href="#architecture">Architecture</a></li>
                 <li><a href="#javascript">Javascript</a></li>
                 <li><a href="#reference">Reference</a></li>
                 <li><a href="https://github.com/jballands/Business-Casual" target="_blank">Repository</a></li>
@@ -104,9 +104,9 @@
             <img src="./img/dev/sidekick-unit-1.jpg"/>
         </div>
         
-        <div class="navigation-bar sticky" fadeOut="structure-fadeout">
+        <div class="navigation-bar sticky" fadeOut="architecture-fadeout">
             <ul class="center">
-                <li class="logo">Structure</li>
+                <li class="logo">Architecture</li>
                 <li><a href="#development">Development</a></li>
                 <li><a href="#building">Building</a></li>
                 <li><a href="#production">Production</a></li>
@@ -115,9 +115,9 @@
         
         <div class="container">
             
-            <h1 class="separate" id="structure">Overall Structure</h1>
+            <h1 class="separate" id="architecture">The Business Casual Architecture</h1>
             
-            <p>In general, the structure of Business Casual can be broken down into three parts:</p>
+            <p>In general, the architecture of Business Casual can be broken down into three parts:</p>
             
                 <ol>
                     <li>The development part</li>
@@ -154,7 +154,7 @@
                 </tbody>
             </table>
             
-            <p>LESS code exists in the <code>/less</code> directory and is broken down into 11 files. Out of these files, 4 of them
+            <p>LESS code exists in the <code>less/</code> directory and is broken down into 11 files. Out of these files, 4 of them
             are important in order to understand the structure of Business Casual:</p>
             
             <table class="rounded-table full">
@@ -202,7 +202,7 @@
                 </tbody>
             </table>
             
-            <p>Javascript code exists in the <code>/js</code> directory under the file <code>business-casual.js</code> and is
+            <p>Javascript code exists in the <code>js/</code> directory under the file <code>business-casual.js</code> and is
             minimized directly by Grunt. Since this
             file has a very particular stucture to it, we will discuss this file in detail in the
             <a href="#javascript">Javascript</a> section.</p>
@@ -249,7 +249,7 @@
             
         </div>
         
-        <div class="sidekick-unit parallax" id="structure-fadeout">
+        <div class="sidekick-unit parallax" id="architecture-fadeout">
             <img src="./img/dev/sidekick-unit-2.jpg"/>
         </div>
         
@@ -456,6 +456,51 @@
             <p>The <code>Broadcaster</code> object is a singleton object that allows instances of a BC DOM object to share variables
             amongst themselves. In other words, the <code>Broadcaster</code> provides a safe way to define global variables.</p>
             
+            <h4>Properties</h4>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th><code>channels</code></th>
+                        <th class="left">Key-value pairs that the <code>Broadcaster</code> object references.</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>Functions</h4>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th><code>hasChannel</code></th>
+                        <th class="left">Given a channel <code>c</code>,
+                            checks for the existance of the channel in the <code>channels</code> property.</th>
+                    </tr>
+                    <tr>
+                        <th><code>getChannel</code></th>
+                        <th class="left">Given a key <code>name</code>, retrieves the value corresponding to the given name.</th>
+                    </tr>
+                    <tr>
+                        <th><code>setChannel</code></th>
+                        <th class="left">Given a key <code>name</code> and a value <code>value</code>, creates a channel in
+                            the <code>channels</code> property.</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>What's Important?</h4>
+            
+            <ol>
+                <li>The <code>Broadcaster</code> object is a singleton that allows multiple BC DOM objects to safely access
+                    global varaibles.</li>
+                <li>The <code>Broadcaster</code> is a static prototype. So, to ask the <code>Broadcaster</code> if there is a 
+                    channel named <code>foo</code>, simply call <code>Broadcaster.hasChannel("foo")</code>.</li>
+                <li>Never define your own variables at global scope in <code>business-casual.js</code>; you should always
+                    use the <code>Broadcaster</code> for this purpose.</li>   
+                <li>You should always call <code>hasChannel</code> before <code>getChannel</code> to avoid <code>undefined</code>
+                    variables.</li>
+            </ol>
+            
         </div>
         
         <div class="sidekick-unit parallax">
@@ -464,7 +509,89 @@
         
         <div class="container">
             
-            <h1 class="separate" id="reference">Complete Reference</h1>
+            <h1 class="separate" id="reference">Complete API Reference</h1>
+            
+            <p>The following is a complete reference of the Business Casual API, including all static features and dynamic features.
+            You should refer to this reference whenever you need to recall the usage of a component within Business Casual.</p>
+            
+            <h2>HTML API</h2>
+            
+            <h3>Static</h3>
+            
+            <h5>Container</h5>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th class="left success" style="width:200px;">Available since v1.0</th>
+                    </tr>
+                    <tr>
+                        <th class="left">Declared In</th>
+                        <th class="left invert">
+                            <code>flexors.less</code> &#10141; <code>business-casual.css</code>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="left">Description</th>
+                        <th class="left invert">Wraps webpage content so elements work nicely together.</th>
+                    </tr>
+                    <tr>
+                        <th class="left">
+                            Usage
+                        </th>
+                        <th class="left invert">
+<!--Code-->
+<code>&lt;div class="container"&gt;
+    ...
+&lt;/div&gt;</code>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="left">Notes</th>
+                        <th class="left invert">Unremarkable</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!------------------------------------------------------------------------>
+            
+            <h5>Asides</h5>
+            
+            <table class="rounded-table">
+                <tbody>
+                    <tr>
+                        <th class="left success" style="width:200px;">Available since v1.0</th>
+                    </tr>
+                    <tr>
+                        <th class="left">Declared In</th>
+                        <th class="left invert">
+                            <code>basics.less</code> &#10141; <code>business-casual.css</code>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="left">Description</th>
+                        <th class="left invert">Places text in a white, italic font to the right of header levels 1 through 3.</th>
+                    </tr>
+                    <tr>
+                        <th class="left">
+                            Usage
+                        </th>
+                        <th class="left invert">
+<!--Code-->
+<code>&lt;h1&gt;Foo &lt;span class="aside"&gt;Bar&lt;/span&gt;&lt;/h1&gt;</code>
+                            
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="left">Notes</th>
+                        <th class="left invert">Unremarkable</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Dynamic</h3>
+            
+            <h2>Javascript API</h2>
             
         </div>
         
