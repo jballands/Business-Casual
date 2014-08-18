@@ -2,7 +2,7 @@
 
 For more information on Business Casual, please go to the <a href="http://jonathanballands.me/bc" target="_blank">Business Casual website</a>.
 <br/>
-Want to know how Business Casual works? Go to the <a href="http://jonathanballands.me/bc/dev" target="_blank">dev page</a> to learn more.
+Want to know how Business Casual works? See the shiny new <a href="http://jonathanballands.me/bc/dev" target="_blank">dev page</a> to learn more.
 
 <h2>What's New?</h2>
 
@@ -40,6 +40,7 @@ Want to know how Business Casual works? Go to the <a href="http://jonathanballan
 
 <ul>
 <li>The minimized version of <code>business-casual.js</code> is now called <code>business-casual.min.js</code></li>
+<li>Start <code>business-casual.js</code> by calling <code>bc.bootstrap()</code> instead of <code>bc.go()</code></li>
 <li>Business Casual uses Grunt instead of <code>build.sh</code> to build itself (See above)</li>
 <li>BC v1.2 is 100% backwards compatible with BC v1.1 and v1.0</li>
 <li><a href="http://jonathanballands.me/bc#images" target="_blank">Images & Glassboxes</a></li>
